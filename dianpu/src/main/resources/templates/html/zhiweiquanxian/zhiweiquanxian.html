@@ -1,48 +1,52 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-<meta charset="UTF-8">
-<title></title>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
 
-<body>
-	<div class="card">
-		<div class="card-header">
-			<h4 class="text-uppercase mb-0">
-				职位权限
-				<button style="float: right;" class="btn btn-primary"
-					data-toggle="modal" data-target=".bs-example-modal-lg">添加职位</button>
-			</h4>
+	<body>
+		<div class="card">
+			<div class="card-header">
+				<h4 class="text-uppercase mb-0">职位权限<button style="float: right;" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">添加职位</button></h4>
+			</div>
+			<div class="card-body">
+				<table class="table card-text">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>账号</th>
+							<th>店名</th>
+							<th>员工</th>
+							<th>联系人</th>
+							<th>手机</th>
+							<th>地址</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">1</th>
+							<td>Mark</td>
+							<td>Otto</td>
+							<td>@mdo</td>
+							<td>@mdo</td>
+							<td>@mdo</td>
+							<td>@mdo</td>
+							<td>@mdo</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
-		<div class="card-body">
-			<table class="table card-text">
-				<thead>
-					<tr>
-						<th>序号</th>
-						<th>名称</th>
-						<th>所属店铺</th>
-						<th>操作</th>
-					</tr>
-				</thead>
-				<tbody id="zhiweiquanxiantbody">
 
-				</tbody>
-			</table>
-		</div>
-	</div>
-
-	<div id="zhiweiquanxiantb">
-		<div class="modal fade bs-example-modal-lg" id="zhiweiquanxianmyModal" tabindex="-1"
-			role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="myModalLabel">添加职位</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
 					</div>
 					<div class="modal-body">
@@ -50,18 +54,12 @@
 							<tr>
 								<td>职位名称</td>
 								<td><input></td>
-								<td>所属店铺</td>
-								<td>
-									<select>
-										<option></option>
-									</select>
-								</td>
 							</tr>
 							<tr>
 								<td>职位权限</td>
 								<td>
 									<table>
-
+										
 									</table>
 								</td>
 							</tr>
@@ -74,57 +72,12 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<script>
 		
-		function zhiweiquanxianinit(){
-			$.ajax({
-				url:"[[@{/dianpu/queryAllZhiWei}]]",
-				success:function(res){
-					$("#zhiweiquanxiantbody").empty();
-					$.each(res,function(i,obj){
-						let str=`<tr>
-							<th>${i+1}</th>
-							<th>${obj.zwname}</th>
-							<th>${obj.dpname}</th>
-							<th><a href="javascript:void(0);">编辑</a></th>
-						</tr>`;
-						$("#zhiweiquanxiantbody").append(str);
-					});
-				}
+		<script>
+			$(function(){
+				
 			});
-		}
-		
-		zhiweiquanxianinit();
-		
-		$(function(){
-			
-			var vm=new Vue({
-				el:"#zhiweiquanxiantb",
-				data(){
-					return {
-						zhiwei:{}
-					}
-				},
-				methods:{
-					baocun:function(){
-						var that=this;
-						$.ajax({
-							url:"[[@{/dianpu/insertZhiWei}]]",
-							data:that.zhiwei,
-							success:function(res){
-								zhiweiquanxianinit();
-								$("#zhiweiquanxianmyModal").modal("hide");
-							}
-						});
-					}
-					
-
-				}
-			});
-			
-		});
 		</script>
-</body>
+	</body>
 
 </html>

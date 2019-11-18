@@ -86,7 +86,8 @@
     select 
     <include refid="Base_Column_List" />
     from yanse
-    where ysid = #{ysid,jdbcType=INTEGER}
+    where 
+`yslbid` = #{yslbid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from yanse
@@ -193,4 +194,15 @@
       ysimg = #{ysimg,jdbcType=VARCHAR}
     where ysid = #{ysid,jdbcType=INTEGER}
   </update>
+  
+  
+  
+  <select id="selectYanselb" resultType="com.accp.domain.Yanseleibie">
+  	select * from `yanseleibie`
+  </select>
+  
+  
+  
+  
+  
 </mapper>

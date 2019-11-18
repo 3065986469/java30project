@@ -11,17 +11,7 @@ public class Zhiwei {
 
     private Integer sid;
 
-    private String dpname;
-    
-    public String getDpname() {
-		return dpname;
-	}
-
-	public void setDpname(String dpname) {
-		this.dpname = dpname;
-	}
-
-	public Integer getZwid() {
+    public Integer getZwid() {
         return zwid;
     }
 

@@ -5,6 +5,7 @@
     <id column="lbid" property="lbid" jdbcType="INTEGER" />
     <result column="lbname" property="lbname" jdbcType="VARCHAR" />
     <result column="sid" property="sid" jdbcType="INTEGER" />
+   
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -178,4 +179,18 @@
       sid = #{sid,jdbcType=INTEGER}
     where lbid = #{lbid,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectleibie" resultMap="BaseResultMap">
+  SELECT * FROM `leibie` WHERE sid=1
+  </select>
+  
+  <select id="selectleibiekey" resultMap="BaseResultMap">
+  select * from leibie where lbid=#{lbid}
+  </select>
+  
+  <update id="deletekey" >
+  update leibie set sid=0 where lbid=#{lbid}
+  </update>
+  
+  
 </mapper>

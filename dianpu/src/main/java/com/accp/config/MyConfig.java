@@ -38,9 +38,9 @@ public class MyConfig extends WebMvcConfigurationSupport {
 		super.configureMessageConverters(converters);
 	}
 	
-	@Override
-	protected void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(my).addPathPatterns("/**").excludePathPatterns("/dianpu/toLogin").excludePathPatterns("/dianpu/denglu");
-		super.addInterceptors(registry);
-	}
+//	@Override
+//	protected void addInterceptors(InterceptorRegistry registry) {
+//		registry.addInterceptor(my).addPathPatterns("/**").excludePathPatterns("/login").addPathPatterns("/register");
+//		super.addInterceptors(registry);
+//	}
 }

@@ -27,4 +27,13 @@ public interface LeibieMapper {
     int updateByPrimaryKeySelective(Leibie record);
 
     int updateByPrimaryKey(Leibie record);
+    
+    List<Leibie> selectleibie();
+    
+    Leibie selectleibiekey(@Param("lbid")Integer lbid);
+    
+    int deletekey(@Param("lbid")Integer lbid);
+    
+    
+    
 }
