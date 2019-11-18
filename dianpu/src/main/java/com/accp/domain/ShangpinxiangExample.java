@@ -403,6 +403,76 @@ public class ShangpinxiangExample {
             addCriterion("spxcount not between", value1, value2, "spxcount");
             return (Criteria) this;
         }
+
+        public Criteria andSpxtmIsNull() {
+            addCriterion("spxtm is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpxtmIsNotNull() {
+            addCriterion("spxtm is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpxtmEqualTo(String value) {
+            addCriterion("spxtm =", value, "spxtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpxtmNotEqualTo(String value) {
+            addCriterion("spxtm <>", value, "spxtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpxtmGreaterThan(String value) {
+            addCriterion("spxtm >", value, "spxtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpxtmGreaterThanOrEqualTo(String value) {
+            addCriterion("spxtm >=", value, "spxtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpxtmLessThan(String value) {
+            addCriterion("spxtm <", value, "spxtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpxtmLessThanOrEqualTo(String value) {
+            addCriterion("spxtm <=", value, "spxtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpxtmLike(String value) {
+            addCriterion("spxtm like", value, "spxtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpxtmNotLike(String value) {
+            addCriterion("spxtm not like", value, "spxtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpxtmIn(List<String> values) {
+            addCriterion("spxtm in", values, "spxtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpxtmNotIn(List<String> values) {
+            addCriterion("spxtm not in", values, "spxtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpxtmBetween(String value1, String value2) {
+            addCriterion("spxtm between", value1, value2, "spxtm");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpxtmNotBetween(String value1, String value2) {
+            addCriterion("spxtm not between", value1, value2, "spxtm");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

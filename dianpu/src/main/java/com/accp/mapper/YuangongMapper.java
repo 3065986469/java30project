@@ -38,5 +38,19 @@ public interface YuangongMapper {
     		"WHERE a.dpid=b.dpid AND a.sid=1 AND a.zwid=c.zwid AND c.sid=1")
     List<Yuangong> queryAllYuanGong();
     
+    @Select("SELECT a.ygid,a.ygname,b.dpname,c.zwname\r\n" + 
+    		"FROM `yuangong` a,`dianpu` b,`zhiwei` c\r\n" + 
+    		"WHERE a.dpid=b.dpid AND a.sid=1 AND a.zwid=c.zwid AND c.sid=1 AND a.ygname LIKE '%${ygname}%'")
+    List<Yuangong> yuangongguanliquery(String ygname);
     
+    
+    @Select("SELECT a.ygid,a.ygname,b.dpname,c.zwname\r\n" + 
+    		"    FROM `yuangong` a,`dianpu` b,`zhiwei` c\r\n" + 
+    		"    WHERE a.dpid=b.dpid AND a.sid=1 AND a.zwid=c.zwid AND c.sid=1 AND b.dpid=#{dpid}")
+    List<Yuangong> yuangongguanliqueryByDianPu(Integer dpid);
+    
+    @Select("SELECT a.ygid,a.ygname,b.dpname,c.zwname\r\n" + 
+    		"    FROM `yuangong` a,`dianpu` b,`zhiwei` c\r\n" + 
+    		"    WHERE a.dpid=b.dpid AND a.sid=1 AND a.zwid=c.zwid AND c.sid=1 AND c.zwid=#{zwid}")
+    List<Yuangong> yuangongguanliqueryByZhiWei(Integer zwid);
 }

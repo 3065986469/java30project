@@ -46,7 +46,34 @@ public class DianPuService {
 		return zw.queryAllZhiWei();
 	}
 	
+	public List<Zhiwei> queryAllZhiWei2() {
+		return zw.queryAllZhiWei2();
+	}
+	
 	public List<Yuangong> queryAllYuanGong() {
 		return yg.queryAllYuanGong();
+	}
+	
+	public List<Yuangong> yuangongguanliquery(String ygname) {
+		return yg.yuangongguanliquery(ygname);
+	}
+	
+	public List<Yuangong> yuangongguanliqueryByDianPu(int dpid) {
+		if(dpid==0) {
+			return yg.queryAllYuanGong();
+		}
+		return yg.yuangongguanliqueryByDianPu(dpid);
+	}
+	
+	public List<Yuangong> yuangongguanliqueryByZhiWei(int zwid) {
+		if(zwid==0) {
+			return yg.queryAllYuanGong();
+		}
+		return yg.yuangongguanliqueryByZhiWei(zwid);
+	}
+	
+	public int insertYuanGong(Yuangong yuangong) {
+		yuangong.setSid(1);
+		return yg.insert(yuangong);
 	}
 }

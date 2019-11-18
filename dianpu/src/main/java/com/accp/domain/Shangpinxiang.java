@@ -11,6 +11,8 @@ public class Shangpinxiang {
 
     private Integer spxcount;
 
+    private String spxtm;
+
     public Integer getSpxid() {
         return spxid;
     }
@@ -49,5 +51,13 @@ public class Shangpinxiang {
 
     public void setSpxcount(Integer spxcount) {
         this.spxcount = spxcount;
+    }
+
+    public String getSpxtm() {
+        return spxtm;
+    }
+
+    public void setSpxtm(String spxtm) {
+        this.spxtm = spxtm;
     }
 }
