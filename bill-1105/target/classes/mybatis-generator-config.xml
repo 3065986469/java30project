@@ -14,15 +14,15 @@
     	c.andNameLike("%"+name+"%");
     	c.andParentidEqualTo(parentId); -->
 	<classPathEntry
-		location="E:\mevam\local\mysql\mysql-connector-java\5.1.40\mysql-connector-java-5.1.40.jar" />
+		location="D:\Y2\mvn-repo\mysql\mysql-connector-java\5.1.40\mysql-connector-java-5.1.40.jar" />
 	<context id="context1">
 		<!-- 注释 -->
 		<commentGenerator>
 			<property name="suppressAllComments" value="true" /><!-- 是否取消注释 -->
 			<property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳 -->
 		</commentGenerator>
-		<jdbcConnection connectionURL="jdbc:mysql://localhost:3306/dianpu?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMutilQueries=true"
-			driverClass="com.mysql.jdbc.Driver" password="" userId="root" />
+		<jdbcConnection connectionURL="jdbc:mysql://localhost:3306/bill?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMutilQueries=true"
+			driverClass="com.mysql.jdbc.Driver" password="123" userId="root" />
 		<!-- 实体生成位置 -->
 		<javaModelGenerator targetPackage="com.accp.domain"
 			targetProject="src/main/java" />
@@ -32,46 +32,14 @@
 		<!-- mapper接口生成 -->
 		<javaClientGenerator targetPackage="com.accp.mapper"
 			targetProject="src/main/java" type="XMLMAPPER" />
-<<<<<<< HEAD
-			
-			<table schema="ShangPinXiang" tableName="shangpinxiang"></table>
-			
+			<table schema="Bill" tableName="bill"></table>
+			<table schema="Supplier" tableName="supplier"></table>
 <!-- 		<table schema="Student" tableName="student"></table> -->
 <!-- 		<table schema="Sys_permissions" tableName="sys_permissions"></table> -->
 <!-- 		<table schema="Sys_roles" tableName="sys_roles"></table> -->
 <!-- 		<table schema="Sys_roles_permissions" tableName="sys_roles_permissions"></table> -->
 <!-- 		<table schema="Sys_users" tableName="sys_users"></table> -->
 <!-- 		<table schema="Sys_users_roles" tableName="sys_users_roles"></table> -->
-
-			<!-- <table schema="CaiGou" tableName="caigou"></table>
-			<table schema="CaiGouXiang" tableName="caigouxiang"></table>
-			<table schema="ChengJiaoXiang" tableName="chengjiaoxiang"></table>
-			<table schema="ChengJiao" tableName="chengjiao"></table>
-			<table schema="ChiCun" tableName="chicun"></table>
-			<table schema="ChongZhi" tableName="chongzhi"></table>
-			<table schema="DianPu" tableName="DianPu"></table>
-			<table schema="GongYingShang" tableName="gongyingshang"></table>
-			<table schema="GuaDan" tableName="guadan"></table>
-			<table schema="JiFen" tableName="jifen"></table>
-			<table schema="LeiBie" tableName="leibie"></table>
-			<table schema="Qu" tableName="qu"></table>
-			<table schema="QuanXian" tableName="quanxian"></table>
-			<table schema="QuanXianLeiBie" tableName="quanxianleibie"></table>
-			<table schema="ShangPin" tableName="shangpin"></table>
-			
-			<table schema="ShengFen" tableName="shengfen"></table>
-			<table schema="Shi" tableName="shi"></table>
-			<table schema="Vip" tableName="vip"></table>
-			<table schema="VipDengJi" tableName="vipdengji"></table>
-			<table schema="YanSe" tableName="yanse"></table>
-			<table schema="YanSeLeiBie" tableName="yanseleibie"></table>
-			<table schema="YuanGong" tableName="yuangong"></table>
-			<table schema="ZhiWei" tableName="zhiwei"></table>
-			<table schema="Status" tableName="status"></table> -->
-			
-			<table schema="ShangPinXiang" tableName="shangpinxiang"></table>
-			
-
 		<!--<table schema="Module" tableName="module">
 		</table>
 		<table schema="Role" tableName="role">

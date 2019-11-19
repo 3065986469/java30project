@@ -4,6 +4,7 @@ import com.accp.domain.Zhiwei;
 import com.accp.domain.ZhiweiExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface ZhiweiMapper {
     int countByExample(ZhiweiExample example);
@@ -27,4 +28,16 @@ public interface ZhiweiMapper {
     int updateByPrimaryKeySelective(Zhiwei record);
 
     int updateByPrimaryKey(Zhiwei record);
+
+    
+    @Select("SELECT a.zwid as zwid,a.zwname as zwname,b.dpname as dpname\r\n" + 
+    		"FROM `zhiwei` a,`dianpu` b\r\n" + 
+    		"WHERE a.dpid=b.dpid AND a.sid=1 and b.sid=1")
+    List<Zhiwei> queryAllZhiWei();
+    
+    @Select("SELECT a.zwid as zwid,a.zwname as zwname,b.dpname as dpname\r\n" + 
+    		"FROM `zhiwei` a,`dianpu` b \r\n" + 
+    		"WHERE a.dpid=b.dpid AND a.sid=1 and b.sid=1 group by a.zwname")
+    List<Zhiwei> queryAllZhiWei2();
+
 }
