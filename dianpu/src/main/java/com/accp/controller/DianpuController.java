@@ -13,9 +13,11 @@ import com.accp.domain.Dianpu;
 import com.accp.domain.Yuangong;
 import com.accp.domain.Zhiwei;
 import com.accp.service.DianPuService;
+
 @Controller
 @RequestMapping("/dianpu")
 public class DianpuController {
+	
 	@Autowired
 	DianPuService service;
 	
@@ -23,6 +25,7 @@ public class DianpuController {
 	public String toIndex() {
 		return "index";
 	}
+	
 	@RequestMapping("/go")
 	public String go(String method) {
 		return method;
@@ -32,7 +35,6 @@ public class DianpuController {
 	public String toLogin() {
 		return "login";
 	}
-
 	
 	@RequestMapping("/queryAllDianPu")
 	@ResponseBody
@@ -101,5 +103,4 @@ public class DianpuController {
 		service.insertYuanGong(yuangong);
 		return "";
 	}
-
 }

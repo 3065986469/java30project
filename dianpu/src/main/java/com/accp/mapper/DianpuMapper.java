@@ -28,7 +28,6 @@ public interface DianpuMapper {
     int updateByPrimaryKeySelective(Dianpu record);
 
     int updateByPrimaryKey(Dianpu record);
-
     
     @Select("SELECT b.ygname AS ygname,a.dpid as dpid,a.dpname AS dpname,a.dplianxiren AS dplianxiren,a.dpphone AS dpphone,a.dpaddress AS dpaddress,COUNT(b.dpid) AS COUNT\r\n" + 
     		"    		FROM `dianpu` a,`yuangong` b\r\n" + 
@@ -40,5 +39,4 @@ public interface DianpuMapper {
     		"FROM dianpu\r\n" + 
     		"")
     String queryDianPuId();
-
 }

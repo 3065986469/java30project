@@ -15,7 +15,28 @@ public class Dianpu {
 
     private Integer sid;
 
-    public Integer getId() {
+    private String count;
+    
+    private String ygname;
+    
+    
+    public String getYgname() {
+		return ygname;
+	}
+
+	public void setYgname(String ygname) {
+		this.ygname = ygname;
+	}
+
+	public String getCount() {
+		return count;
+	}
+
+	public void setCount(String count) {
+		this.count = count;
+	}
+
+	public Integer getId() {
         return id;
     }
 

@@ -28,7 +28,6 @@ public interface ZhiweiMapper {
     int updateByPrimaryKeySelective(Zhiwei record);
 
     int updateByPrimaryKey(Zhiwei record);
-
     
     @Select("SELECT a.zwid as zwid,a.zwname as zwname,b.dpname as dpname\r\n" + 
     		"FROM `zhiwei` a,`dianpu` b\r\n" + 
@@ -39,5 +38,4 @@ public interface ZhiweiMapper {
     		"FROM `zhiwei` a,`dianpu` b \r\n" + 
     		"WHERE a.dpid=b.dpid AND a.sid=1 and b.sid=1 group by a.zwname")
     List<Zhiwei> queryAllZhiWei2();
-
 }

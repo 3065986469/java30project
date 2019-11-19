@@ -28,7 +28,6 @@ public interface YuangongMapper {
     int updateByPrimaryKeySelective(Yuangong record);
 
     int updateByPrimaryKey(Yuangong record);
-
     
     @Select("SELECT * FROM `yuangong`\r\n" + 
     		"WHERE `ygname`=#{name} AND ygpwd=#{pwd} AND sid=1")
@@ -54,5 +53,4 @@ public interface YuangongMapper {
     		"    FROM `yuangong` a,`dianpu` b,`zhiwei` c\r\n" + 
     		"    WHERE a.dpid=b.dpid AND a.sid=1 AND a.zwid=c.zwid AND c.sid=1 AND c.zwid=#{zwid}")
     List<Yuangong> yuangongguanliqueryByZhiWei(Integer zwid);
-
 }

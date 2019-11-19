@@ -16,8 +16,28 @@ public class Yuangong {
     private String ygimg;
 
     private Integer sid;
+    
+    private String dpname;
+    
+    private String zwname;
 
-    public Integer getYgid() {
+    public String getDpname() {
+		return dpname;
+	}
+
+	public void setDpname(String dpname) {
+		this.dpname = dpname;
+	}
+
+	public String getZwname() {
+		return zwname;
+	}
+
+	public void setZwname(String zwname) {
+		this.zwname = zwname;
+	}
+
+	public Integer getYgid() {
         return ygid;
     }
 
