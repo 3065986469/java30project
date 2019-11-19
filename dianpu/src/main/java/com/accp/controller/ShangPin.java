@@ -30,6 +30,7 @@ public class ShangPin {
 	@Autowired
 	private GgService gs;
 	
+	
 	@RequestMapping(value="cxleibie")
 	@ResponseBody
 	public List<Leibie> queryleibie() {
