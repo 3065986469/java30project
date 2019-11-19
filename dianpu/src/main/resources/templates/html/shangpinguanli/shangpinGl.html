@@ -138,13 +138,17 @@
 			$("#sck").click(function() {
 				$("#btn button").attr("class", "btn btn-gray-500 btn-lg");
 				$("#spsc").attr("class", "btn btn-primary btn-lg");
-				init("shangpinshangchuan/shangpinshch");
+				initshch("shangpinshangchuan/shangpinshch");
 			});
 			
 			
 		});
 		
-		function init(index) {
+		
+		
+		
+		
+		function initshch(index) {
 			$.ajax({
 				url : "[[@{/dianpu/go}]]",
 				data : {

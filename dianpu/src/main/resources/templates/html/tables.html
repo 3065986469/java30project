@@ -180,7 +180,7 @@
 		<script>
 		
 		function init(index) {
-			alert(index);
+			//alert(index);
 			$.ajax({
 				url : "[[@{/dianpu/go}]]",
 				data : {
@@ -188,7 +188,7 @@
 				},
 				dataType : "html",
 				success : function(res) {
-					alert(11);
+					//alert(11);
 					$("#lb").empty();
 					$("#lb").append(res);
 					
@@ -206,7 +206,7 @@
 					init("shangpinleibie/shangpinlb");
 				});
 				$("#shpglid").click(function() {
-					alert(22);
+					//alert(22);
 					init("shangpinguanli/shangpinGl");
 				});
 
