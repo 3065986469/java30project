@@ -7,7 +7,7 @@
 	</head>
 
 	<body>
-		<div class="col-lg-12 mb-4">
+		<div class="col-lg-12 mb-4" id="sb">
 			<div class="card">
 				<form>
 					<div class="card-header">
@@ -25,16 +25,17 @@
 										<table style="margin: auto;">
 											<tr>
 												<td align="right">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">*</span>等级名称</td>
-												<td><input type="text"></td>
+												<td><input type="text" v-model="dengji.djname"></td>
 												<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 												<td align="right"><span style="color: red;">*</span>优惠折扣</td>
-												<td><input type="text"></td>
+												<td><input type="text" v-model="dengji.djzhekou"></td>
 											</tr>
 										</table>
 										<div style="border: 1px solid gray;width: 486px;height: 35px; margin: 10px 0px 0px 177px;padding: 5px 5px 0px 5px;">
 											<span>自动升级</span>
 											<div class="btn-group " role="group " aria-label="..." style="border: 1px solid green;float: right;">
 												<button type="button" style="border: none; width: 50px; height: 20px;" name="button3">开启</button>
+												<input id="input1" style="display: none" v-model="dengji.dxzidong">
 												<button type="button" style="border: none; width: 50px; height: 20px;" name="button4">关闭</button>
 											</div>
 										</div>
@@ -45,7 +46,7 @@
 													<td>&nbsp;</td>
 												</tr>
 												<tr>
-													<td>1、当会员消费达到<input style="width: 50px;">元时，自动升级到该等级。</td>
+													<td>1、当会员消费达到<input style="width: 50px;" v-model="dengji.djxiaofei">元时，自动升级到该等级。</td>
 												</tr>
 												<tr>
 													<td>&nbsp;</td>
@@ -60,7 +61,7 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" data-dismiss="modal">取消</button>
-										<button type="button">确定</button>
+										<button type="button" data-dismiss="modal" @click="add()">确定</button>
 									</div>
 								</div>
 							</div>
@@ -79,92 +80,159 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<th scope="row">1</th>
-								<td>---</td>
-								<td>---</td>
-								<td>---</td>
+							<tr v-for="w,index in list">
+								<th scope="row">{{(index+1)}}</th>
+								<td>{{w.djname}}</td>
+								<td>{{w.djzhekou}}.00</td>
+								<td>{{w.djxiaofei}}积分</td>
 								<td>
-									<a href="">删除</a>
-									<a href="" data-toggle="modal" data-target="#huiyuan4">修改</a>
+									<a href="#" @click="del(w.djid)">删除</a>
+									<a href="#" @click="upd(w.djid)"data-toggle="modal" data-target="#huiyuan4">修改</a>
 								</td>
 						</tbody>
 					</table>
-									<!-- Modal -->
-									<div class="modal fade" id="huiyuan4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-										<div class="modal-dialog modal-lg" role="document">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h4 class="modal-title" id="myModalLabel">修改等级</h4>
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-												</div>
-												<div class="modal-body">
-													<table style="margin: auto;">
-														<tr>
-															<td align="right">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">*</span>等级名称</td>
-															<td><input type="text"></td>
-															<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-															<td align="right"><span style="color: red;">*</span>优惠折扣</td>
-															<td><input type="text"></td>
-														</tr>
-													</table>
-													<div style="border: 1px solid gray;width: 486px;height: 35px; margin: 10px 0px 0px 177px;padding: 5px 5px 0px 5px;">
-														<span>自动升级</span>
-														<div class="btn-group " role="group " aria-label="..." style="border: 1px solid green;float: right;">
-															<button type="button " style="border: none; width: 50px; height: 20px;" name="button3">开启</button>
-															<button type="button " style="border: none; width: 50px; height: 20px;" name="button4">关闭</button>
-														</div>
-													</div>
-													<div style="border: 1px solid gray;width: 486px;margin: 0px 0px 0px 177px;padding: 5px 5px 0px 5px;" id="zd">
-														<table>
-															<tr>
-																<td>&nbsp;</td>
-																<td>&nbsp;</td>
-															</tr>
-															<tr>
-																<td>1、当会员消费达到<input style="width: 50px;">元时，自动升级到该等级。</td>
-															</tr>
-															<tr>
-																<td>&nbsp;</td>
-																<td>&nbsp;</td>
-															</tr>
-															<tr>
-																<td>2、自动升级，将在消费达到要求后的第二天生效。</td>
-															</tr>
-														</table>
-													</div>
-
-												</div>
-												<div class="modal-footer">
-													<button type="button" data-dismiss="modal">取消</button>
-													<button type="button">确定</button>
-												</div>
-											</div>
+						<!-- Modal -->
+							<div class="modal fade" id="huiyuan4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								<div class="modal-dialog modal-lg" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title" id="myModalLabel">修改等级</h4>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										</div>
+										<div class="modal-body">
+											<table style="margin: auto;">
+												<tr>
+													<td align="right">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">*</span>等级名称</td>
+													<td><input type="text"></td>
+													<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+													<td align="right"><span style="color: red;">*</span>优惠折扣</td>
+													<td><input type="text"></td>
+												</tr>
+											</table>
+										<div style="border: 1px solid gray;width: 486px;height: 35px; margin: 10px 0px 0px 177px;padding: 5px 5px 0px 5px;">
+										<span>自动升级</span>
+										<div class="btn-group " role="group " aria-label="..." style="border: 1px solid green;float: right;">
+											<button type="button" style="border: none; width: 50px; height: 20px;" name="button3">开启</button>
+											<button type="button" style="border: none; width: 50px; height: 20px;" name="button4">关闭</button>
 										</div>
 									</div>
+									<div style="border: 1px solid gray;width: 486px;margin: 0px 0px 0px 177px;padding: 5px 5px 0px 5px;" id="zd">
+										<table>
+											<tr>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>1、当会员消费达到<input style="width: 50px;">元时，自动升级到该等级。</td>
+											</tr>
+											<tr>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>2、自动升级，将在消费达到要求后的第二天生效。</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" data-dismiss="modal">取消</button>
+									<button type="button">确定</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		<script>
-			$(function() {
-				if(true) {
-					$("[name='button3']").css("background-color", "#18CE0F").css("color", "white");
-					$("[name='button4']").css("background-color", "white").css("color", "white");
-					$("#zd").show();
+		
+		
+		
+		$(document).ready(function(){
+			if(true) {
+				$("[name='button3']").css("background-color", "#18CE0F").css("color", "white");
+				$("[name='button4']").css("background-color", "white").css("color", "white");
+				$("#input1").val(1);
+				$("#zd").show();
+			}
+		})
+			var vue=new Vue({
+				el:"#sb",
+				data(){
+					return{
+						list:[],
+						dengji:{dxzidong:"1"},
+						upddj:{}
+						
+					}
+				},methods :{
+					query : function(){
+						alert("进入了查询")
+						$.ajax({
+							url:"[[@{query}]]",
+							type:"post",
+							success:function(result){
+								vue.list=result;
+							}
+						})
+					},
+					add : function(){
+						var dx=$("#input1").val();
+						vue.dengji.dxzidong=dx;
+						alert(JSON.stringify(vue.dengji))
+						$.ajax({
+							url:"[[@{add}]]",
+							type:"post",
+							data:JSON.stringify(vue.dengji),
+							contentType:"application/json;charser=utf-8",
+							success:function(result){
+								this.query();
+								alert(1);
+							}
+						})
+					},
+					del : function(djid){
+						$.ajax({
+							url:"[[@{del}]]",
+							type:"post",
+							data:{djid:djid},
+							success:function(result){
+								alert(1);
+								this.query();
+							}
+						})
+					}
+					upd: function(djid){
+						$.ajax({
+							url:"[[@{upd}]]",
+							type:"post",
+							success:function(result){
+								
+							}
+						})
+					}
+				},
+				created:function(){
+					this.query();
 				}
-
+			})
 				$("[name='button3']").click(function() {
 					$("[name='button3']").css("background-color", "#18CE0F").css("color", "white");
 					$("[name='button4']").css("background-color", "white").css("color", "white");
+					$("#input1").val(1);
 					$("#zd").show();
 				})
 
 				$("[name='button4']").click(function() {
+
 					$("[name='button3']").css("background-color", "white").css("color", "white");
 					$("[name='button4']").css("background-color", "gray").css("color", "white");
+					$("#input1").val(0);
 					$("#zd").hide()
 				})
-			})
+			
+			
 		</script>
 	</body>
 

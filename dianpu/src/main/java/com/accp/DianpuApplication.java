@@ -11,5 +11,4 @@ public class DianpuApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DianpuApplication.class, args);
 	}
-
 }
