@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.accp.mapper.StatusMapper" >
-  <resultMap id="BaseResultMap" type="com.accp.domain.Status" >
-    <result column="sid" property="sid" jdbcType="INTEGER" />
-    <result column="sname" property="sname" jdbcType="VARCHAR" />
+<mapper namespace="com.accp.mapper.SupplierMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.domain.Supplier" >
+    <result column="billno" property="billno" jdbcType="VARCHAR" />
+    <result column="suppliername" property="suppliername" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -64,15 +64,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    sid, sname
+    billno, suppliername
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.StatusExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.SupplierExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from status
+    from supplier
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -80,49 +80,49 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.accp.domain.StatusExample" >
-    delete from status
+  <delete id="deleteByExample" parameterType="com.accp.domain.SupplierExample" >
+    delete from supplier
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.accp.domain.Status" >
-    insert into status (sid, sname)
-    values (#{sid,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.accp.domain.Supplier" >
+    insert into supplier (billno, suppliername)
+    values (#{billno,jdbcType=VARCHAR}, #{suppliername,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.accp.domain.Status" >
-    insert into status
+  <insert id="insertSelective" parameterType="com.accp.domain.Supplier" >
+    insert into supplier
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="sid != null" >
-        sid,
+      <if test="billno != null" >
+        billno,
       </if>
-      <if test="sname != null" >
-        sname,
+      <if test="suppliername != null" >
+        suppliername,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="sid != null" >
-        #{sid,jdbcType=INTEGER},
+      <if test="billno != null" >
+        #{billno,jdbcType=VARCHAR},
       </if>
-      <if test="sname != null" >
-        #{sname,jdbcType=VARCHAR},
+      <if test="suppliername != null" >
+        #{suppliername,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.accp.domain.StatusExample" resultType="java.lang.Integer" >
-    select count(*) from status
+  <select id="countByExample" parameterType="com.accp.domain.SupplierExample" resultType="java.lang.Integer" >
+    select count(*) from supplier
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update status
+    update supplier
     <set >
-      <if test="record.sid != null" >
-        sid = #{record.sid,jdbcType=INTEGER},
+      <if test="record.billno != null" >
+        billno = #{record.billno,jdbcType=VARCHAR},
       </if>
-      <if test="record.sname != null" >
-        sname = #{record.sname,jdbcType=VARCHAR},
+      <if test="record.suppliername != null" >
+        suppliername = #{record.suppliername,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -130,9 +130,9 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update status
-    set sid = #{record.sid,jdbcType=INTEGER},
-      sname = #{record.sname,jdbcType=VARCHAR}
+    update supplier
+    set billno = #{record.billno,jdbcType=VARCHAR},
+      suppliername = #{record.suppliername,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

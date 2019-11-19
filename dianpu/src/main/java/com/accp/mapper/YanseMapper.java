@@ -2,6 +2,8 @@ package com.accp.mapper;
 
 import com.accp.domain.Yanse;
 import com.accp.domain.YanseExample;
+import com.accp.domain.Yanseleibie;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -18,7 +20,7 @@ public interface YanseMapper {
 
     List<Yanse> selectByExample(YanseExample example);
 
-    Yanse selectByPrimaryKey(Integer ysid);
+    List<Yanse> selectByPrimaryKey(Integer ysid);
 
     int updateByExampleSelective(@Param("record") Yanse record, @Param("example") YanseExample example);
 
@@ -27,4 +29,9 @@ public interface YanseMapper {
     int updateByPrimaryKeySelective(Yanse record);
 
     int updateByPrimaryKey(Yanse record);
+    
+    List<Yanseleibie> selectYanselb();
+    
+    
+    
 }

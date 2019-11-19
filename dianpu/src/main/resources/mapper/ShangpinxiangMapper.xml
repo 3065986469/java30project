@@ -7,6 +7,7 @@
     <result column="ccid" property="ccid" jdbcType="INTEGER" />
     <result column="ysid" property="ysid" jdbcType="INTEGER" />
     <result column="spxcount" property="spxcount" jdbcType="INTEGER" />
+    <result column="spxtm" property="spxtm" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    spxid, spno, ccid, ysid, spxcount
+    spxid, spno, ccid, ysid, spxcount, spxtm
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.ShangpinxiangExample" >
     select
@@ -101,9 +102,11 @@
   </delete>
   <insert id="insert" parameterType="com.accp.domain.Shangpinxiang" >
     insert into shangpinxiang (spxid, spno, ccid, 
-      ysid, spxcount)
+      ysid, spxcount, spxtm
+      )
     values (#{spxid,jdbcType=INTEGER}, #{spno,jdbcType=INTEGER}, #{ccid,jdbcType=INTEGER}, 
-      #{ysid,jdbcType=INTEGER}, #{spxcount,jdbcType=INTEGER})
+      #{ysid,jdbcType=INTEGER}, #{spxcount,jdbcType=INTEGER}, #{spxtm,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.accp.domain.Shangpinxiang" >
     insert into shangpinxiang
@@ -123,6 +126,9 @@
       <if test="spxcount != null" >
         spxcount,
       </if>
+      <if test="spxtm != null" >
+        spxtm,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="spxid != null" >
@@ -139,6 +145,9 @@
       </if>
       <if test="spxcount != null" >
         #{spxcount,jdbcType=INTEGER},
+      </if>
+      <if test="spxtm != null" >
+        #{spxtm,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -166,6 +175,9 @@
       <if test="record.spxcount != null" >
         spxcount = #{record.spxcount,jdbcType=INTEGER},
       </if>
+      <if test="record.spxtm != null" >
+        spxtm = #{record.spxtm,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -177,7 +189,8 @@
       spno = #{record.spno,jdbcType=INTEGER},
       ccid = #{record.ccid,jdbcType=INTEGER},
       ysid = #{record.ysid,jdbcType=INTEGER},
-      spxcount = #{record.spxcount,jdbcType=INTEGER}
+      spxcount = #{record.spxcount,jdbcType=INTEGER},
+      spxtm = #{record.spxtm,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -197,6 +210,9 @@
       <if test="spxcount != null" >
         spxcount = #{spxcount,jdbcType=INTEGER},
       </if>
+      <if test="spxtm != null" >
+        spxtm = #{spxtm,jdbcType=VARCHAR},
+      </if>
     </set>
     where spxid = #{spxid,jdbcType=INTEGER}
   </update>
@@ -205,7 +221,8 @@
     set spno = #{spno,jdbcType=INTEGER},
       ccid = #{ccid,jdbcType=INTEGER},
       ysid = #{ysid,jdbcType=INTEGER},
-      spxcount = #{spxcount,jdbcType=INTEGER}
+      spxcount = #{spxcount,jdbcType=INTEGER},
+      spxtm = #{spxtm,jdbcType=VARCHAR}
     where spxid = #{spxid,jdbcType=INTEGER}
   </update>
 </mapper>

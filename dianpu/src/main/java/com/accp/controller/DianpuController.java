@@ -66,9 +66,41 @@ public class DianpuController {
 		return service.queryAllZhiWei();
 	}
 	
+	@RequestMapping("/queryAllZhiWei2")
+	@ResponseBody
+	public List<Zhiwei> queryAllZhiWei2() {
+		return service.queryAllZhiWei2();
+	}
+	
+	
 	@RequestMapping("/queryAllYuanGong")
 	@ResponseBody
 	public List<Yuangong> queryAllYuanGong() {
 		return service.queryAllYuanGong();
+	}
+	
+	@RequestMapping("/yuangongguanliquery")
+	@ResponseBody
+	public List<Yuangong> yuangongguanliquery(String ygname) {
+		return service.yuangongguanliquery(ygname);
+	}
+	
+	@RequestMapping("/yuangongguanliqueryByDianPu")
+	@ResponseBody
+	public List<Yuangong> yuangongguanliqueryByDianPu(Integer dpid) {
+		return service.yuangongguanliqueryByDianPu(dpid);
+	}
+	
+	@RequestMapping("/yuangongguanliqueryByZhiWei")
+	@ResponseBody
+	public List<Yuangong> yuangongguanliqueryByZhiWei(Integer zwid) {
+		return service.yuangongguanliqueryByZhiWei(zwid);
+	}
+	
+	@RequestMapping("/insertYuanGong")
+	@ResponseBody
+	public String insertYuanGong(Yuangong yuangong) {
+		service.insertYuanGong(yuangong);
+		return "";
 	}
 }

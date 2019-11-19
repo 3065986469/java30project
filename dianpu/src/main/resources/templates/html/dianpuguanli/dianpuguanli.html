@@ -37,7 +37,7 @@
 	</div>
 
 
-	<div id="tb">
+	<div id="dianpuguanlitb">
 		<div class="modal fade bs-example-modal-lg" id="dianpuguanlimyModal" tabindex="-1"
 			role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog modal-lg" role="document">
@@ -75,7 +75,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="button" @click="baocun()" class="btn btn-primary">保存</button>
+						<button type="button" @click="dianpuguanlibaocun()" class="btn btn-primary">保存</button>
 					</div>
 				</div>
 			</div>
@@ -110,14 +110,14 @@
 			$(function(){
 				
 				var vm=new Vue({
-					el:"#tb",
+					el:"#dianpuguanlitb",
 					data(){
 						return {
 							dianpu:{}
 						}
 					},
 					methods:{
-						baocun:function(){
+						dianpuguanlibaocun:function(){
 							var that=this;
 							$.ajax({
 								url:"[[@{/dianpu/insertDianPu}]]",

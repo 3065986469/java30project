@@ -2,6 +2,8 @@ package com.accp.mapper;
 
 import com.accp.domain.Shangpin;
 import com.accp.domain.ShangpinExample;
+import com.accp.domain.Shangpinxiang;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +29,13 @@ public interface ShangpinMapper {
     int updateByPrimaryKeySelective(Shangpin record);
 
     int updateByPrimaryKey(Shangpin record);
+    
+    List<Shangpin> selectspguanli(Shangpin record);
+    
+    int deleteBYid(Integer spid);
+    
+    Shangpin selectspno(String spno);
+    
+    List<Shangpinxiang> selectspxno(String spno);
+    
 }

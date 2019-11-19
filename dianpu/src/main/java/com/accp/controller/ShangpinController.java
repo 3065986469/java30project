@@ -9,6 +9,7 @@ public class ShangpinController {
 	
 	@RequestMapping("/toTables")
 	public String toCharts() {
+	
 		return "tables";
 	}
 }

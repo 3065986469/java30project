@@ -1,5 +1,7 @@
 package com.accp.domain;
 
+import java.util.List;
+
 public class Shangpin {
     private Integer spid;
 
@@ -22,8 +24,58 @@ public class Shangpin {
     private String spmiaoshu;
 
     private Integer sid;
+    
+    private String lbname;
+    
+    private String spxtm;
+    
+    private String ysname;
+    
+    private String ccname;
+    
+    private List<Shangpinxiang> shangpinx;
+    
+    public List<Shangpinxiang> getShangpinx() {
+		return shangpinx;
+	}
 
-    public Integer getSpid() {
+	public void setShangpinx(List<Shangpinxiang> shangpinx) {
+		this.shangpinx = shangpinx;
+	}
+
+	public String getLbname() {
+		return lbname;
+	}
+
+	public void setLbname(String lbname) {
+		this.lbname = lbname;
+	}
+
+	public String getSpxtm() {
+		return spxtm;
+	}
+
+	public void setSpxtm(String spxtm) {
+		this.spxtm = spxtm;
+	}
+
+	public String getYsname() {
+		return ysname;
+	}
+
+	public void setYsname(String ysname) {
+		this.ysname = ysname;
+	}
+
+	public String getCcname() {
+		return ccname;
+	}
+
+	public void setCcname(String ccname) {
+		this.ccname = ccname;
+	}
+
+	public Integer getSpid() {
         return spid;
     }
 

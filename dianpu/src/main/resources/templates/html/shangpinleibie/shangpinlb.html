@@ -16,7 +16,7 @@
                 <div class="card">
                   <div class="card-header">
                     <h3 class="h6 text-uppercase mb-0">商品类别 <span class="col-md-2" style="float: right;">
-					<a href="#tjym" class="btn btn-success " data-toggle="modal">添加类别</a></span></h3>
+					<a href="#tjym" class="btn btn-success " data-toggle="modal" id="tjlb">添加类别</a></span></h3>
                   </div>
                   <div class="card-body">
                     <table class="table table-hover table-striped">
@@ -27,12 +27,8 @@
 							<th style="text-align: center;">操作</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td style="text-align: center;">1</td>
-							<td style="text-align: center;">名称</td>
-							<td style="text-align: center;"><a href="javascript:void(0);">修改</a>&nbsp;<a href="javascript:void(0);">删除</a></td>
-						</tr>
+					<tbody id="lbtr">
+						
 					</tbody>
 				</table>
                   </div>
@@ -45,21 +41,125 @@
 						  <div class="modal-content">
 						<div class="modal-header">
 							
-							<h3>添加类别</h3>
+							<h3 id="tab"></h3>
 							<button class="close" data-dismiss="modal">&times;</button>
 						</div>
 						<div class="modal-body">
-							名称<input type="text" id="lbname"/>
+							名称<input type="text" id="lbname"/><input type="hidden" id="lbid"/>
 						</div>
 						<div class="modal-footer">
-							<button class="btn btn-default" data-dismiss="modal">取消</button>
-							<button class="btn btn-success" id="qd">确定</button>
+							<button class="btn btn-default" id="qxlb" data-dismiss="modal">取消</button>
+							<button class="btn btn-success"  id="qd">确定</button>
 						</div>
 					</div>
 					</div>
 				</div>
 			
-			
+			<script type="text/javascript">
+			function initlb(){
+					$.ajax({
+						url:"[[@{/shangping/cxleibie}]]",
+						type:"get",
+						data:{},
+						dataType:"json",
+						success:function(res){
+							$("#lbtr").html("");
+							$.each(res,function(i,obj){
+								var $lb=`<tr>
+									<td style="text-align: center;">${i+1}</td>
+									<td style="text-align: center;">${obj.lbname}</td>
+									<td style="text-align: center;"><a href="#tjym" data-toggle="modal" onclick="xglb(${obj.lbid})">修改</a>&nbsp;<a href="javascript:void(0);" onclick="sc(${obj.lbid})">删除</a></td>
+								</tr>`;
+								$("#lbtr").append($lb);
+							});
+						}
+					});
+				}
+				$(function(){
+					$("#tjym").click(function(){
+						$("#tab").text("添加商品");
+					});
+					
+					$("#qxlb").click(function(){
+						$("#lbid").val("");
+						$("#lbname").val("");
+					});
+					
+					
+					initlb();
+					$("#qd").click(function(){
+						//alert();
+						if($("#lbid").val()!=null&&$("#lbid").val()!=""){
+							$.ajax({
+								url:"[[@{/shangping/updatelb}]]",
+								type:"get",
+								data:{lbid:$("#lbid").val(),lbname:$("#lbname").val(),sid:1},
+								dataType:"text",
+								success:function(res){
+									$("#tjym").modal('hide');
+									//alert(res);
+									//alert(111);
+									initlb();
+									
+								}
+							});
+							
+							
+						}else{
+							$.ajax({
+								url:"[[@{/shangping/insertlb}]]",
+								type:"get",
+								data:{lbid:0,lbname:$("#lbname").val(),sid:1},
+								dataType:"text",
+								success:function(res){
+									$("#tjym").modal("hide");
+									//alert(res);
+									initlb();
+								}
+							});
+							
+						}
+						
+						$("#lbid").val("");
+						$("#lbname").val("");
+					});
+					
+					
+					
+				});
+				function xglb(obj){
+				//	alert(obj);
+				$("#tab").text("编辑商品");
+					$.ajax({
+						url:"[[@{/shangping/querylbkey}]]",
+						type:"get",
+						data:{lbid:obj},
+						dataType:"json",
+						success:function(res){
+						//	alert(obj);
+							$("#lbid").val(res.lbid);
+							$("#lbname").val(res.lbname);
+						}
+					});
+				}
+				
+				function sc(obj){
+					$.ajax({
+						url:"[[@{/shangping/deleteleibie}]]",
+						type:"get",
+						data:{lbid:obj},
+						dataType:"json",
+						success:function(res){
+							//alert(res);
+							if(res=="1"){
+								alert("删除成功！！");
+							}
+							initlb();
+						}
+					});
+				}
+				
+			</script>
 			<!--<div class="row col-md-12 " style="border: 1px solid;">
 				<h3 class="col-md-2">商品类别</h3> <span class="col-md-2" style="margin-left: 650px;">
 					<a href="#tjym" class="btn btn-success " data-toggle="modal">添加类别</a>
