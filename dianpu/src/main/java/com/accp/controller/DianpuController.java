@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.accp.domain.Dianpu;
+import com.accp.domain.Quanxian;
 import com.accp.domain.Yuangong;
 import com.accp.domain.Zhiwei;
 import com.accp.service.DianPuService;
@@ -101,6 +102,59 @@ public class DianpuController {
 	@ResponseBody
 	public String insertYuanGong(Yuangong yuangong) {
 		service.insertYuanGong(yuangong);
+		return "";
+	}
+	
+	@RequestMapping("/queryQuanXian")
+	@ResponseBody
+	public List<Quanxian> queryQuanXian() {
+		return service.queryQuanXian();
+	}
+	
+	@RequestMapping("/insertZhiWei")
+	@ResponseBody
+	public String insertZhiWei(Zhiwei zhiwei) {
+		service.insertZhiWei(zhiwei);
+		return "";
+	}
+	
+	@RequestMapping("/queryZhiWeiById")
+	@ResponseBody
+	public Zhiwei queryZhiWeiById(Integer zwid) {
+		return service.queryZhiWeiById(zwid);
+	}
+	
+	@RequestMapping("/updateZhiWei")
+	@ResponseBody
+	public String updateZhiWei(Zhiwei zhiwei) {
+		service.updateZhiWei(zhiwei);
+		return "";
+	}
+	
+	@RequestMapping("/deleteZhiWei")
+	@ResponseBody
+	public String deleteZhiWei(Zhiwei zhiwei) {
+		service.deleteZhiWei(zhiwei);
+		return "";
+	}
+	
+	@RequestMapping("/queryYuanGongById")
+	@ResponseBody
+	public Yuangong queryYuanGongById(Integer ygid) {
+		return service.queryYuanGongById(ygid);
+	}
+	
+	@RequestMapping("/updateYuanGong")
+	@ResponseBody
+	public String updateYuanGong(Yuangong yuangong) {
+		service.updateYuanGong(yuangong);
+		return "";
+	}
+	
+	@RequestMapping("/deleteYuanGong")
+	@ResponseBody
+	public String deleteYuanGong(Yuangong yuangong) {
+		service.deleteYuanGong(yuangong);
 		return "";
 	}
 }

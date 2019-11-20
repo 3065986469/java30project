@@ -38,8 +38,8 @@
 
 
 	<div id="dianpuguanlitb">
-		<div class="modal fade bs-example-modal-lg" id="dianpuguanlimyModal" tabindex="-1"
-			role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal fade bs-example-modal-lg" id="dianpuguanlimyModal"
+			tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -68,14 +68,23 @@
 								<td><input type="text" v-model="dianpu.dpphone"></td>
 								<td></td>
 								<td>&nbsp;&nbsp;&nbsp;地址</td>
-								<td><input type="text" v-model="dianpu.dpaddress"></td>
+								<td>
+									<!-- 								<input type="text" v-model="dianpu.dpaddress"> -->
+									<div data-toggle="distpicker">
+										<select></select> <select></select> <select></select>
+									</div>
+								</td>
+
+
+
 							</tr>
 
 						</table>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="button" @click="dianpuguanlibaocun()" class="btn btn-primary">保存</button>
+						<button type="button" @click="dianpuguanlibaocun()"
+							class="btn btn-primary">保存</button>
 					</div>
 				</div>
 			</div>
@@ -96,7 +105,7 @@
 								<th>${obj.dplianxiren}</th>
 								<th>${obj.dpphone}</th>
 								<th>${obj.dpaddress}</th>
-								<th><a href="javascript:void(0);">编辑</a></th>
+								<th><a href="javascript:void(0);" onclick="dianpuguanlibianji(${obj.dpid})">编辑</a></th>
 							</tr>`;
 							$("#dianpuguanlitbody").append(str);
 						});
@@ -105,6 +114,13 @@
 			}
 			
 			dianpuguanliinit();
+			
+			
+			function dianpuguanlibianji(){
+				
+			}
+			
+			
 			
 			
 			$(function(){
@@ -128,12 +144,13 @@
 								}
 							});
 						}
-						
-
 					}
 				});
 				
 			});
+			
+			
+			
 		</script>
 
 

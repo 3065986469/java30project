@@ -12,7 +12,7 @@
 			<table>
 				<tr>
 					<td>
-						<h4 class="text-uppercase mb-0" style="margin-right: 320px;">员工管理</h4>
+						<h4 class="text-uppercase mb-0" style="margin-right: 300px;">员工管理</h4>
 					</td>
 
 					<td><select class="custom-select"
@@ -34,7 +34,7 @@
 					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 					<td>
 						<button class="btn btn-primary" data-toggle="modal"
-							data-target=".bs-example-modal-lg">添加员工</button>
+							data-target=".bs-example-modal-lg" id="yuangongguanlitianjiazhiwei">添加员工</button>
 					</td>
 				</tr>
 
@@ -65,7 +65,7 @@
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="myModalLabel">添加员工</h5>
+						<h5 class="modal-title" id="myModalLabel" >添加员工</h5>
 
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
@@ -73,7 +73,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<table style="margin: auto;">
+						<table style="margin: auto;" id="yuangongguanlitable1">
 							<tr>
 								<td>店铺</td>
 								<td><select class="custom-select" v-model="yg.dpid" id="yuangongguanliqueryAlldianpu2">
@@ -90,17 +90,46 @@
 							</tr>
 							<tr>
 								<td>姓名</td>
-								<td><input type="text" class="text" v-model="yg.ygname"></td>
+								<td><input type="text" class="text" v-model="yg.ygname" id="ygname"></td>
 								<td></td>
 								<td>密码</td>
-								<td><input type="text" class="text" v-model="yg.ygpwd"></td>
+								<td><input type="text" class="text" v-model="yg.ygpwd" id="ygpwd"></td>
 							</tr>
-							
 						</table>
+						
+						
+						<table style="margin: auto;display: none;" id="yuangongguanlitable3">
+							<tr>
+								<td>店铺</td>
+								<td><input type="hidden" id="ygid3"><select class="custom-select" id="yuangongguanliqueryAlldianpu3">
+								</select></td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td>职位</td>
+								<td><select class="custom-select"  id="yuangongguanliqueryAllzhiwei3">
+									
+								</select></td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>姓名</td>
+								<td><input type="text" class="text" id="ygname3"></td>
+								<td></td>
+								<td>密码</td>
+								<td><input type="text" class="text" id="ygpwd3"></td>
+							</tr>
+						</table>
+						
+						
+						
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="button" class="btn btn-primary" @click="yuangongadd()">保存</button>
+						<button type="button" class="btn btn-red" id="yuangongguanlishanchu" style="display: none;" data-dismiss="modal" onclick="yuangongguanlishanchu()">删除</button>
+						<button type="button" class="btn btn-primary" id="yuangongguanlixiugai" onclick="yuangongguanlixiugai()">修改</button>
+						<button type="button" class="btn btn-primary" @click="yuangongadd()" id="yuangongguanlibaocun">保存</button>
 					</div>
 				</div>
 			</div>
@@ -114,7 +143,6 @@
 				url:"[[@{/dianpu/queryAllYuanGong}]]",
 				dataType:"json",
 				success:function(res){
-					console.log(res);
 					$("#yuangongguanlitbody").empty();
 					$.each(res,function(i,obj){
 						let str=`<tr>
@@ -122,7 +150,7 @@
 							<th>${obj.ygname}</th>
 							<th>${obj.zwname}</th>
 							<th>${obj.dpname}</th>
-							<th><a href="javascript:void(0);">编辑</a></th>
+							<th><a href="javascript:void(0);" onclick="yuangongguanlibianji(${obj.ygid})">编辑</a></th>
 						</tr>`;
 						$("#yuangongguanlitbody").append(str);
 					});
@@ -139,10 +167,12 @@
 					$("#yuangongguanliqueryAlldianpu").append(str1);
 					let str11=`<option value="0">请选择店铺</option>`;
 					$("#yuangongguanliqueryAlldianpu2").append(str11);
+					$("#yuangongguanliqueryAlldianpu3").append(str11);
 					$.each(res,function(i,obj){
 						let str2=`<option value="${obj.dpid}">${obj.dpname}</option>`;
 						$("#yuangongguanliqueryAlldianpu").append(str2);
 						$("#yuangongguanliqueryAlldianpu2").append(str2);
+						$("#yuangongguanliqueryAlldianpu3").append(str2);
 					});
 				}
 			});
@@ -157,10 +187,12 @@
 					let str11=`<option value="0">请选择职位</option>`;
 					$("#yuangongguanliqueryAllzhiwei").append(str1);
 					$("#yuangongguanliqueryAllzhiwei2").append(str11);
+					$("#yuangongguanliqueryAllzhiwei3").append(str11);
 					$.each(res,function(i,obj){
 						let str=`<option value="${obj.zwid}">${obj.zwname}</option>`;
 						$("#yuangongguanliqueryAllzhiwei").append(str);
 						$("#yuangongguanliqueryAllzhiwei2").append(str);
+						$("#yuangongguanliqueryAllzhiwei3").append(str);
 					});
 				}
 			});
@@ -184,7 +216,7 @@
 							<th>${obj.ygname}</th>
 							<th>${obj.zwname}</th>
 							<th>${obj.dpname}</th>
-							<th><a href="javascript:void(0);">编辑</a></th>
+							<th><a href="javascript:void(0);"  onclick="yuangongguanlibianji(${obj.ygid})">编辑</a></th>
 						</tr>`;
 						$("#yuangongguanlitbody").append(str);
 					});
@@ -207,7 +239,7 @@
 							<th>${obj.ygname}</th>
 							<th>${obj.zwname}</th>
 							<th>${obj.dpname}</th>
-							<th><a href="javascript:void(0);">编辑</a></th>
+							<th><a href="javascript:void(0);"  onclick="yuangongguanlibianji(${obj.ygid})">编辑</a></th>
 						</tr>`;
 						$("#yuangongguanlitbody").append(str);
 					});
@@ -215,12 +247,12 @@
 			});
 		}
 		
-		function yuangongguanliqueryByZhiWei(zwid){
+		function yuangongguanliqueryByZhiWei(ygid){
 			$.ajax({
 				url:"[[@{/dianpu/yuangongguanliqueryByZhiWei}]]",
 				type:"post",
 				data:{
-					zwid:zwid
+					ygid:ygid
 				},
 				success:function(res){
 					$("#yuangongguanlitbody").empty();
@@ -230,7 +262,7 @@
 							<th>${obj.ygname}</th>
 							<th>${obj.zwname}</th>
 							<th>${obj.dpname}</th>
-							<th><a href="javascript:void(0);">编辑</a></th>
+							<th><a href="javascript:void(0);" onclick="yuangongguanlibianji(${obj.ygid})">编辑</a></th>
 						</tr>`;
 						$("#yuangongguanlitbody").append(str);
 					});
@@ -264,6 +296,87 @@
 				}
 			});
 			
+			$("#yuangongguanlitianjiazhiwei").click(function(){
+				$("#yuangongguanlibaocun").show();
+				$("#yuangongguanlishanchu").hide();
+				$("#yuangongguanlixiugai").hide();
+				$("#ygname").val("");
+				$("#ygid").val("");
+				$("#ygpwd").val("");
+				$("#yuangongguanliqueryAlldianpu2").val(0);
+				$("#yuangongguanliqueryAllzhiwei2").val(0);
+				$("#yuangongguanlitable3").hide();
+				$("#yuangongguanlitable1").show();
+			});
+			
 		});
+		
+		
+		
+		function yuangongguanlixiugai(){
+			$.ajax({
+				url:"[[@{/dianpu/updateYuanGong}]]",
+				type:"post",
+				data:{
+					ygid:$("#ygid3").val(),
+					ygname:$("#ygname3").val(),
+					ygpwd:$("#ygpwd3").val(),
+					dpid:$("#yuangongguanliqueryAlldianpu3").val(),
+					zwid:$("#yuangongguanliqueryAllzhiwei3").val()
+				},
+				success:function(res){
+					yuangongguanliinit();
+					$("#yuangongguanliModal").modal("hide");
+				}
+			});
+		}
+		
+		
+		function yuangongguanlishanchu(ygid){
+			if(confirm("你确定要删除吗？")){
+				$.ajax({
+					url:"[[@{/dianpu/deleteYuanGong}]]",
+					type:"post",
+					data:{
+						ygid:$("#ygid3").val(),
+					},
+					success:function(res){
+						yuangongguanliinit();
+						$("#yuangongguanliModal").modal("hide");
+					}
+				});
+			}
+			
+		}
+		
+		function yuangongguanlibianji(ygid){
+			$.ajax({
+				url:"[[@{/dianpu/queryYuanGongById}]]",
+				data:{
+					ygid:ygid
+				},
+				success:function(res){
+					$("#ygname3").val("");
+					$("#ygid3").val("");
+					$("#ygpwd3").val("");
+					$("#yuangongguanliqueryAlldianpu3").val(0);
+					$("#yuangongguanliqueryAllzhiwei3").val(0);
+					$("#yuangongguanlitable1").hide();
+					
+					
+					$("#ygname3").val(res.ygname);
+					$("#ygpwd3").val(res.ygpwd);
+					$("#ygid3").val(res.ygid);
+					$("#yuangongguanliqueryAlldianpu3").val(res.dpid);
+					$("#yuangongguanliqueryAllzhiwei3").val(res.zwid);
+					$("#yuangongguanlishanchu").show();
+					$("#yuangongguanlixiugai").show();
+					$("#yuangongguanlibaocun").hide();
+					$("#yuangongguanlitable3").show();
+					$("#yuangongguanliModal").modal("show");
+				}
+				
+			});
+		}
 		</script>
 </html>

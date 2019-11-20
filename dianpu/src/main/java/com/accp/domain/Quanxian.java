@@ -6,8 +6,29 @@ public class Quanxian {
     private String qxname;
 
     private Integer qxlbid;
+    
+    private String qxlbname;
 
-    public Integer getQxid() {
+    private Integer qxlb;
+    
+    
+    public Integer getQxlb() {
+		return qxlb;
+	}
+
+	public void setQxlb(Integer qxlb) {
+		this.qxlb = qxlb;
+	}
+
+	public String getQxlbname() {
+		return qxlbname;
+	}
+
+	public void setQxlbname(String qxlbname) {
+		this.qxlbname = qxlbname;
+	}
+
+	public Integer getQxid() {
         return qxid;
     }
 
