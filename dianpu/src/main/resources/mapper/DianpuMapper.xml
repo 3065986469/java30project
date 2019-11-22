@@ -232,12 +232,12 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.accp.domain.Dianpu" >
     update dianpu
-    set dpid = #{dpid,jdbcType=VARCHAR},
+    set 
       dpname = #{dpname,jdbcType=VARCHAR},
       dplianxiren = #{dplianxiren,jdbcType=VARCHAR},
       dpphone = #{dpphone,jdbcType=VARCHAR},
       dpaddress = #{dpaddress,jdbcType=VARCHAR},
       sid = #{sid,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+    where dpid = #{dpid,jdbcType=INTEGER}
   </update>
 </mapper>

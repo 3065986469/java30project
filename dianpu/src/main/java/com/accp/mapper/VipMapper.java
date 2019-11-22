@@ -65,4 +65,27 @@ public interface VipMapper {
     
     int hyupd(Vip record);
     
+    @Select("SELECT v.vid as vid,v.vyue as vyue,v.vname as vname,SUM(cj.cjprice) as chengjiao,vd.djname as djname\r\n" + 
+    		"FROM `vip` v\r\n" + 
+    		"INNER JOIN `vipdengji` vd ON v.djid=vd.djid AND vd.sid=1\r\n" + 
+    		"INNER JOIN `chenjiao` cj ON v.vid=cj.vid\r\n" + 
+    		"GROUP BY v.vid")
+    List<Vip> queryAllHuiYuan();
+    
+    @Select("SELECT v.vid as vid,v.vyue as vyue,v.vname as vname,SUM(cj.cjprice) as chengjiao,vd.djname as djname\r\n" + 
+    		"FROM `vip` v\r\n" + 
+    		"INNER JOIN `vipdengji` vd ON v.djid=vd.djid AND vd.sid=1\r\n" + 
+    		"INNER JOIN `chenjiao` cj ON v.vid=cj.vid\r\n" + 
+    		"WHERE vd.djid=#{djid}\r\n" + 
+    		"GROUP BY v.vid")
+    List<Vip> queryHuiYuanByLeiBie(Integer djid);
+    
+    @Select("SELECT vd.djzhekou\r\n" + 
+    		"FROM `vip` v,`vipdengji` vd\r\n" + 
+    		"WHERE v.djid=vd.djid AND v.vid=#{vid}")
+    String shiyong(Integer vid);
+    
+    @Insert("INSERT INTO `dianpu`.`vip` (`vid`,`djid`,`vname`,`vphone`,`vyue`,`vjifen`,`vpwd`,`vaddress`,`sid`) \r\n" + 
+    		"	VALUES(#{vip.vid},#{vip.djid},#{vip.vname},#{vip.vphone},#{vip.vyue},#{vip.vjifen},#{vip.vpwd},#{vip.vaddress},#{vip.sid}) ")
+	int hyadd(Vip vip);
 }

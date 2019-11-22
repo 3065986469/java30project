@@ -128,32 +128,28 @@
 								<div class="card mb-4">
 									<div class="card-header">
 										<div style="float: right;" class="icon text-white bg-blue"><i class="fa fa-dolly-flatbed"></i></div>
-										<h4 class=" text-uppercase mb-0">购物清单</h4>
+										<h4 class="mb-0">购物清单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px;">总金额：<span style="color: red;font-size: 24px;font-weight:normal;" id="zongjine"></span></span></h4>
+										
 									</div>
 									<div class="card-body">
 										<table class="table card-text">
 											<thead>
 												<tr>
-													<th>商品</th>
-													<th>数量</th>
-													<th>价格</th>
-													<th>折扣</th>
+													<th style="color: #FF7256;">商品</th>
+													<th style="color: #FF7256;">数量</th>
+													<th style="color: #FF7256;">价格</th>
+													<th style="color: #FF7256;">折扣（%）</th>
 												</tr>
 											</thead>
-											<tbody>
-												<tr>
-													<th scope="row">1</th>
-													<td>Mark</td>
-													<th scope="row">1</th>
-													<td>Mark</td>
-												</tr>
+											<tbody id="chartsgouwuchetable">
+												
 											</tbody>
 										</table>
 									</div>
 								</div>
-								<div style="float: right;">
-									<button class="btn btn-outline-danger">删除</button>
-									<button class="btn btn-outline-warning">挂单</button>
+								<div style="float: right;" id="chartscaozuo">
+									<button class="btn btn-outline-danger" id="chartsshanchu">删除</button>
+									<button class="btn btn-outline-warning" id="chartsguadan">挂单</button>
 									<button class="btn btn-outline-info" id="chartsshoukuan">收款</button>
 								</div>
 
@@ -169,27 +165,25 @@
 									<div class="card-body">
 										<div id="chartsshangpin">
 											<div class="btn-group" id="shangpinleibie">
-												<button type="button" class="btn btn-primary btn-xs">全部</button>
-												<button type="button" class="btn btn-gray-500 btn-xs">羽绒服</button>
-												<button type="button" class="btn btn-gray-500 btn-xs">打底</button>
-												<button type="button" class="btn btn-gray-500 btn-xs">卫衣</button>
-												<button type="button" class="btn btn-gray-500 btn-xs">毛衣</button>
-												<button type="button" class="btn btn-gray-500 btn-xs">衬衣</button>
+												<button type="button" class="btn btn-primary btn-xs" onclick="chartsinit()">全部</button>
+												<button type="button" class="btn btn-gray-500 btn-xs" onclick="queryShangPinByLeiBie(1)">羽绒服</button>
+												<button type="button" class="btn btn-gray-500 btn-xs" onclick="queryShangPinByLeiBie(2)">卫衣</button>
+												<button type="button" class="btn btn-gray-500 btn-xs" onclick="queryShangPinByLeiBie(3)">T恤</button>
+												<button type="button" class="btn btn-gray-500 btn-xs" onclick="queryShangPinByLeiBie(4)">上衣</button>
+												<button type="button" class="btn btn-gray-500 btn-xs" onclick="queryShangPinByLeiBie(5)">外套</button>
 											</div>
 											<section class="py-3">
 											<table class="table card-text">
 												<thead>
 													<tr>
-														<th>图片</th>
-														<th>名字</th>
-														<th>单价</th>
+														<th style="color: #FF7256;">商品图片</th>
+														<th style="color: #FF7256;">商品名称</th>
+														<th style="color: #FF7256;">商品单价</th>
+														<th style="color: #FF7256;">操作</th>
 													</tr>
 												</thead>
-												<tbody>
-													<tr>
-														<th scope="row">1</th>
-														<td>Mark</td>
-													</tr>
+												<tbody id="chartsshangpintable">
+													
 												</tbody>
 											</table>
 											</section>
@@ -197,29 +191,23 @@
 
 										<div id="chartshuiyuan" style="display: none;">
 											<div class="btn-group" id="shangpinleibie2">
-											<button type="button" class="btn btn-primary btn-xs">全部</button>
-											<button type="button" class="btn btn-gray-500 btn-xs">会员</button>
-											<button type="button" class="btn btn-gray-500 btn-xs">vip</button>
+											<button type="button" class="btn btn-primary btn-xs" onclick="chartsinit2()">全部</button>
+											<button type="button" class="btn btn-gray-500 btn-xs" onclick="queryHuiYuanByLeiBie(1)">会员</button>
+											<button type="button" class="btn btn-gray-500 btn-xs" onclick="queryHuiYuanByLeiBie(2)">vip</button>
 										</div>
 										<section class="py-3">
 										<table class="table card-text">
 											<thead>
 												<tr>
-													<th>头像</th>
-													<th>名字</th>
-													<th>等级</th>
-													<th>余额</th>
-													<th>成交</th>
+													<th style="color: #FF7256;">会员名字</th>
+													<th style="color: #FF7256;">会员等级</th>
+													<th style="color: #FF7256;">会员余额</th>
+													<th style="color: #FF7256;">成交额</th>
+													<th style="color: #FF7256;">操作</th>
 												</tr>
 											</thead>
-											<tbody>
-												<tr>
-													<th scope="row">1</th>
-													<td>Mark</td>
-													<th scope="row">1</th>
-													<td>Mark</td>
-													<th scope="row">1</th>
-												</tr>
+											<tbody id="chartshuiyuantable">
+												
 											</tbody>
 										</table>
 										</section>
@@ -239,63 +227,24 @@
 												<table class="table card-text">
 														<tr>
 															<td>总额:</td>
-															<td><span>999</span></td>
-															<td><input type="text" style="margin-right: -28px;"><img th:src="@{/img/1.jpg}" style="width: 25px;height: 25px;"></td>
+															<td><span id="jiesuanzonge"></span></td>
+															
 														</tr>
 														<tr>
 															<td>折扣:</td>
-															<td><input type="text" class="small" placeholder="折扣">&nbsp;<span>%</span></td>
-															<td><button class="btn btn-xs btn-outline-blue">7</button>&nbsp;&nbsp;<button class="btn btn-xs btn-outline-blue">8</button>&nbsp;&nbsp;<button class="btn btn-xs btn-outline-blue">9</button></td>
-														</tr>
-														<tr>
+															<td><input type="text" class="small" placeholder="折扣" onblur="jiesuanzhekou()" id="jiesuanzhekou">&nbsp;<span>%</span></td>
 															<td>折扣后:</td>
-															<td><input type="text" class="small"></td>
-															<td><button class="btn btn-xs btn-outline-blue">4</button>&nbsp;&nbsp;<button class="btn btn-xs btn-outline-blue">5</button>&nbsp;&nbsp;<button class="btn btn-xs btn-outline-blue">6</button></td>
+															<td><input type="text" class="small" id="jiesuanzhekouhou"></td>
 														</tr>
 														<tr>
 															<td>实收:</td>
-															<td><input type="text" class="small"></td>
-															<td><button class="btn btn-xs btn-outline-blue">1</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-xs btn-outline-blue">2</button>&nbsp;&nbsp;<button class="btn btn-xs btn-outline-blue">3</button></td>
+															<td><input style="color: red;" class="text-ms" id="jiesuanshishou"></td>
 														</tr>
-														<tr>
-															<td>未收:</td>
-															<td><input type="text" class="small"></td>
-															<td><button class="btn btn-xs btn-outline-blue">0</button>&nbsp;<button class="btn btn-xs btn-outline-blue">.</button>&nbsp;&nbsp;<button class="btn btn-info">收款</button></td>
-														</tr>
-												</table>
+														</table>
+														<button style="float: right;background-color: #FF6347;" class="btn ">收款</button>
 											</section>
 										</div>
 
-										<div id="chartshuiyuan" style="display: none;">
-											<div class="btn-group" id="shangpinleibie2">
-											<button type="button" class="btn btn-primary btn-xs">全部</button>
-											<button type="button" class="btn btn-gray-500 btn-xs">会员</button>
-											<button type="button" class="btn btn-gray-500 btn-xs">vip</button>
-										</div>
-										<section class="py-3">
-										<table class="table card-text">
-											<thead>
-												<tr>
-													<th>头像</th>
-													<th>名字</th>
-													<th>等级</th>
-													<th>余额</th>
-													<th>成交</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<th scope="row">1</th>
-													<td>Mark</td>
-													<th scope="row">1</th>
-													<td>Mark</td>
-													<th scope="row">1</th>
-												</tr>
-											</tbody>
-										</table>
-										</section>
-										</div>
-				
 									</div>
 								</div>
 							</div>
@@ -367,16 +316,210 @@
 				});
 
 				$("#chartsshoukuan").click(function(){
+					$("#chartscaozuo").hide();
+					$("#jiesuanzonge").text($("#zongjine").text());
+					$("#jiesuanzhekouhou").val($("#zongjine").text());
+					$("#jiesuanshishou").val($("#zongjine").text());
 					$("#chartsdiv1").hide();
 					$("#chartsdiv2").show();
+					
+					
 				});
 
 				$("#chartsfanhui").click(function(){
+					$("#chartscaozuo").show();
 					$("#chartsdiv1").show();
 					$("#chartsdiv2").hide();
 				});
+				
+				$("#chartsshanchu").click(function(){
+					$("#chartsgouwuchetable").empty();
+					let zongjine=0;
+					$("[name='chartsxiaoshou']").each(function(){
+						zongjine+=parseFloat($(this).text());
+					});
+					$("#zongjine").text(zongjine);
+				});
 			});
 		
+			function chartsinit(){
+				$.ajax({
+					url:"[[@{/shouyin/queryAllShangPin}]]",
+					success:function(res){
+						$("#chartsshangpintable").empty();
+						$.each(res,function(index,obj){
+							let str=`<tr style="line-height:40px;">
+								<th><img style="width:50px;height:50px;" src="/img/${obj.spimg}"></th>
+								<th>${obj.spname}</th>
+								<th>${obj.spxiaoshou}</th>
+								<th><button onclick="chartstianjiagouwuche(${obj.spid})" class="btn btn-primary btn-xs">添加</button></th>
+							</tr>`;
+							
+							$("#chartsshangpintable").append(str);
+						});
+					}
+				});
+			}
+			
+			function chartsinit2(){
+				$.ajax({
+					url:"[[@{/shouyin/queryAllHuiYuan}]]",
+					success:function(res){
+						$("#chartshuiyuantable").empty();
+						$.each(res,function(index,obj){
+							let str=`<tr style="line-height:40px;"><th>${obj.vname}</th>
+								<th>${obj.djname}</th>
+								<th>${obj.vyue}</th>
+								<th>${obj.chengjiao}</th>
+								<th><button onclick="shiyong(${obj.vid})" class="btn btn-primary btn-xs">使用</button></th>
+							</tr>`;
+							
+							$("#chartshuiyuantable").append(str);
+						});
+					}
+				});
+			}
+			
+			
+			
+			
+			chartsinit();
+			chartsinit2();
+			
+			function chartstianjiagouwuche(spid){
+				var i=true;
+				$(".chartsspid").each(function(){
+					if($(this).val()==spid){
+						$(this).parent().next().text(parseFloat($(this).parent().next().text())+1);
+						if($(this).parent().next().next().next().text()==""){
+							$(this).parent().next().next().text((parseFloat($(this).parent().next().text())*parseFloat($(this).next().val())).toFixed(2));
+						}else{
+							$(this).parent().next().next().text((parseFloat($(this).parent().next().text())*parseFloat($(this).next().val())*parseFloat($(this).parent().next().next().next().text())/100).toFixed(2));
+						}
+						i=false;
+					}
+				});
+				if(i){
+					$.ajax({
+						url:"[[@{/shouyin/queryShangPinById}]]",
+						data:{
+							spid:spid
+						},
+						success:function(res){
+							let str="";
+							if(zhekou==0){
+								str=`<tr>
+									<th><input type="hidden" class="chartsspid" value="${res.spid}"><input type="hidden" class="chartsxiaoshou" value="${res.spxiaoshou}">${res.spname}</th>
+									<th>1</th>
+									<th name="chartsxiaoshou">${res.spxiaoshou}</th>
+									<th></th>
+								</tr>`;
+							}else{
+								let a=(res.spxiaoshou*zhekou/100).toFixed(2);
+								str=`<tr>
+									<th><input type="hidden" class="chartsspid" value="${res.spid}"><input type="hidden" class="chartsxiaoshou" value="${res.spxiaoshou}">${res.spname}</th>
+									<th>1</th>
+									<th name="chartsxiaoshou">${a}</th>
+									<th>${zhekou}</th>
+								</tr>`;
+							}
+							
+							
+							$("#chartsgouwuchetable").append(str);
+							let zongjine=0;
+							$("[name='chartsxiaoshou']").each(function(){
+								zongjine+=parseFloat($(this).text());
+							});
+							$("#zongjine").text(zongjine.toFixed(2));
+						}
+					});
+				}
+				let zongjine=0;
+				$("[name='chartsxiaoshou']").each(function(){
+					zongjine+=parseFloat($(this).text());
+				});
+				$("#zongjine").text(zongjine.toFixed(2));
+			}
+			
+			var zhekou=0;
+			function shiyong(vid){
+				$.ajax({
+					url:"[[@{/shouyin/shiyong}]]",
+					data:{
+						vid:vid
+					},
+					success:function(res){
+						zhekou=res;
+						$(".chartsspid").each(function(){
+								$(this).parent().next().next().text((parseFloat($(this).parent().next().text())*parseFloat($(this).next().val())*parseFloat(res)/100).toFixed(2));
+								$(this).parent().next().next().next().text(res);
+						});
+						let zongjine=0;
+						$("[name='chartsxiaoshou']").each(function(){
+							zongjine+=parseFloat($(this).text());
+						});
+						$("#zongjine").text(zongjine.toFixed(2));
+					}
+				});
+				
+			}
+			
+			
+			
+			
+			function queryShangPinByLeiBie(lbid){
+				$.ajax({
+					url:"[[@{/shouyin/queryShangPinByLeiBie}]]",
+					data:{
+						lbid:lbid
+					},
+					success:function(res){
+						$("#chartsshangpintable").empty();
+						$.each(res,function(index,obj){
+							let str=`<tr style="line-height:40px;">
+								<th><img style="width:50px;height:50px;" src="/img/${obj.spimg}"></th>
+								<th>${obj.spname}</th>
+								<th>${obj.spxiaoshou}</th>
+								<th><button onclick="chartstianjiagouwuche(${obj.spid})" class="btn btn-primary btn-xs">添加</button></th>
+							</tr>`;
+							
+							$("#chartsshangpintable").append(str);
+						});
+					}
+				});
+				
+			}
+			
+			function queryHuiYuanByLeiBie(djid){
+				$.ajax({
+					url:"[[@{/shouyin/queryHuiYuanByLeiBie}]]",
+					data:{
+						djid:djid
+					},
+					success:function(res){
+						$("#chartshuiyuantable").empty();
+						$.each(res,function(index,obj){
+							let str=`<tr><th>${obj.vname}</th>
+								<th>${obj.djname}</th>
+								<th>${obj.vyue}</th>
+								<th>${obj.chengjiao}</th>
+								<th><button onclick="shiyong(${obj.vid})" class="btn btn-primary btn-xs">使用</button></th>
+							</tr>`;
+							$("#chartshuiyuantable").append(str);
+						});
+					}
+				});
+			}
+			
+			function jiesuanzhekou(){
+				let a=$("#jiesuanzonge").text();
+				let b=$("#jiesuanzhekou").val();
+				let c=(parseFloat(a)*b/100).toFixed(2)
+				$("#jiesuanzhekouhou").val(c);
+				$("#jiesuanshishou").val(c);
+			}
+			
+			
 		</script>
 	</body>
 

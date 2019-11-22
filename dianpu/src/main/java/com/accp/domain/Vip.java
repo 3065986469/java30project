@@ -26,7 +26,10 @@ public class Vip {
     private int jqcount ;		//最近成交次数
     
     private String djname;		//等级名字
-
+    
+    private Integer chengjiao;
+    
+    
     public String getDjname() {
 		return djname;
 	}
@@ -57,6 +60,14 @@ public class Vip {
 
 	public void setJqcount(int jqcount) {
 		this.jqcount = jqcount;
+	}
+	
+	public Integer getChengjiao() {
+		return chengjiao;
+	}
+
+	public void setChengjiao(Integer chengjiao) {
+		this.chengjiao = chengjiao;
 	}
 
 	public Integer getVid() {

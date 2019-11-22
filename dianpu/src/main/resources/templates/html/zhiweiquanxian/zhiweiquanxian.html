@@ -12,7 +12,7 @@
 			<h4 class="text-uppercase mb-0">
 				职位权限
 				<button style="float: right;" class="btn btn-primary"
-					data-toggle="modal" data-target=".bs-example-modal-lg">添加职位</button>
+					data-toggle="modal" data-target=".bs-example-modal-lg" id="zhiweiquanxiantianjiazhiwei">添加职位</button>
 			</h4>
 		</div>
 		<div class="card-body">
@@ -49,18 +49,17 @@
 						<table style="margin: auto;">
 							<tr>
 								<td>职位名称</td>
-								<td><input></td>
+								<td><input type="hidden" id="zwid"><input style="height: 38px; margin-right: 20px;" id="zwname"></td>
 								<td>所属店铺</td>
 								<td>
-									<select>
-										<option></option>
+									<select  class="custom-select" id="zhiweiquanxianselect">
 									</select>
 								</td>
 							</tr>
 							<tr>
 								<td>职位权限</td>
 								<td>
-									<table>
+									<table id="zhiweiquanxianAllQuanXian">
 
 									</table>
 								</td>
@@ -69,7 +68,9 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="button" class="btn btn-primary">保存</button>
+						<button type="button" class="btn btn-red" id="zhiweiquanxianshanchu" style="display: none;" data-dismiss="modal" onclick="zhiweiquanxianshanchu()">删除</button>
+						<button type="button" class="btn btn-primary" id="zhiweiquanxianbaocun" onclick="zhiweiquanxianbaocun()">保存</button>
+						<button type="button" class="btn btn-primary" id="zhiweiquanxianxiugai" onclick="zhiweiquanxianxiugai()">修改</button>
 					</div>
 				</div>
 			</div>
@@ -87,7 +88,7 @@
 							<th>${i+1}</th>
 							<th>${obj.zwname}</th>
 							<th>${obj.dpname}</th>
-							<th><a href="javascript:void(0);">编辑</a></th>
+							<th><a href="javascript:void(0);" onclick="zhiweiquanxianbianji(${obj.zwid})">编辑</a></th>
 						</tr>`;
 						$("#zhiweiquanxiantbody").append(str);
 					});
@@ -95,35 +96,166 @@
 			});
 		}
 		
-		zhiweiquanxianinit();
 		
-		$(function(){
-			
-			var vm=new Vue({
-				el:"#zhiweiquanxiantb",
-				data(){
-					return {
-						zhiwei:{}
-					}
-				},
-				methods:{
-					baocun:function(){
-						var that=this;
-						$.ajax({
-							url:"[[@{/dianpu/insertZhiWei}]]",
-							data:that.zhiwei,
-							success:function(res){
-								zhiweiquanxianinit();
-								$("#zhiweiquanxianmyModal").modal("hide");
-							}
-						});
-					}
-					
-
+		
+		function zhiweiquanxianselect(){
+			$.ajax({
+				url:"[[@{/dianpu/queryAllDianPu}]]",
+				success:function(res){
+					$("#zhiweiquanxianselect").empty();
+					let str11=`<option value="0">请选择店铺</option>`;
+					$("#zhiweiquanxianselect").append(str11);
+					$.each(res,function(i,obj){
+						let str2=`<option value="${obj.dpid}">${obj.dpname}</option>`;
+						$("#zhiweiquanxianselect").append(str2);
+					});
 				}
 			});
+		}
+		
+		function queryQuanXian(){
+			$.ajax({
+				url:"[[@{/dianpu/queryQuanXian}]]",
+				success:function(res){
+					$("#zhiweiquanxianAllQuanXian").empty();
+					$.each(res,function(i,obj1){
+						let str=``;
+						if(obj1.qxlb!=null){
+							str+=`<tr><td>${obj1.qxlbname} :</td>`;
+							$.each(res,function(index,obj2){
+								if(obj2.qxid!=null){
+									if(obj1.qxlb==obj2.qxlbid){
+										str+=`<td><input class="hh" type="checkbox" value="${obj2.qxid}">${obj2.qxname}</td>`;
+									}
+								}
+							});
+							str+=`</tr>`;
+						}
+						$("#zhiweiquanxianAllQuanXian").append(str);
+					});
+				}
+			});
+		}
+		
+		zhiweiquanxianinit();
+		zhiweiquanxianselect();
+		queryQuanXian();
+		
+		
+		function zhiweiquanxianbaocun(){
+			var ids="";
+			$(".hh").each(function(){
+				if($(this).prop("checked")){
+					ids+=$(this).val()+",";
+				}
+			});
+			$.ajax({
+				url:"[[@{/dianpu/insertZhiWei}]]",
+				type:"post",
+				data:{
+					zwname:$("#zwname").val(),
+					dpid:$("#zhiweiquanxianselect").val(),
+					qxid:ids
+				},
+				success:function(res){
+					zhiweiquanxianinit();
+					$("#zhiweiquanxianmyModal").modal("hide");
+				}
+			});
+		}
+		
+		function zhiweiquanxianxiugai(){
+			var ids="";
+			$(".hh").each(function(){
+				if($(this).prop("checked")){
+					ids+=$(this).val()+",";
+				}
+			});
+			$.ajax({
+				url:"[[@{/dianpu/updateZhiWei}]]",
+				type:"post",
+				data:{
+					zwid:$("#zwid").val(),
+					zwname:$("#zwname").val(),
+					dpid:$("#zhiweiquanxianselect").val(),
+					qxid:ids
+				},
+				success:function(res){
+					zhiweiquanxianinit();
+					$("#zhiweiquanxianmyModal").modal("hide");
+				}
+			});
+		}
+		
+		
+		function zhiweiquanxianshanchu(zwid){
+			if(confirm("你确定要删除吗？")){
+				$.ajax({
+					url:"[[@{/dianpu/deleteZhiWei}]]",
+					type:"post",
+					data:{
+						zwid:$("#zwid").val(),
+					},
+					success:function(res){
+						zhiweiquanxianinit();
+						$("#zhiweiquanxianmyModal").modal("hide");
+					}
+				});
+			}
 			
+		}
+		
+		function zhiweiquanxianbianji(zwid){
+			$.ajax({
+				url:"[[@{/dianpu/queryZhiWeiById}]]",
+				data:{
+					zwid:zwid
+				},
+				success:function(res){
+					$("#zhiweiquanxianshanchu").hide();
+					$("#zwname").val("");
+					$("#zwid").val("");
+					$("#zhiweiquanxianselect").val(0);
+					$(".hh").each(function(){
+						$(this).prop("checked",false);
+					});
+					$("#zwname").val(res.zwname);
+					$("#zwid").val(res.zwid);
+					$("#zhiweiquanxianselect").val(res.dpid);
+					$("#zhiweiquanxianshanchu").show();
+					$("#zhiweiquanxianxiugai").show();
+					
+					
+					$.each(res.qxids,function(index,obj){
+						$(".hh").each(function(){
+							if($(this).val()==obj){
+								$(this).prop("checked",true);
+							}
+						});
+					});
+					
+					
+					$("#zhiweiquanxianbaocun").hide();
+					$("#zhiweiquanxianmyModal").modal("show");
+				}
+				
+			});
+		}
+		
+		$(function(){
+			$("#zhiweiquanxiantianjiazhiwei").click(function(){
+				$("#zhiweiquanxianbaocun").show();
+				$("#zhiweiquanxianshanchu").hide();
+				$("#zhiweiquanxianxiugai").hide();
+				$("#zwname").val("");
+				$("#zhiweiquanxianselect").val(0);
+				$(".hh").each(function(){
+					$(this).prop("checked",false);
+				});
+			});
 		});
+		
+		
 		</script>
 </body>
 
