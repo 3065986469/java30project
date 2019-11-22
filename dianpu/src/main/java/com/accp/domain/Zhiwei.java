@@ -1,5 +1,7 @@
 package com.accp.domain;
 
+import java.util.List;
+
 public class Zhiwei {
     private Integer zwid;
 
@@ -13,7 +15,17 @@ public class Zhiwei {
 
     private String dpname;
     
-    public String getDpname() {
+    private List<String> qxids;
+    
+    public List<String> getQxids() {
+		return qxids;
+	}
+
+	public void setQxids(List<String> qxids) {
+		this.qxids = qxids;
+	}
+
+	public String getDpname() {
 		return dpname;
 	}
 

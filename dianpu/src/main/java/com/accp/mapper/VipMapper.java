@@ -4,6 +4,7 @@ import com.accp.domain.Vip;
 import com.accp.domain.VipExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface VipMapper {
     int countByExample(VipExample example);
@@ -27,4 +28,25 @@ public interface VipMapper {
     int updateByPrimaryKeySelective(Vip record);
 
     int updateByPrimaryKey(Vip record);
+    
+    @Select("SELECT v.vid as vid,v.vyue as vyue,v.vname as vname,SUM(cj.cjprice) as chengjiao,vd.djname as djname\r\n" + 
+    		"FROM `vip` v\r\n" + 
+    		"INNER JOIN `vipdengji` vd ON v.djid=vd.djid AND vd.sid=1\r\n" + 
+    		"INNER JOIN `chenjiao` cj ON v.vid=cj.vid\r\n" + 
+    		"GROUP BY v.vid")
+    List<Vip> queryAllHuiYuan();
+    
+    @Select("SELECT v.vid as vid,v.vyue as vyue,v.vname as vname,SUM(cj.cjprice) as chengjiao,vd.djname as djname\r\n" + 
+    		"FROM `vip` v\r\n" + 
+    		"INNER JOIN `vipdengji` vd ON v.djid=vd.djid AND vd.sid=1\r\n" + 
+    		"INNER JOIN `chenjiao` cj ON v.vid=cj.vid\r\n" + 
+    		"WHERE vd.djid=#{djid}\r\n" + 
+    		"GROUP BY v.vid")
+    List<Vip> queryHuiYuanByLeiBie(Integer djid);
+    
+    @Select("SELECT vd.djzhekou\r\n" + 
+    		"FROM `vip` v,`vipdengji` vd\r\n" + 
+    		"WHERE v.djid=vd.djid AND v.vid=#{vid}")
+    String shiyong(Integer vid);
+    
 }

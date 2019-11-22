@@ -206,7 +206,6 @@
 		}
 		
 		function zhiweiquanxianbianji(zwid){
-			
 			$.ajax({
 				url:"[[@{/dianpu/queryZhiWeiById}]]",
 				data:{
@@ -224,13 +223,18 @@
 					$("#zwid").val(res.zwid);
 					$("#zhiweiquanxianselect").val(res.dpid);
 					$("#zhiweiquanxianshanchu").show();
-					let a=res.qxid;
-					$(".hh").each(function(){
-						let a2=$(this).val();
-						if(a.indexOf(a2)!=-1){
-							$(this).prop("checked",true);
-						}
+					$("#zhiweiquanxianxiugai").show();
+					
+					
+					$.each(res.qxids,function(index,obj){
+						$(".hh").each(function(){
+							if($(this).val()==obj){
+								$(this).prop("checked",true);
+							}
+						});
 					});
+					
+					
 					$("#zhiweiquanxianbaocun").hide();
 					$("#zhiweiquanxianmyModal").modal("show");
 				}

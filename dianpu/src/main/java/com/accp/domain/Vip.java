@@ -18,8 +18,28 @@ public class Vip {
     private String vaddress;
 
     private Integer sid;
+    
+    private Integer chengjiao;
+    
+    private String djname;
+    
+    public String getDjname() {
+		return djname;
+	}
 
-    public Integer getVid() {
+	public void setDjname(String djname) {
+		this.djname = djname;
+	}
+
+	public Integer getChengjiao() {
+		return chengjiao;
+	}
+
+	public void setChengjiao(Integer chengjiao) {
+		this.chengjiao = chengjiao;
+	}
+
+	public Integer getVid() {
         return vid;
     }
 

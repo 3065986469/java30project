@@ -12,7 +12,7 @@
 			<h4 class="text-uppercase mb-0">
 				门店列表
 				<button style="float: right;" class="btn btn-primary"
-					data-toggle="modal" data-target=".bs-example-modal-lg">添加店铺</button>
+					data-toggle="modal" data-target=".bs-example-modal-lg" id="dianpuguanlitianjiadianpu">添加店铺</button>
 			</h4>
 		</div>
 		<div class="card-body">
@@ -51,7 +51,7 @@
 
 					</div>
 					<div class="modal-body">
-						<table style="margin: auto;">
+						<table style="margin: auto;" id="dianpuguanlitable1">
 							<tr>
 								<td>&nbsp;&nbsp;&nbsp;&nbsp;店铺名称</td>
 								<td><input type="text" v-model="dianpu.dpname"></td>
@@ -69,28 +69,94 @@
 								<td></td>
 								<td>&nbsp;&nbsp;&nbsp;地址</td>
 								<td>
-									<!-- 								<input type="text" v-model="dianpu.dpaddress"> -->
-									<div data-toggle="distpicker">
-										<select></select> <select></select> <select></select>
-									</div>
+									<select style="height: 30px;" id="sheng" onchange="queryShiById(this.value)"></select>
+									<select style="height: 30px;" id="shi" onchange="queryQuById(this.value)"></select>
+									<select style="height: 30px;" id="qu"></select>
+									<input type="hidden" id="dianpuguanliaddress">
 								</td>
-
-
-
 							</tr>
-
+						</table>
+						
+						<table style="margin: auto;display: none;" id="dianpuguanlitable2">
+							<tr>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;店铺名称</td>
+								<td><input type="text" id="dpname"></td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td>联系人</td>
+								<td><input type="hidden" id="dpid"><input type="text" id="dplianxiren"></td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>联系人电话</td>
+								<td><input type="text" id="dpphone"></td>
+								<td></td>
+								<td>&nbsp;&nbsp;&nbsp;地址</td>
+								<td>
+									<select style="height: 30px;" id="sheng2" onchange="queryShiById(this.value)"></select>
+									<select style="height: 30px;" id="shi2" onchange="queryQuById(this.value)"></select>
+									<select style="height: 30px;" id="qu2"></select>
+									<input type="hidden" id="dianpuguanliaddress2">
+								</td>
+							</tr>
 						</table>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 						<button type="button" @click="dianpuguanlibaocun()"
-							class="btn btn-primary">保存</button>
+							class="btn btn-primary" id="dianpuguanlibaocun">保存</button>
+							<button type="button" class="btn btn-red" id="dianpuguanlishanchu" style="display: none;" data-dismiss="modal" onclick="dianpuguanlishanchu()">删除</button>
+						<button type="button" class="btn btn-primary" id="dianpuguanlixiugai" onclick="dianpuguanlixiugai()">修改</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
+	$(function(){
+		$("#dianpuguanlitianjiadianpu").click(function(){
+			$("#sheng").val(0);
+			$("#shi").val(0);
+			$("#qu").val(0);
+			vm.dianpu.dpname="";
+			vm.dianpu.dplianxiren="";
+			vm.dianpu.dpphone="";
+			
+			$("#dianpuguanlishanchu").hide();
+			$("#dianpuguanlixiugai").hide();
+			$("#dianpuguanlibaocun").show();
+			$("#dianpuguanlitable1").show();
+			$("#dianpuguanlitable2").hide();
+			
+		});
+		var vm=new Vue({
+			el:"#dianpuguanlitb",
+			data(){
+				return {
+					dianpu:{}
+				}
+			},
+			methods:{
+				dianpuguanlibaocun:function(){
+					var that=this;
+					$("#dianpuguanliaddress").val($("#sheng").val()+"-"+$("#shi").val()+"-"+$("#qu").val());
+					that.dianpu.dpaddress=$("#dianpuguanliaddress").val();
+					$.ajax({
+						url:"[[@{/dianpu/insertDianPu}]]",
+						data:that.dianpu,
+						success:function(res){
+							dianpuguanliinit();
+							$("#dianpuguanlimyModal").modal("hide");
+						}
+					});
+				}
+			}
+		});
+		
+	});
+		
 			function dianpuguanliinit(){
 				$.ajax({
 					url:"[[@{/dianpu/queryAllDianPu}]]",
@@ -113,50 +179,177 @@
 				});
 			}
 			
-			dianpuguanliinit();
 			
-			
-			function dianpuguanlibianji(){
-				
+			function querysheng(){
+				$.ajax({
+					url:"[[@{/dianpu/querysheng}]]",
+					success:function(res){
+						$("#sheng").empty();
+						let str1=`<option value="0">请选择省份</option>`;
+						$("#sheng").append(str1);
+						$("#sheng2").append(str1);
+						$.each(res,function(index,obj){
+							let str=`<option value="${obj.sfid}">${obj.sfname}</option>`;
+							$("#sheng").append(str);
+							$("#sheng2").append(str);
+						});
+					}
+				});
 			}
 			
 			
 			
-			
-			$(function(){
-				
-				var vm=new Vue({
-					el:"#dianpuguanlitb",
-					data(){
-						return {
-							dianpu:{}
-						}
+			function queryShiById(sfid){
+				$.ajax({
+					url:"[[@{/dianpu/queryShiById}]]",
+					data:{
+						sfid:sfid
 					},
-					methods:{
-						dianpuguanlibaocun:function(){
-							var that=this;
-							$.ajax({
-								url:"[[@{/dianpu/insertDianPu}]]",
-								data:that.dianpu,
-								success:function(res){
-									dianpuguanliinit();
-									$("#dianpuguanlimyModal").modal("hide");
-								}
-							});
-						}
+					success:function(res){
+						$("#shi").empty();
+						$("#shi2").empty();
+						let str1=`<option value="0">请选择市</option>`;
+						$("#shi").append(str1);
+						$("#shi2").append(str1);
+						$.each(res,function(index,obj){
+							let str=`<option value="${obj.sid}">${obj.sname}</option>`;
+							$("#shi").append(str);
+							$("#shi2").append(str);
+						});
 					}
 				});
+			}
+			
+			
+			
+			function queryQuById(sid){
+				$.ajax({
+					url:"[[@{/dianpu/queryQuById}]]",
+					data:{
+						sid:sid
+					},
+					success:function(res){
+						$("#qu").empty();
+						$("#qu2").empty();
+						let str1=`<option value="0">请选择区</option>`;
+						$("#qu").append(str1);
+						$("#qu2").append(str1);
+						$.each(res,function(index,obj){
+							let str=`<option value="${obj.qid}">${obj.qname}</option>`;
+							$("#qu").append(str);
+							$("#qu2").append(str);
+						});
+						
+					}
+				});
+			}
+			
+			dianpuguanliinit();
+			querysheng();
+			queryshi();
+			queryqu();
+			
+			function queryshi(){
+				$.ajax({
+					url:"[[@{/dianpu/queryshi}]]",
+					success:function(res){
+						$("#shi").empty();
+						$("#shi2").empty();
+						let str1=`<option value="0">请选择市</option>`;
+						$("#shi").append(str1);
+						$("#shi2").append(str1);
+						$.each(res,function(index,obj){
+							let str=`<option value="${obj.sid}">${obj.sname}</option>`;
+							$("#shi").append(str);
+							$("#shi2").append(str);
+						});
+					}
+				});
+			}
+			
+			function queryqu(){
+				$.ajax({
+					url:"[[@{/dianpu/queryqu}]]",
+					success:function(res){
+						$("#qu").empty();
+						$("#qu2").empty();
+						let str1=`<option value="0">请选择区</option>`;
+						$("#qu").append(str1);
+						$("#qu2").append(str1);
+						$.each(res,function(index,obj){
+							let str=`<option value="${obj.qid}">${obj.qname}</option>`;
+							$("#qu").append(str);
+							$("#qu2").append(str);
+						});
+					}
+				});
+			}
+		
+			function dianpuguanlibianji(dpid){
+				queryshi();
+				queryqu();
+				$.ajax({
+					url:"[[@{/dianpu/queryDianPuById}]]",
+					data:{
+						dpid:dpid
+					},
+					success:function(res){
+						$("#dianpuguanlibaocun").hide();
+						$("#dianpuguanlitable1").hide();
+						$("#dianpuguanlitable2").show();
+						
+						$("#dianpuguanlishanchu").show();
+						$("#dianpuguanlixiugai").show();
+						$("#dpname").val(res.dpname);		
+						$("#dpid").val(res.dpid);		
+						$("#dplianxiren").val(res.dplianxiren);		
+						$("#dpphone").val(res.dpphone);
+						let a=res.dpaddress;
+						let str=new Array();
+						str=a.split("-");
+						$("#sheng2").val(str[0]);
+						$("#shi2").val(str[1]);
+						$("#qu2").val(str[2]);
+						$("#dianpuguanlimyModal").modal("show");
+					}
+				});
+			}
+			
+			function dianpuguanlishanchu(){
+				if(confirm("你确定要删除吗？")){
+					$.ajax({
+						url:"[[@{/dianpu/deleteDianPu}]]",
+						data:{
+							dpid:$("#dpid").val()
+						},
+						success:function(res){
+							dianpuguanliinit();
+							$("#dianpuguanlimyModal").modal("hide");
+						}
+						
+					});
+				}
 				
-			});
+			}
 			
-			
-			
+			function dianpuguanlixiugai(){
+				$("#dianpuguanliaddress2").val($("#sheng2").val()+"-"+$("#shi2").val()+"-"+$("#qu2").val());
+					$.ajax({
+						url:"[[@{/dianpu/updateDianPu}]]",
+						data:{
+							dpid:$("#dpid").val(),
+							dpname:$("#dpname").val(),
+							dplianxiren:$("#dplianxiren").val(),
+							dpphone:$("#dpphone").val(),
+							dpaddress:$("#dianpuguanliaddress2").val(),
+						},
+						success:function(res){
+							dianpuguanliinit();
+							$("#dianpuguanlimyModal").modal("hide");
+						}
+					});
+			}
 		</script>
-
-
-
-
-
 </body>
 
 </html>

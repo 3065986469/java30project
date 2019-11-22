@@ -36,4 +36,6 @@ public interface QuanxianMapper {
     @Select("SELECT qxname,qxid,qxlbid\r\n" + 
     		"FROM `quanxian`")
     List<Quanxian> queryQuanXian();
+    
+    
 }

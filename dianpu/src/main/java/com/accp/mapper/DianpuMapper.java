@@ -39,4 +39,7 @@ public interface DianpuMapper {
     		"FROM dianpu\r\n" + 
     		"")
     String queryDianPuId();
+    
+    @Select("select * from dianpu where dpid=#{dpid}")
+    Dianpu queryDianPuById(Integer dpid);
 }

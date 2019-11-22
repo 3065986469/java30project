@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.mapper.GuadanxiangMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.domain.Guadanxiang" >
+    <id column="gdxid" property="gdxid" jdbcType="INTEGER" />
+    <result column="cjno" property="cjno" jdbcType="VARCHAR" />
+    <result column="spid" property="spid" jdbcType="INTEGER" />
+    <result column="spnum" property="spnum" jdbcType="INTEGER" />
+    <result column="spdanjia" property="spdanjia" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    gdxid, cjno, spid, spnum, spdanjia
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.GuadanxiangExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from guadanxiang
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from guadanxiang
+    where gdxid = #{gdxid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from guadanxiang
+    where gdxid = #{gdxid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.GuadanxiangExample" >
+    delete from guadanxiang
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.Guadanxiang" >
+    insert into guadanxiang (gdxid, cjno, spid, 
+      spnum, spdanjia)
+    values (#{gdxid,jdbcType=INTEGER}, #{cjno,jdbcType=VARCHAR}, #{spid,jdbcType=INTEGER}, 
+      #{spnum,jdbcType=INTEGER}, #{spdanjia,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.Guadanxiang" >
+    insert into guadanxiang
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gdxid != null" >
+        gdxid,
+      </if>
+      <if test="cjno != null" >
+        cjno,
+      </if>
+      <if test="spid != null" >
+        spid,
+      </if>
+      <if test="spnum != null" >
+        spnum,
+      </if>
+      <if test="spdanjia != null" >
+        spdanjia,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gdxid != null" >
+        #{gdxid,jdbcType=INTEGER},
+      </if>
+      <if test="cjno != null" >
+        #{cjno,jdbcType=VARCHAR},
+      </if>
+      <if test="spid != null" >
+        #{spid,jdbcType=INTEGER},
+      </if>
+      <if test="spnum != null" >
+        #{spnum,jdbcType=INTEGER},
+      </if>
+      <if test="spdanjia != null" >
+        #{spdanjia,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.GuadanxiangExample" resultType="java.lang.Integer" >
+    select count(*) from guadanxiang
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update guadanxiang
+    <set >
+      <if test="record.gdxid != null" >
+        gdxid = #{record.gdxid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cjno != null" >
+        cjno = #{record.cjno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spid != null" >
+        spid = #{record.spid,jdbcType=INTEGER},
+      </if>
+      <if test="record.spnum != null" >
+        spnum = #{record.spnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.spdanjia != null" >
+        spdanjia = #{record.spdanjia,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update guadanxiang
+    set gdxid = #{record.gdxid,jdbcType=INTEGER},
+      cjno = #{record.cjno,jdbcType=VARCHAR},
+      spid = #{record.spid,jdbcType=INTEGER},
+      spnum = #{record.spnum,jdbcType=INTEGER},
+      spdanjia = #{record.spdanjia,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.Guadanxiang" >
+    update guadanxiang
+    <set >
+      <if test="cjno != null" >
+        cjno = #{cjno,jdbcType=VARCHAR},
+      </if>
+      <if test="spid != null" >
+        spid = #{spid,jdbcType=INTEGER},
+      </if>
+      <if test="spnum != null" >
+        spnum = #{spnum,jdbcType=INTEGER},
+      </if>
+      <if test="spdanjia != null" >
+        spdanjia = #{spdanjia,jdbcType=REAL},
+      </if>
+    </set>
+    where gdxid = #{gdxid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.Guadanxiang" >
+    update guadanxiang
+    set cjno = #{cjno,jdbcType=VARCHAR},
+      spid = #{spid,jdbcType=INTEGER},
+      spnum = #{spnum,jdbcType=INTEGER},
+      spdanjia = #{spdanjia,jdbcType=REAL}
+    where gdxid = #{gdxid,jdbcType=INTEGER}
+  </update>
+</mapper>
