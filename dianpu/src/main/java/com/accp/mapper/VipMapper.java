@@ -3,6 +3,8 @@ package com.accp.mapper;
 import com.accp.domain.Vip;
 import com.accp.domain.VipExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -49,4 +51,7 @@ public interface VipMapper {
     		"WHERE v.djid=vd.djid AND v.vid=#{vid}")
     String shiyong(Integer vid);
     
+    @Insert("INSERT INTO `dianpu`.`vip` (`vid`,`djid`,`vname`,`vphone`,`vyue`,`vjifen`,`vpwd`,`vaddress`,`sid`) \r\n" + 
+    		"	VALUES(#{vip.vid},#{vip.djid},#{vip.vname},#{vip.vphone},#{vip.vyue},#{vip.vjifen},#{vip.vpwd},#{vip.vaddress},#{vip.sid}) ")
+	int hyadd(Vip vip);
 }

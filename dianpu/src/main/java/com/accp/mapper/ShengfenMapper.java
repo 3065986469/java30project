@@ -4,6 +4,7 @@ import com.accp.domain.Shengfen;
 import com.accp.domain.ShengfenExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface ShengfenMapper {
     int countByExample(ShengfenExample example);
@@ -27,4 +28,7 @@ public interface ShengfenMapper {
     int updateByPrimaryKeySelective(Shengfen record);
 
     int updateByPrimaryKey(Shengfen record);
+    
+    @Select("SELECT * FROM shengfen")
+    List<Shengfen> fsquery();
 }

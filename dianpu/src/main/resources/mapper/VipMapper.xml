@@ -111,7 +111,7 @@
     values (#{vid,jdbcType=INTEGER}, #{djid,jdbcType=INTEGER}, #{vname,jdbcType=VARCHAR}, 
       #{vphone,jdbcType=VARCHAR}, #{vyue,jdbcType=REAL}, #{vjifen,jdbcType=INTEGER}, 
       #{vpwd,jdbcType=VARCHAR}, #{vaddress,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER}
-      )
+      )  
   </insert>
   <insert id="insertSelective" parameterType="com.accp.domain.Vip" >
     insert into vip
@@ -272,4 +272,10 @@
       sid = #{sid,jdbcType=INTEGER}
     where vid = #{vid,jdbcType=INTEGER}
   </update>
+  
+  
+<!--   <insert id="hyadd" parameterType="com.accp.domain,Vip">
+	INSERT INTO `dianpu`.`vip` (`vid`,`djid`,`vname`,`vphone`,`vyue`,`vjifen`,`vpwd`,`vaddress`,`sid`) 
+	VALUES(#{vid},#{djid},#{vname},#{vphone},#{vyue},#{vjifen},#{vpwd},#{vaddress},#{sid}) 
+  </insert> -->
 </mapper>
