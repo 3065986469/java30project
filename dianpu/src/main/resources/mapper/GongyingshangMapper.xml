@@ -255,4 +255,27 @@
       sid = #{sid,jdbcType=INTEGER}
     where gysid = #{gysid,jdbcType=INTEGER}
   </update>
+  <select id="selectAll" resultType="com.accp.domain.Gongyingshang" parameterType="com.accp.domain.Gongyingshang">
+  	select * from gongyingshang
+  	<where>
+  		<if test="gysname!=null">
+  		and gysname like '%${gysname}%'
+  		</if>
+  		<if test="gysaddress!=null">
+  		and gysaddress like '%${gysaddress}%'
+  		</if>
+  	</where>
+  </select>
+  
+  <update id="deletegysid" >
+  update gongyingshang set sid=0 where gysid=#{gysid}
+  </update>
+  
+  
+  
+  
+  
+  
+  
+  
 </mapper>

@@ -28,6 +28,15 @@ public class GgService {
 		return yslb;
 	}
 	
+	
+	public List<Yanse> queryysAll() {
+		List<Yanse> ys= ym.selectByExample(null);
+		
+		return ys;
+	}
+	
+	
+	
 	public void insertys(Yanse record) {
 		ym.insert(record);
 	}		

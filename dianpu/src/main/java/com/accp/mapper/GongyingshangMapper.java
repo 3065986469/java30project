@@ -27,4 +27,9 @@ public interface GongyingshangMapper {
     int updateByPrimaryKeySelective(Gongyingshang record);
 
     int updateByPrimaryKey(Gongyingshang record);
+    
+    List<Gongyingshang> selectAll(Gongyingshang record);
+    
+    int deletegysid(Integer gysid);
+    
 }

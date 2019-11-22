@@ -7,14 +7,23 @@ import org.springframework.stereotype.Service;
 
 import com.accp.domain.Leibie;
 import com.accp.mapper.LeibieMapper;
+import com.github.pagehelper.PageHelper;
 
 @Service
 public class leibieService {
 	@Autowired
 	private LeibieMapper lbm;
 	
-	public List<Leibie> queryleibie() {
-		return lbm.selectleibie();
+	public List<Leibie> queryleibie(Integer pageNum, Integer pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+		List<Leibie> list=lbm.selectleibie();
+		return list;
+	}
+	
+	public List<Leibie> queryleibieAll() {
+		
+		List<Leibie> list=lbm.selectleibie();
+		return list;
 	}
 	
 	public Leibie queryprimayKey(Integer lbid) {

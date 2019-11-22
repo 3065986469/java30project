@@ -174,173 +174,203 @@ public class ShangpinxiangExample {
             return (Criteria) this;
         }
 
-        public Criteria andSpnoEqualTo(Integer value) {
+        public Criteria andSpnoEqualTo(String value) {
             addCriterion("spno =", value, "spno");
             return (Criteria) this;
         }
 
-        public Criteria andSpnoNotEqualTo(Integer value) {
+        public Criteria andSpnoNotEqualTo(String value) {
             addCriterion("spno <>", value, "spno");
             return (Criteria) this;
         }
 
-        public Criteria andSpnoGreaterThan(Integer value) {
+        public Criteria andSpnoGreaterThan(String value) {
             addCriterion("spno >", value, "spno");
             return (Criteria) this;
         }
 
-        public Criteria andSpnoGreaterThanOrEqualTo(Integer value) {
+        public Criteria andSpnoGreaterThanOrEqualTo(String value) {
             addCriterion("spno >=", value, "spno");
             return (Criteria) this;
         }
 
-        public Criteria andSpnoLessThan(Integer value) {
+        public Criteria andSpnoLessThan(String value) {
             addCriterion("spno <", value, "spno");
             return (Criteria) this;
         }
 
-        public Criteria andSpnoLessThanOrEqualTo(Integer value) {
+        public Criteria andSpnoLessThanOrEqualTo(String value) {
             addCriterion("spno <=", value, "spno");
             return (Criteria) this;
         }
 
-        public Criteria andSpnoIn(List<Integer> values) {
+        public Criteria andSpnoLike(String value) {
+            addCriterion("spno like", value, "spno");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpnoNotLike(String value) {
+            addCriterion("spno not like", value, "spno");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpnoIn(List<String> values) {
             addCriterion("spno in", values, "spno");
             return (Criteria) this;
         }
 
-        public Criteria andSpnoNotIn(List<Integer> values) {
+        public Criteria andSpnoNotIn(List<String> values) {
             addCriterion("spno not in", values, "spno");
             return (Criteria) this;
         }
 
-        public Criteria andSpnoBetween(Integer value1, Integer value2) {
+        public Criteria andSpnoBetween(String value1, String value2) {
             addCriterion("spno between", value1, value2, "spno");
             return (Criteria) this;
         }
 
-        public Criteria andSpnoNotBetween(Integer value1, Integer value2) {
+        public Criteria andSpnoNotBetween(String value1, String value2) {
             addCriterion("spno not between", value1, value2, "spno");
             return (Criteria) this;
         }
 
-        public Criteria andCcidIsNull() {
-            addCriterion("ccid is null");
+        public Criteria andCcnameIsNull() {
+            addCriterion("ccname is null");
             return (Criteria) this;
         }
 
-        public Criteria andCcidIsNotNull() {
-            addCriterion("ccid is not null");
+        public Criteria andCcnameIsNotNull() {
+            addCriterion("ccname is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCcidEqualTo(Integer value) {
-            addCriterion("ccid =", value, "ccid");
+        public Criteria andCcnameEqualTo(String value) {
+            addCriterion("ccname =", value, "ccname");
             return (Criteria) this;
         }
 
-        public Criteria andCcidNotEqualTo(Integer value) {
-            addCriterion("ccid <>", value, "ccid");
+        public Criteria andCcnameNotEqualTo(String value) {
+            addCriterion("ccname <>", value, "ccname");
             return (Criteria) this;
         }
 
-        public Criteria andCcidGreaterThan(Integer value) {
-            addCriterion("ccid >", value, "ccid");
+        public Criteria andCcnameGreaterThan(String value) {
+            addCriterion("ccname >", value, "ccname");
             return (Criteria) this;
         }
 
-        public Criteria andCcidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("ccid >=", value, "ccid");
+        public Criteria andCcnameGreaterThanOrEqualTo(String value) {
+            addCriterion("ccname >=", value, "ccname");
             return (Criteria) this;
         }
 
-        public Criteria andCcidLessThan(Integer value) {
-            addCriterion("ccid <", value, "ccid");
+        public Criteria andCcnameLessThan(String value) {
+            addCriterion("ccname <", value, "ccname");
             return (Criteria) this;
         }
 
-        public Criteria andCcidLessThanOrEqualTo(Integer value) {
-            addCriterion("ccid <=", value, "ccid");
+        public Criteria andCcnameLessThanOrEqualTo(String value) {
+            addCriterion("ccname <=", value, "ccname");
             return (Criteria) this;
         }
 
-        public Criteria andCcidIn(List<Integer> values) {
-            addCriterion("ccid in", values, "ccid");
+        public Criteria andCcnameLike(String value) {
+            addCriterion("ccname like", value, "ccname");
             return (Criteria) this;
         }
 
-        public Criteria andCcidNotIn(List<Integer> values) {
-            addCriterion("ccid not in", values, "ccid");
+        public Criteria andCcnameNotLike(String value) {
+            addCriterion("ccname not like", value, "ccname");
             return (Criteria) this;
         }
 
-        public Criteria andCcidBetween(Integer value1, Integer value2) {
-            addCriterion("ccid between", value1, value2, "ccid");
+        public Criteria andCcnameIn(List<String> values) {
+            addCriterion("ccname in", values, "ccname");
             return (Criteria) this;
         }
 
-        public Criteria andCcidNotBetween(Integer value1, Integer value2) {
-            addCriterion("ccid not between", value1, value2, "ccid");
+        public Criteria andCcnameNotIn(List<String> values) {
+            addCriterion("ccname not in", values, "ccname");
             return (Criteria) this;
         }
 
-        public Criteria andYsidIsNull() {
-            addCriterion("ysid is null");
+        public Criteria andCcnameBetween(String value1, String value2) {
+            addCriterion("ccname between", value1, value2, "ccname");
             return (Criteria) this;
         }
 
-        public Criteria andYsidIsNotNull() {
-            addCriterion("ysid is not null");
+        public Criteria andCcnameNotBetween(String value1, String value2) {
+            addCriterion("ccname not between", value1, value2, "ccname");
             return (Criteria) this;
         }
 
-        public Criteria andYsidEqualTo(Integer value) {
-            addCriterion("ysid =", value, "ysid");
+        public Criteria andYsnameIsNull() {
+            addCriterion("ysname is null");
             return (Criteria) this;
         }
 
-        public Criteria andYsidNotEqualTo(Integer value) {
-            addCriterion("ysid <>", value, "ysid");
+        public Criteria andYsnameIsNotNull() {
+            addCriterion("ysname is not null");
             return (Criteria) this;
         }
 
-        public Criteria andYsidGreaterThan(Integer value) {
-            addCriterion("ysid >", value, "ysid");
+        public Criteria andYsnameEqualTo(String value) {
+            addCriterion("ysname =", value, "ysname");
             return (Criteria) this;
         }
 
-        public Criteria andYsidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("ysid >=", value, "ysid");
+        public Criteria andYsnameNotEqualTo(String value) {
+            addCriterion("ysname <>", value, "ysname");
             return (Criteria) this;
         }
 
-        public Criteria andYsidLessThan(Integer value) {
-            addCriterion("ysid <", value, "ysid");
+        public Criteria andYsnameGreaterThan(String value) {
+            addCriterion("ysname >", value, "ysname");
             return (Criteria) this;
         }
 
-        public Criteria andYsidLessThanOrEqualTo(Integer value) {
-            addCriterion("ysid <=", value, "ysid");
+        public Criteria andYsnameGreaterThanOrEqualTo(String value) {
+            addCriterion("ysname >=", value, "ysname");
             return (Criteria) this;
         }
 
-        public Criteria andYsidIn(List<Integer> values) {
-            addCriterion("ysid in", values, "ysid");
+        public Criteria andYsnameLessThan(String value) {
+            addCriterion("ysname <", value, "ysname");
             return (Criteria) this;
         }
 
-        public Criteria andYsidNotIn(List<Integer> values) {
-            addCriterion("ysid not in", values, "ysid");
+        public Criteria andYsnameLessThanOrEqualTo(String value) {
+            addCriterion("ysname <=", value, "ysname");
             return (Criteria) this;
         }
 
-        public Criteria andYsidBetween(Integer value1, Integer value2) {
-            addCriterion("ysid between", value1, value2, "ysid");
+        public Criteria andYsnameLike(String value) {
+            addCriterion("ysname like", value, "ysname");
             return (Criteria) this;
         }
 
-        public Criteria andYsidNotBetween(Integer value1, Integer value2) {
-            addCriterion("ysid not between", value1, value2, "ysid");
+        public Criteria andYsnameNotLike(String value) {
+            addCriterion("ysname not like", value, "ysname");
+            return (Criteria) this;
+        }
+
+        public Criteria andYsnameIn(List<String> values) {
+            addCriterion("ysname in", values, "ysname");
+            return (Criteria) this;
+        }
+
+        public Criteria andYsnameNotIn(List<String> values) {
+            addCriterion("ysname not in", values, "ysname");
+            return (Criteria) this;
+        }
+
+        public Criteria andYsnameBetween(String value1, String value2) {
+            addCriterion("ysname between", value1, value2, "ysname");
+            return (Criteria) this;
+        }
+
+        public Criteria andYsnameNotBetween(String value1, String value2) {
+            addCriterion("ysname not between", value1, value2, "ysname");
             return (Criteria) this;
         }
 

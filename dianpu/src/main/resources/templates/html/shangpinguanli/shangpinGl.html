@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="UTF-8">
@@ -17,19 +17,19 @@
 						<div class="card-header">
 							<h3 class="h6 text-uppercase mb-0">商品管理<span style="float: right;">
 				<select id="dpxlk" >
-					<option>店铺</option>
+					
 				</select>				
 				<select id="lbxlk" >
-					<option>全部类别</option>
+					<option value="">全部类别</option>
 				</select>
-				<input type="text" class="form" placeholder="查找"/><input type="button" value="查询" class="btn-success" />
-                    <input type="button" class="btn-default" value="导出商品" />&nbsp;&nbsp;<input type="button" class="btn-default" value="批量导入" />
+				<input type="text" class="form" id="spname" placeholder="查找"/><input type="button" value="查询" class="btn-success" />
+                    <input type="button" class="btn-default" id="spdc" value="导出商品" />&nbsp;&nbsp;<input type="file" id="spdr" class="btn-default" value="批量导入" />
                     <input type="button" id="sck" class="btn-success" value="商品上传" />
                     
                     </span></h3>
 						</div>
 						<div class="card-body">
-							<table class="table table-hover table-striped">
+							<table class="table table-hover ">
 								<thead>
 									<tr>
 										<th style="text-align: center;">选择</th>
@@ -41,35 +41,22 @@
 										<th style="text-align: center;">库存</th>
 										<th style="text-align: center;">销售价</th>
 										<th style="text-align: center;">成本价</th>
-										<th style="text-align: center;">网店同步</th>
 
-										<th style="text-align: center;">操作</th>
+										<th  style="text-align: center;">操作</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td style="text-align: center;"><input type="checkbox"></td>
-										<td style="text-align: center;">名称</td>
-										<td style="text-align: center;">名称</td>
-										<td style="text-align: center;">名称</td>
-										<td style="text-align: center;">名称</td>
-										<td style="text-align: center;">名称</td>
-										<td style="text-align: center;">名称</td>
-
-										<td style="text-align: center;">名称</td>
-										<td style="text-align: center;">名称</td>
-										<td style="text-align: center;">名称</td>
-										<td style="text-align: center;">
-											<a href="javascript:void(0);">删除</a>&nbsp;
-											<a href="javascript:void(0);">编辑</a>
-										</td>
-									</tr>
-								</tbody>
+								<tbody id="spgl">
+							</tbody>
 							</table>
 						</div>
+						 <div style="float: right; ">
+                 <input type="button" style="float: right;"  class="btn" id="sptz" value="跳转"> <input type="text"  id="spshu" class=" col-md-1" style="float: right;color:block;">
+                 <button id="spxyy" class="btn" style="float: right;color:black;">></button> <span style="float: right;" id="zyshu"></span>
+                  <button id="spsyy" class="btn" style="float: right;color:black;"><</button>
+                  </div>
 					</div>
 				</div>
-
+	
 				<!--<div class="row col-md-12">
 				<h4 class="col-md-2">商品类别</h4> 
 			</div>
@@ -140,12 +127,168 @@
 				$("#spsc").attr("class", "btn btn-primary btn-lg");
 				initshch("shangpinshangchuan/shangpinshch");
 			});
+			initshangpingl(1);
+			$("#sptz").click(function(){
+				//alert($("#yshu").val());
+				 initshangpingl($("#spshu").val(),$("dpxlk").val(),$("#lbxlk").val(),$("#spname").val());
+			});
+			$("#dpxlk").change(function(){
+				alert($(this).val());
+				initshangpingl(1,$(this).val(),$("#lbxlk").val(),$("#spname").val());
+			});
 			
+			$("#spdr").change(function(){
+				$.ajax({
+					url:"[[@{/shangpin/excelUpload}]]",
+					type:"post",
+					data:{file:$("#spdr").val()},
+					dataType:"json",
+					success:function(res){
+						if(res=="1"){
+							alert(res);
+						}
+					}
+				});
+			});
+			
+			$("#lbxlk").change(function(){
+				alert($(this).val());
+				initshangpingl(1,$("#dpxlk").val(),$(this).val(),$("#spname").val());
+			});
+			initshangpindp();
+			initshangpinlb();
+			
+			$("#spdc").click(function(){
+				window.location.href="[[@{/shangping/exportExcel}]]?dpid="+$("#dpxlk").val()+"&lbid="+$("#lbxlk").val()+"&spname="+$("#spname").val();
+			});
 			
 		});
 		
 		
+		function initshangpindp(){
+			$.ajax({
+				url:"[[@{/dianpu/queryAllDianPu}]]",
+				type:"get",
+				dataType:"json",
+				success:function(res){
+					$.each(res,function(i,obj){
+						var $op=`<option value="${obj.dpid}">${obj.dpname}</option>`;
+						$("#dpxlk").append($op);
+					});
+				}
+			});
+		}
 		
+		function initshangpinlb(){
+			$.ajax({
+				url:"[[@{/shangping/leibieAll}]]",
+				type:"get",
+				data:{},
+				dataType:"json",
+				success:function(res){
+					//alert();
+					$.each(res,function(i,obj){
+						var $lb=`<option value="${obj.lbid}">${obj.lbname}</option>`;
+						$("#lbxlk").append($lb);
+					});
+				}
+			});
+		}
+		
+		
+		function initshangpingl(objss,dpid,lbid,spname){
+			$.ajax({
+				url:"[[@{/shangping/shangpcx}]]",
+				type:"get",
+				data:{pageNum:objss,pageSize:12,dpid:dpid,lbid:lbid,spname:spname},
+				dataType:"json",
+				success:function(res){
+					$("#spgl").html("");
+					var k=0;
+					
+					$.each(res.list,function(i,obj){
+						var xa=obj.spno;
+						k=0;
+					for(var ii=0;ii<res.list.length;ii++){
+						if(res.list[ii].spno==xa){
+							k++;
+						}
+					}
+					});
+					if(res.list==null||res.list==""){
+						//alert(2);
+						$("#spgl").append(`<tr><td style="text-align: center;" colspan="10">抱歉，没有找到商品</td></tr>`);
+						
+					}else{
+					$.each(res.list,function(i,obj){
+							var $lb=`<tr>
+								<td style="text-align: center;"><input type="checkbox"></td>
+								<td style="text-align: center;">${i+1}</td>
+								<td style="text-align: center;">${obj.lbname}</td>
+								<td style="text-align: center;"><img th:src="${obj.spimg}" width="20px" height="20px">${obj.spname}</td>
+								<td style="text-align: center;">${obj.spno}<br>${obj.spxtm}</td>
+								<td style="text-align: center;">${obj.ysname}/${obj.ccname}</td>
+								<td style="text-align: center;">${obj.spxcount}</td>
+
+								<td style="text-align: center;">${obj.spxiaoshou}</td>
+								<td style="text-align: center;">${obj.spchengben}</td>`;
+								var rowshu=0;
+								var x=obj.spno;
+								for(var ii=0;ii<res.list.length;ii++){
+									if(res.list[ii].spno==x){
+										//alert(11);
+										rowshu++;
+										//k++;
+									}
+								}
+									
+								//var k=0;
+								//alert(rowshu);
+								
+									if(rowshu>=1){
+										
+										if(k==rowshu){
+											$lb+=`<td style="text-align: center;padding-top: 50px;" rowspan="${rowshu}">
+												<a href="javascript:void(0);" onclick="shangpinspscs(${obj.spname})">删除</a>&nbsp;
+												<a href="javascript:void(0);"  onclick="bj(${obj.spid})">编辑</a>
+											</td>
+										</tr>`;
+											k=0;
+										}else{
+											k+=rowshu;
+										}
+									
+									
+									}
+								
+							$("#spgl").append($lb);
+						});
+					}
+					
+					$("#spsyy").attr("onclick","initshangpingl("+res.prePage+")");
+					$("#spxyy").attr("onclick","initshangpingl("+res.nextPage+")");
+					$("#zyshu").text(res.Pages);
+					//alert(res.Pages());
+				}
+			});
+		}
+		
+		
+		function bj(objsa){
+			alert(objsa);
+			$.ajax({
+				url : "[[@{/shangping/shangpinidkey}]]",
+				data : {
+					method : "shangpinshangchuan/shangpinshch",
+					spno:objsa
+				},
+				dataType : "html",
+				success : function(res) {
+					$("#lb").empty();
+					$("#lb").append(res);
+				}
+			});
+		}
 		
 		
 		function initshch(index) {
@@ -162,6 +305,23 @@
 			});
 		}
 
+		
+		function shangpinspscs(spname){
+			var s=spname;
+			//alert(spname);
+			$.ajax({
+				url:"[[@{/shangping/deletesp}]]",
+				type:"get",
+				data:{spid:spname},
+				dataType:"json",
+				success:function(res){
+					//alert();
+					if(res=="1"){
+						alert("删除成功");
+					}
+				}
+			});
+		}
 	</script>
 
 </html>

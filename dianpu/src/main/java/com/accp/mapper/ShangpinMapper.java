@@ -30,12 +30,10 @@ public interface ShangpinMapper {
 
     int updateByPrimaryKey(Shangpin record);
     
-    List<Shangpin> selectspguanli(Shangpin record);
+    List<Shangpin> selectspguanli(Shangpin s);
+    Shangpin selectspno(Integer spid);
     
-    int deleteBYid(Integer spid);
+    List<Shangpinxiang>  selectspxno(String spno);
     
-    Shangpin selectspno(String spno);
-    
-    List<Shangpinxiang> selectspxno(String spno);
-    
+    int deleteBYid(String spid);
 }

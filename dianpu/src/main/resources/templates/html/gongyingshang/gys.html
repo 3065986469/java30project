@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<title></title>
 		
-		
+		<script type="text/javascript" th:src="@{/js/dizhi.js}"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -18,7 +18,7 @@
                     <h3 class="h6 text-uppercase mb-0">供应商<span  style="float: right;">
 					地区<select id="" ><option>请选择省份</option></select>-
 					<select id="" ><option >请选择城市</option></select><input type="text" placeholder="查找" class="btn"/><button class="glyphicon glyphicon-search btn btn-success"  >查询</button>&nbsp;
-					<input type="button" value="添加供应商" class="btn btn-success" id="" data-toggle="modal" data-target="#tjgys"/>
+					<input type="button" value="添加供应商" class="btn btn-success" id="tjgysz" data-toggle="modal" data-target="#tjgys"/>
                     </span>
                     </h3>
                   </div>
@@ -57,20 +57,20 @@
 						  <div class="modal-content">
 						<div class="modal-header">
 							
-							<h3>添加供应商</h3>
+							<h3 id="gysmtkt"></h3>
 							<button class="close" data-dismiss="modal">&times;</button>
 						</div>
 						<div class="modal-body ">
 							公司名称：<input type="text" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;公司简称：<input type="text" /><br /><br />
 							联&nbsp; 系&nbsp;&nbsp;人：<input type="text" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：<input type="text" /><br /><br />
 							邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：<input type="text" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：<input type="text" /><br /><br />
-							地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：<select id="" class="btn"><option>请选择省份</option></select>-<select id="" class="btn"><option>请选择城市</option>-</select><select id="" class="btn"><option>请选择地区</option></select><br />
+							地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：<select id="" class="btn"><option>请选择省份</option></select>-<select id="" class="btn"><option>请选择城市</option></select>-<select id="" class="btn"><option>请选择地区</option></select><br />
 							<br>街&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;道：<input type="text" style="width: 360px;" />
 							
 						</div>
 						<div class="modal-footer">
-							<button class="btn btn-default" data-dismiss="modal">取消</button>
-							<button class="btn btn-success" id="qd">确定</button>
+							<button class="btn btn-default" id="gysqx" data-dismiss="modal">取消</button>
+							<button class="btn btn-success" id="gysqd">确定</button>
 						</div>
 					</div>
 					</div>
@@ -157,4 +157,119 @@
 			</div>-->
 		</div>
 	</body>
+	<script type="text/javascript">
+
+
+	function gysinitgys(){
+				$.ajax({
+					url:"[[@{/shangping/querygysAll}]]",
+					type:"get",
+					data:{gysname:$("#gyscxname").val(),gysaddress:$("#citysinfo").val()},
+					dataType:"json",
+					success:function(res){
+						$("#gyslbid").html("");
+						$.each(res,function(i,obj){
+							var $lb=`<tr>
+								<td style="text-align: center;">${i+1}</td>
+								<td style="text-align: center;">${obj.gysjianchen}</td>
+								<td style="text-align: center;">${obj.gysname}</td>
+								<td style="text-align: center;">${obj.gyslianxiren}</td>
+								<td style="text-align: center;">${obj.gysphone}</td>
+								<td style="text-align: center;">${obj.gysemail}</td>
+								<td style="text-align: center;">${obj.gysaddress}</td>
+								
+								<td style="text-align: center;"><a href="javascript:void(0);" onclick="xggys(${obj.gysid})">修改</a>&nbsp;<a href="javascript:void(0);" onclick="gyssc()">删除</a></td>
+							</tr>`;
+							$("#gyslbid").append($lb);
+						});
+						
+					}
+				});
+			}
+			$(function(){
+				$("#tjgysz").click(function(){
+					$("#gysmtkt").text("添加供应商");
+				});
+				
+				$("#gysqx").click(function(){
+					$("#lbid").val("");
+					$("#lbname").val("");
+				});
+				
+				gysinitgys();
+				$("#gysqd").click(function(){
+					//alert();
+					if($("#lbid").val()!=null&&$("#lbid").val()!=""){
+						$.ajax({
+							url:"[[@{/shangping/updategys}]]",
+							type:"get",
+							data:{lbid:$("#lbid").val(),lbname:$("#lbname").val(),sid:1},
+							dataType:"text",
+							success:function(res){
+								$("#tjgys").modal('hide');
+								//alert(res);
+								//alert(111);
+								gysinitgys();
+								
+							}
+						});
+						
+						
+					}else{
+						$.ajax({
+							url:"[[@{/shangping/insertgys}]]",
+							type:"get",
+							data:{lbid:0,lbname:$("#lbname").val(),sid:1},
+							dataType:"text",
+							success:function(res){
+								$("#tjgys").modal("hide");
+								//alert(res);
+								gysinitgys();
+							}
+						});
+						
+					}
+					
+					$("#lbid").val("");
+					$("#lbname").val("");
+				});
+				
+				
+				
+			});
+			function xggsy(obj){
+			//	alert(obj);
+			$("#gysmtkt").text("编辑供应商");
+				$.ajax({
+					url:"[[@{/shangping/querylbkey}]]",
+					type:"get",
+					data:{gysid:obj},
+					dataType:"json",
+					success:function(res){
+					//	alert(obj);
+						$("#lbid").val(res.lbid);
+						$("#lbname").val(res.lbname);
+					}
+				});
+			}
+			
+			function gyssc(obj){
+				$.ajax({
+					url:"[[@{/shangping/deletegys}]]",
+					type:"get",
+					data:{gysid:obj},
+					dataType:"json",
+					success:function(res){
+						//alert(res);
+						if(res=="1"){
+							alert("删除成功！！");
+						}
+						gysinitgys();
+					}
+				});
+			}
+			
+	</script>
+	
+	
 </html>

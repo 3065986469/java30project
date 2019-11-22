@@ -25,25 +25,19 @@ public class Shangpin {
 
     private Integer sid;
     
-    private String lbname;
-    
-    private String spxtm;
-    
     private String ysname;
     
     private String ccname;
     
-    private List<Shangpinxiang> shangpinx;
+    private String spxtm;
     
-    public List<Shangpinxiang> getShangpinx() {
-		return shangpinx;
-	}
-
-	public void setShangpinx(List<Shangpinxiang> shangpinx) {
-		this.shangpinx = shangpinx;
-	}
-
-	public String getLbname() {
+    private String spxcount;
+    
+    private List<Shangpinxiang> spx;
+    
+    private String lbname;
+    
+    public String getLbname() {
 		return lbname;
 	}
 
@@ -51,12 +45,12 @@ public class Shangpin {
 		this.lbname = lbname;
 	}
 
-	public String getSpxtm() {
-		return spxtm;
+	public List<Shangpinxiang> getSpx() {
+		return spx;
 	}
 
-	public void setSpxtm(String spxtm) {
-		this.spxtm = spxtm;
+	public void setSpx(List<Shangpinxiang> spx) {
+		this.spx = spx;
 	}
 
 	public String getYsname() {
@@ -73,6 +67,22 @@ public class Shangpin {
 
 	public void setCcname(String ccname) {
 		this.ccname = ccname;
+	}
+
+	public String getSpxtm() {
+		return spxtm;
+	}
+
+	public void setSpxtm(String spxtm) {
+		this.spxtm = spxtm;
+	}
+
+	public String getSpxcount() {
+		return spxcount;
+	}
+
+	public void setSpxcount(String spxcount) {
+		this.spxcount = spxcount;
 	}
 
 	public Integer getSpid() {

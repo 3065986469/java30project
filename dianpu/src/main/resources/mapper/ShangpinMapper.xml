@@ -94,7 +94,7 @@
     select 
     <include refid="Base_Column_List" />
     from shangpin
-    where spid = #{spid,jdbcType=INTEGER}
+    where spid = #{spid,jdbcType=INTEGER} 
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from shangpin
@@ -115,14 +115,15 @@
       #{spcount,jdbcType=INTEGER}, #{spxiaoshou,jdbcType=REAL}, #{spchengben,jdbcType=REAL}, 
       #{lbid,jdbcType=INTEGER}, #{dpid,jdbcType=INTEGER}, #{spimg,jdbcType=VARCHAR}, 
       #{spmiaoshu,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER});
-         <foreach collection="shangpinx" item="sp">
-     insert into shangpinxiang (spxid, spno, ccid, 
-      ysid, spxcount, spxtm
+        <foreach collection="spx" item="i">
+     insert into shangpinxiang (spxid, spno, ccname, 
+      ysname, spxcount, spxtm
       )
-    values (#{sp.spxid,jdbcType=INTEGER}, #{spno,jdbcType=INTEGER}, #{sp.ccid,jdbcType=INTEGER}, 
-      #{sp.ysid,jdbcType=INTEGER}, #{sp.spxcount,jdbcType=INTEGER}, #{sp.spxtm,jdbcType=VARCHAR}
+    values (#{i.spxid,jdbcType=INTEGER}, #{spno,jdbcType=VARCHAR}, #{i.ccname,jdbcType=VARCHAR}, 
+      #{i.ysname,jdbcType=VARCHAR}, #{i.spxcount,jdbcType=INTEGER}, #{i.spxtm,jdbcType=VARCHAR}
       );
     </foreach>
+    
   </insert>
   <insert id="insertSelective" parameterType="com.accp.domain.Shangpin" >
     insert into shangpin
@@ -296,14 +297,16 @@
       </if>
     </set>
     where spid = #{spid,jdbcType=INTEGER};
-    <foreach collection="shangpinx" item="sp">
-     insert into shangpinxiang (spxid, spno, ccid, 
-      ysid, spxcount, spxtm
+    delete from shangpinxiang where spno=#{spno};
+    <foreach collection="spx" item="i">
+     insert into shangpinxiang (spxid, spno, ccname, 
+      ysname, spxcount, spxtm
       )
-    values (#{sp.spxid,jdbcType=INTEGER}, #{spno,jdbcType=INTEGER}, #{sp.ccid,jdbcType=INTEGER}, 
-      #{sp.ysid,jdbcType=INTEGER}, #{sp.spxcount,jdbcType=INTEGER}, #{sp.spxtm,jdbcType=VARCHAR}
+    values (#{i.spxid,jdbcType=INTEGER}, #{spno,jdbcType=VARCHAR}, #{i.ccname,jdbcType=VARCHAR}, 
+      #{i.ysname,jdbcType=VARCHAR}, #{i.spxcount,jdbcType=INTEGER}, #{i.spxtm,jdbcType=VARCHAR}
       );
     </foreach>
+    
   </update>
   <update id="updateByPrimaryKey" parameterType="com.accp.domain.Shangpin" >
     update shangpin
@@ -317,18 +320,15 @@
       spimg = #{spimg,jdbcType=VARCHAR},
       spmiaoshu = #{spmiaoshu,jdbcType=VARCHAR},
       sid = #{sid,jdbcType=INTEGER}
-    where spid = #{spid,jdbcType=INTEGER};
-    
-    
-    
+    where spid = #{spid,jdbcType=INTEGER}
   </update>
   
-  
   <select id="selectspguanli" resultType="com.accp.domain.Shangpin" parameterType="com.accp.domain.Shangpin">
-  
-SELECT lb.`lbname`,sp.`spname`,sp.`spimg`,sp.`spno`,spx.spxtm,ys.`ysname`,cc.`ccname`,sp.`spcount`,sp.`spxiaoshou`,sp.`spchengben` FROM `shangpin` AS sp,`shangpinxiang` AS spx,`leibie`AS lb,`yanse` AS  ys,`chicun` AS cc
- WHERE sp.`lbid`=lb.`lbid` AND sp.`spno`=spx.`spno` AND spx.`ysid`=ys.`ysid` AND spx.`ccid`=cc.`ccid` and sp.sid=1
-		 <if test="dpid!=null">
+  SELECT  lb.`lbname`,sp.`spname`,sp.`spid`,sp.`spimg`,sp.`spno`,spx.spxtm,spx.`ysname`,spx.`ccname`,spx.`spxcount`,sp.`spxiaoshou`,sp.`spchengben` FROM `shangpin` AS sp,`shangpinxiang` AS spx, `leibie` AS lb 
+WHERE sp.`spno`=spx.`spno` AND sp.`lbid`=lb.`lbid` AND sp.sid=1
+
+
+		  <if test="dpid!=null">
 		   AND sp.`dpid`=#{dpid}
 		 </if>
 		  <if test="lbid!=null">
@@ -337,19 +337,21 @@ SELECT lb.`lbname`,sp.`spname`,sp.`spimg`,sp.`spno`,spx.spxtm,ys.`ysname`,cc.`cc
 		  <if test="spname!=null">
 		   AND sp.spname like '%${spname}%'
 		 </if>
-		 
   </select>
   
   
-  <select id="selectspno" resultType="com.accp.domain.Shangpin"> 
- SELECT * FROM `shangpin` WHERE `spid`=#{spno}
-  </select>
-  <select id="selectspxno" resultType="com.accp.domain.Shangpinxiang">
- SELECT * FROM `shangpinxiang` WHERE `spno`=#{spno}
+  <select id="selectspno" resultType="com.accp.domain.Shangpin">
+  select * from `shangpin` where `spid`=#{spid}
   </select>
   
-  <update id="deleteBYid" >
-  update `shangpin` set `sid`=0 where `spid`=#{spid}
+   <select id="selectspxno" resultType="com.accp.domain.Shangpinxiang">
+  select * from `shangpinxiang` where `spno`=#{spno}
+  </select>
+  
+  <update id="deleteBYid">
+UPDATE `shangpin` SET `sid`=0 WHERE `spname`=#{spid}
   </update>
+  
+  
   
 </mapper>

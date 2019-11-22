@@ -3,11 +3,11 @@ package com.accp.domain;
 public class Shangpinxiang {
     private Integer spxid;
 
-    private Integer spno;
+    private String spno;
 
-    private Integer ccid;
+    private String ccname;
 
-    private Integer ysid;
+    private String ysname;
 
     private Integer spxcount;
 
@@ -21,28 +21,28 @@ public class Shangpinxiang {
         this.spxid = spxid;
     }
 
-    public Integer getSpno() {
+    public String getSpno() {
         return spno;
     }
 
-    public void setSpno(Integer spno) {
+    public void setSpno(String spno) {
         this.spno = spno;
     }
 
-    public Integer getCcid() {
-        return ccid;
+    public String getCcname() {
+        return ccname;
     }
 
-    public void setCcid(Integer ccid) {
-        this.ccid = ccid;
+    public void setCcname(String ccname) {
+        this.ccname = ccname;
     }
 
-    public Integer getYsid() {
-        return ysid;
+    public String getYsname() {
+        return ysname;
     }
 
-    public void setYsid(Integer ysid) {
-        this.ysid = ysid;
+    public void setYsname(String ysname) {
+        this.ysname = ysname;
     }
 
     public Integer getSpxcount() {
