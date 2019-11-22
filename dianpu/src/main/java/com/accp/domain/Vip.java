@@ -18,8 +18,48 @@ public class Vip {
     private String vaddress;
 
     private Integer sid;
+    
+    private int count;			//成交次数
+    
+    private String price;		//成交金额
+    
+    private int jqcount ;		//最近成交次数
+    
+    private String djname;		//等级名字
 
-    public Integer getVid() {
+    public String getDjname() {
+		return djname;
+	}
+
+	public void setDjname(String djname) {
+		this.djname = djname;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public int getJqcount() {
+		return jqcount;
+	}
+
+	public void setJqcount(int jqcount) {
+		this.jqcount = jqcount;
+	}
+
+	public Integer getVid() {
         return vid;
     }
 

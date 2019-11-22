@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.accp.domain.Jifen;
-import com.accp.domain.Shengfen;
 import com.accp.domain.Vip;
 import com.accp.domain.Vipdengji;
 import com.accp.service.HuiyuanService;
 import com.accp.service.JifenService;
 import com.accp.service.VipService;
+import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("/huiyuan")
@@ -54,6 +54,28 @@ public class HuiyuanController {
 	@ResponseBody
 	public String hyadd(@RequestBody Vip vip) {
 		vipService.hyadd(vip);
+		return null;
+	}
+	
+	//会员分页带参查询
+	@RequestMapping("hyPageQueyr")
+	@ResponseBody
+	public PageInfo<Vip> hyPageQueyr(Integer pageNum,Integer pageSize,Integer djid,String vname){
+		return vipService.hyPageQueyr(pageNum, pageSize, djid, vname);
+	}
+	
+	//会员id查询
+	@RequestMapping("vipQueryById")
+	@ResponseBody
+	public Vip vipQueryById(int vid) {
+		return vipService.vipQueryById(vid);
+	}
+	
+	//会员修改
+	@RequestMapping("hyupd")
+	@ResponseBody
+	public String hyupd(@RequestBody Vip vip) {
+		vipService.hyupd(vip);
 		return null;
 	}
 	

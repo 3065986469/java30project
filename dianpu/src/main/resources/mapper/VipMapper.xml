@@ -273,9 +273,14 @@
     where vid = #{vid,jdbcType=INTEGER}
   </update>
   
-  
-<!--   <insert id="hyadd" parameterType="com.accp.domain,Vip">
-	INSERT INTO `dianpu`.`vip` (`vid`,`djid`,`vname`,`vphone`,`vyue`,`vjifen`,`vpwd`,`vaddress`,`sid`) 
-	VALUES(#{vid},#{djid},#{vname},#{vphone},#{vyue},#{vjifen},#{vpwd},#{vaddress},#{sid}) 
-  </insert> -->
+  <update id="hyupd" parameterType="com.accp.domain.Vip" >
+    update vip
+    set djid = #{djid,jdbcType=INTEGER},
+      vname = #{vname,jdbcType=VARCHAR},
+      vphone = #{vphone,jdbcType=VARCHAR},
+      vjifen = #{vjifen,jdbcType=INTEGER},
+      vpwd = #{vpwd,jdbcType=VARCHAR},
+      vaddress = #{vaddress,jdbcType=VARCHAR}
+    where vid = #{vid,jdbcType=INTEGER}
+  </update>
 </mapper>
