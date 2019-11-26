@@ -29,13 +29,13 @@ public interface DianpuMapper {
 
     int updateByPrimaryKey(Dianpu record);
     
-    @Select("SELECT b.ygname AS ygname,a.dpid as dpid,a.dpname AS dpname,a.dplianxiren AS dplianxiren,a.dpphone AS dpphone,a.dpaddress AS dpaddress,COUNT(b.dpid) AS COUNT\r\n" + 
-    		"    		FROM `dianpu` a,`yuangong` b\r\n" + 
-    		"    		WHERE a.sid=1\r\n" + 
-    		"    		 GROUP BY a.dpid")
+    @Select("SELECT  b.ygname AS ygname,a.dpid AS dpid,a.dpname AS dpname,a.dplianxiren AS dplianxiren,a.dpphone AS dpphone,a.dpaddress AS dpaddress,(SELECT COUNT(1) FROM yuangong c WHERE a.dpid=c.`dpid` AND b.sid=1) AS COUNT\r\n" + 
+    		"    		    		FROM `dianpu` a,yuangong b\r\n" + 
+    		"    		    		WHERE a.sid=1\r\n" + 
+    		"    		    		 GROUP BY a.dpid")
     List<Dianpu> queryAllDianPu();
     
-    @Select("SELECT MAX(dpid)\r\n" + 
+    @Select("SELECT count(1)\r\n" + 
     		"FROM dianpu\r\n" + 
     		"")
     String queryDianPuId();

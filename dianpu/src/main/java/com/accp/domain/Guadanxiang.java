@@ -5,49 +5,71 @@ public class Guadanxiang {
 
     private String cjno;
 
-    private Integer spid;
+    private String spname;
 
     private Integer spnum;
 
     private Float spdanjia;
 
-    public Integer getGdxid() {
-        return gdxid;
-    }
+    private Integer spid;
 
-    public void setGdxid(Integer gdxid) {
-        this.gdxid = gdxid;
-    }
+    private String djzhekou;
+    
+	public String getDjzhekou() {
+		return djzhekou;
+	}
 
-    public String getCjno() {
-        return cjno;
-    }
+	public void setDjzhekou(String djzhekou) {
+		this.djzhekou = djzhekou;
+	}
 
-    public void setCjno(String cjno) {
-        this.cjno = cjno;
-    }
+	public Integer getGdxid() {
+		return gdxid;
+	}
 
-    public Integer getSpid() {
-        return spid;
-    }
+	public void setGdxid(Integer gdxid) {
+		this.gdxid = gdxid;
+	}
 
-    public void setSpid(Integer spid) {
-        this.spid = spid;
-    }
+	public String getCjno() {
+		return cjno;
+	}
 
-    public Integer getSpnum() {
-        return spnum;
-    }
+	public void setCjno(String cjno) {
+		this.cjno = cjno;
+	}
 
-    public void setSpnum(Integer spnum) {
-        this.spnum = spnum;
-    }
+	public String getSpname() {
+		return spname;
+	}
 
-    public Float getSpdanjia() {
-        return spdanjia;
-    }
+	public void setSpname(String spname) {
+		this.spname = spname;
+	}
 
-    public void setSpdanjia(Float spdanjia) {
-        this.spdanjia = spdanjia;
-    }
+	public Integer getSpnum() {
+		return spnum;
+	}
+
+	public void setSpnum(Integer spnum) {
+		this.spnum = spnum;
+	}
+
+	public Float getSpdanjia() {
+		return spdanjia;
+	}
+
+	public void setSpdanjia(Float spdanjia) {
+		this.spdanjia = spdanjia;
+	}
+
+	public Integer getSpid() {
+		return spid;
+	}
+
+	public void setSpid(Integer spid) {
+		this.spid = spid;
+	}
+    
+   
 }

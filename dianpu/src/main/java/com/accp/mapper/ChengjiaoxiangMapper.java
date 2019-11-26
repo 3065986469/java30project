@@ -2,6 +2,8 @@ package com.accp.mapper;
 
 import com.accp.domain.Chengjiaoxiang;
 import com.accp.domain.ChengjiaoxiangExample;
+import com.accp.domain.Guadanxiang;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +29,6 @@ public interface ChengjiaoxiangMapper {
     int updateByPrimaryKeySelective(Chengjiaoxiang record);
 
     int updateByPrimaryKey(Chengjiaoxiang record);
+    
+    int shoukuan(@Param("list")List<Chengjiaoxiang> list,@Param("cjno")String cjno);
 }

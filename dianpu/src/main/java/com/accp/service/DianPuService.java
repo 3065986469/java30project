@@ -64,7 +64,9 @@ public class DianPuService {
 
 	public int insertDianPu(Dianpu dianpu) {
 		String dpid = dp.queryDianPuId();
+		System.out.println("dpid"+dpid);
 		int id = Integer.parseInt(dpid) + 1;
+		System.out.println(id);
 		dianpu.setDpid(id + "");
 		dianpu.setSid(1);
 		return dp.insert(dianpu);
@@ -214,5 +216,13 @@ public class DianPuService {
 	public int updateDianPu(Dianpu dianpu) {
 		dianpu.setSid(1);
 		return dp.updateByPrimaryKey(dianpu);
+	}
+	
+	public List<Quanxian> queryAllQuanXian(){
+		return qx.queryQuanXian();
+	}
+	
+	public Zhiwei queryQuanXianByYuanGongId(Integer ygid){
+		return zw.queryQuanXianByYuanGongId(ygid);
 	}
 }

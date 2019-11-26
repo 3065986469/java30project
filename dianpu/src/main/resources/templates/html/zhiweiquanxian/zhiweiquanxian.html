@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="UTF-8">
@@ -58,7 +58,7 @@
 							</tr>
 							<tr>
 								<td>职位权限</td>
-								<td>
+								<td colspan="3">
 									<table id="zhiweiquanxianAllQuanXian">
 
 									</table>
@@ -149,8 +149,9 @@
 					ids+=$(this).val()+",";
 				}
 			});
+			alert(ids);
 			$.ajax({
-				url:"[[@{/dianpu/insertZhiWei}]]",
+				url:"[[@{/dianpu/insertZhiWei?qxidd=16}]]",
 				type:"post",
 				data:{
 					zwname:$("#zwname").val(),
@@ -172,7 +173,7 @@
 				}
 			});
 			$.ajax({
-				url:"[[@{/dianpu/updateZhiWei}]]",
+				url:"[[@{/dianpu/updateZhiWei?qxidd=17}]]",
 				type:"post",
 				data:{
 					zwid:$("#zwid").val(),
@@ -191,7 +192,7 @@
 		function zhiweiquanxianshanchu(zwid){
 			if(confirm("你确定要删除吗？")){
 				$.ajax({
-					url:"[[@{/dianpu/deleteZhiWei}]]",
+					url:"[[@{/dianpu/deleteZhiWei?qxidd=18}]]",
 					type:"post",
 					data:{
 						zwid:$("#zwid").val(),

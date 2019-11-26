@@ -285,7 +285,7 @@
 					yuangongadd:function(){
 						var that=this;
 						$.ajax({
-							url:"[[@{/dianpu/insertYuanGong}]]",
+							url:"[[@{/dianpu/insertYuanGong?qxidd=19}]]",
 							data:that.yg,
 							success:function(res){
 								yuangongguanliinit();
@@ -315,7 +315,7 @@
 		
 		function yuangongguanlixiugai(){
 			$.ajax({
-				url:"[[@{/dianpu/updateYuanGong}]]",
+				url:"[[@{/dianpu/updateYuanGong?qxidd=20}]]",
 				type:"post",
 				data:{
 					ygid:$("#ygid3").val(),
@@ -335,7 +335,7 @@
 		function yuangongguanlishanchu(ygid){
 			if(confirm("你确定要删除吗？")){
 				$.ajax({
-					url:"[[@{/dianpu/deleteYuanGong}]]",
+					url:"[[@{/dianpu/deleteYuanGong?qxidd=21}]]",
 					type:"post",
 					data:{
 						ygid:$("#ygid3").val(),

@@ -54,10 +54,10 @@
 						<table style="margin: auto;" id="dianpuguanlitable1">
 							<tr>
 								<td>&nbsp;&nbsp;&nbsp;&nbsp;店铺名称</td>
-								<td><input type="text" v-model="dianpu.dpname"></td>
+								<td><input type="text" v-model="dianpu.dpname" id="dianpuguanlidpname"></td>
 								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 								<td>联系人</td>
-								<td><input type="text" v-model="dianpu.dplianxiren"></td>
+								<td><input type="text" v-model="dianpu.dplianxiren" id="dianpuguanlidplianxiren"></td>
 							</tr>
 							<tr>
 								<td>&nbsp;</td>
@@ -65,7 +65,7 @@
 							</tr>
 							<tr>
 								<td>联系人电话</td>
-								<td><input type="text" v-model="dianpu.dpphone"></td>
+								<td><input type="text" v-model="dianpu.dpphone" id="dianpuguanlidpphone"></td>
 								<td></td>
 								<td>&nbsp;&nbsp;&nbsp;地址</td>
 								<td>
@@ -120,9 +120,9 @@
 			$("#sheng").val(0);
 			$("#shi").val(0);
 			$("#qu").val(0);
-			vm.dianpu.dpname="";
-			vm.dianpu.dplianxiren="";
-			vm.dianpu.dpphone="";
+// 			$("#dianpuguanlidpname").val("");
+// 			$("#dianpuguanlidplianxiren").val("");
+// 			$("#dianpuguanlidpphone").val("");
 			
 			$("#dianpuguanlishanchu").hide();
 			$("#dianpuguanlixiugai").hide();
@@ -144,11 +144,15 @@
 					$("#dianpuguanliaddress").val($("#sheng").val()+"-"+$("#shi").val()+"-"+$("#qu").val());
 					that.dianpu.dpaddress=$("#dianpuguanliaddress").val();
 					$.ajax({
-						url:"[[@{/dianpu/insertDianPu}]]",
+						url:"[[@{/dianpu/insertDianPu?qxidd=13}]]",
 						data:that.dianpu,
 						success:function(res){
 							dianpuguanliinit();
 							$("#dianpuguanlimyModal").modal("hide");
+							that.dianpu.dpname="";
+							that.dianpu.dplianxiren="";
+							that.dianpu.dpphone="";
+							that.dianpu.dpaddress="";
 						}
 					});
 				}
@@ -318,7 +322,7 @@
 			function dianpuguanlishanchu(){
 				if(confirm("你确定要删除吗？")){
 					$.ajax({
-						url:"[[@{/dianpu/deleteDianPu}]]",
+						url:"[[@{/dianpu/deleteDianPu?qxidd=15}]]",
 						data:{
 							dpid:$("#dpid").val()
 						},
@@ -335,7 +339,7 @@
 			function dianpuguanlixiugai(){
 				$("#dianpuguanliaddress2").val($("#sheng2").val()+"-"+$("#shi2").val()+"-"+$("#qu2").val());
 					$.ajax({
-						url:"[[@{/dianpu/updateDianPu}]]",
+						url:"[[@{/dianpu/updateDianPu?qxidd=14}]]",
 						data:{
 							dpid:$("#dpid").val(),
 							dpname:$("#dpname").val(),

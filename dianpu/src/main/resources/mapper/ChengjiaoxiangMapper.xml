@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.accp.mapper.ChengjiaoxiangMapper" >
+	
+	<insert id="shoukuan" parameterType="com.accp.domain.Chengjiaoxiang">
+		INSERT INTO `chengjiaoxiang` (
+		`cjno`,
+		`spname`,
+		`cjxnum`,
+		`cjxprice`
+		)
+		VALUES
+		<foreach collection="list" item="l" separator=",">
+			(
+		${cjno},
+		#{l.spname},
+		#{l.cjxnum},
+		#{l.cjxprice}
+		)
+		</foreach>
+		
+	</insert>
+
   <resultMap id="BaseResultMap" type="com.accp.domain.Chengjiaoxiang" >
     <id column="cjxid" property="cjxid" jdbcType="INTEGER" />
     <result column="cjno" property="cjno" jdbcType="VARCHAR" />

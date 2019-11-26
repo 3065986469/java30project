@@ -35,6 +35,7 @@ public interface VipMapper {
     		"FROM `vip` v\r\n" + 
     		"INNER JOIN `vipdengji` vd ON v.djid=vd.djid AND vd.sid=1\r\n" + 
     		"INNER JOIN `chenjiao` cj ON v.vid=cj.vid\r\n" + 
+    		"where vd.djid!=0\r\n" + 
     		"GROUP BY v.vid")
     List<Vip> queryAllHuiYuan();
     

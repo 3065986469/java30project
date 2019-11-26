@@ -1,110 +1,123 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>店铺管理系统</title>
-		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="robots" content="all,follow">
-		<!-- Bootstrap CSS-->
-		<link rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
-		<!-- Font Awesome CSS-->
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-		<!-- Google fonts - Popppins for copy-->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,800">
-		<!-- orion icons-->
-		<link rel="stylesheet" th:href="@{/css/orionicons.css}">
-		<!-- theme stylesheet-->
-		<link rel="stylesheet" th:href="@{/css/style.default.css}" id="theme-stylesheet">
-		<!-- Custom stylesheet - for your changes-->
-		<link rel="stylesheet" th:href="@{/css/custom.css}">
-		<!-- Favicon-->
-		<link rel="shortcut icon" th:href="@{/img/favicon.png?3}">
-		<!-- Tweaks for older IEs-->
-		<!--[if lt IE 9]>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>店铺管理系统</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="all,follow">
+<!-- Bootstrap CSS-->
+<link rel="stylesheet"
+	th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+<!-- Font Awesome CSS-->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+	integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+	crossorigin="anonymous">
+<!-- Google fonts - Popppins for copy-->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Poppins:300,400,800">
+<!-- orion icons-->
+<link rel="stylesheet" th:href="@{/css/orionicons.css}">
+<!-- theme stylesheet-->
+<link rel="stylesheet" th:href="@{/css/style.default.css}"
+	id="theme-stylesheet">
+<!-- Custom stylesheet - for your changes-->
+<link rel="stylesheet" th:href="@{/css/custom.css}">
+<!-- Favicon-->
+<link rel="shortcut icon" th:href="@{/img/favicon.png?3}">
+<!-- Tweaks for older IEs-->
+<!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-	</head>
+</head>
 
-	<body>
-		<!-- navbar-->
-		<header class="header">
-			<nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow">
-				<a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a>
-				<a href="index.html" class="navbar-brand font-weight-bold text-uppercase text">店 铺 管 理 系 统</a>
-				<ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
-					<li class="nav-item">
-						<form id="searchForm" class="ml-auto d-none d-lg-block">
-							<div class="form-group position-relative mb-0">
-								<button type="submit" style="top: -3px; left: 0;" class="position-absolute bg-white border-0 p-0"><i class="o-search-magnify-1 text-gray text-lg"></i></button>
-								<input type="search" placeholder="请输入 ..." class="form-control form-control-sm border-0 no-shadow pl-4">
+<body>
+	<!-- navbar-->
+	<header class="header">
+		<nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow">
+			<a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i
+				class="fas fa-align-left"></i></a> <a href="index.html"
+				class="navbar-brand font-weight-bold text-uppercase text">店 铺 管
+				理 系 统</a>
+			<ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
+				<li class="nav-item">
+					<form id="searchForm" class="ml-auto d-none d-lg-block">
+						<div class="form-group position-relative mb-0">
+							<button type="submit" style="top: -3px; left: 0;"
+								class="position-absolute bg-white border-0 p-0">
+								<i class="o-search-magnify-1 text-gray text-lg"></i>
+							</button>
+							<input type="search" placeholder="请输入 ..."
+								class="form-control form-control-sm border-0 no-shadow pl-4">
+						</div>
+					</form>
+				</li>
+				<li class="nav-item dropdown mr-3"><a id="notifications"
+					href="http://example.com" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"
+					class="nav-link dropdown-toggle text-gray-400 px-1"><i
+						class="fa fa-bell"></i><span class="notification-icon"></span></a>
+					<div aria-labelledby="notifications" class="dropdown-menu">
+						<a href="#" class="dropdown-item">
+							<div class="d-flex align-items-center">
+								<div class="icon icon-sm bg-violet text-white">
+									<i class="fab fa-twitter"></i>
+								</div>
+								<div class="text ml-2">
+									<p class="mb-0">You have 2 followers</p>
+								</div>
 							</div>
-						</form>
-					</li>
-					<li class="nav-item dropdown mr-3">
-						<a id="notifications" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-gray-400 px-1"><i class="fa fa-bell"></i><span class="notification-icon"></span></a>
-						<div aria-labelledby="notifications" class="dropdown-menu">
-							<a href="#" class="dropdown-item">
-								<div class="d-flex align-items-center">
-									<div class="icon icon-sm bg-violet text-white"><i class="fab fa-twitter"></i></div>
-									<div class="text ml-2">
-										<p class="mb-0">You have 2 followers</p>
-									</div>
+						</a> <a href="#" class="dropdown-item">
+							<div class="d-flex align-items-center">
+								<div class="icon icon-sm bg-green text-white">
+									<i class="fas fa-envelope"></i>
 								</div>
-							</a>
-							<a href="#" class="dropdown-item">
-								<div class="d-flex align-items-center">
-									<div class="icon icon-sm bg-green text-white"><i class="fas fa-envelope"></i></div>
-									<div class="text ml-2">
-										<p class="mb-0">You have 6 new messages</p>
-									</div>
+								<div class="text ml-2">
+									<p class="mb-0">You have 6 new messages</p>
 								</div>
-							</a>
-							<a href="#" class="dropdown-item">
-								<div class="d-flex align-items-center">
-									<div class="icon icon-sm bg-blue text-white"><i class="fas fa-upload"></i></div>
-									<div class="text ml-2">
-										<p class="mb-0">Server rebooted</p>
-									</div>
+							</div>
+						</a> <a href="#" class="dropdown-item">
+							<div class="d-flex align-items-center">
+								<div class="icon icon-sm bg-blue text-white">
+									<i class="fas fa-upload"></i>
 								</div>
-							</a>
-							<a href="#" class="dropdown-item">
-								<div class="d-flex align-items-center">
-									<div class="icon icon-sm bg-violet text-white"><i class="fab fa-twitter"></i></div>
-									<div class="text ml-2">
-										<p class="mb-0">You have 2 followers</p>
-									</div>
+								<div class="text ml-2">
+									<p class="mb-0">Server rebooted</p>
 								</div>
-							</a>
-							<div class="dropdown-divider"></div>
-							<a href="#" class="dropdown-item text-center"><small class="font-weight-bold headings-font-family text-uppercase">View all notifications</small></a>
-						</div>
-					</li>
-					<li class="nav-item dropdown ml-auto">
-						<a id="userInfo" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img th:src="@{/img/avatar-6.jpg}" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow"></a>
-						<div aria-labelledby="userInfo" class="dropdown-menu">
-							<a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family">Mark Stephen</strong><small>Web Developer</small></a>
-							<div class="dropdown-divider"></div>
-							<a href="#" class="dropdown-item">Settings</a>
-							<a href="#" class="dropdown-item">Activity log </a>
-							<div class="dropdown-divider"></div>
-							<a href="login.html" class="dropdown-item">Logout</a>
-						</div>
-					</li>
-				</ul>
-			</nav>
-		</header>
-		<div class="d-flex align-items-stretch">
-			<div id="sidebar" class="sidebar py-3">
-				<div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">目 录</div>
-				<ul class="sidebar-menu list-unstyled">
+							</div>
+						</a> <a href="#" class="dropdown-item">
+							<div class="d-flex align-items-center">
+								<div class="icon icon-sm bg-violet text-white">
+									<i class="fab fa-twitter"></i>
+								</div>
+								<div class="text ml-2">
+									<p class="mb-0">You have 2 followers</p>
+								</div>
+							</div>
+						</a>
+						<div class="dropdown-divider"></div>
+						<a href="#" class="dropdown-item text-center"><small
+							class="font-weight-bold headings-font-family text-uppercase">View
+								all notifications</small></a>
+					</div></li>
+				<li class="nav-item dropdown ml-auto"></li>
+			</ul>
+		</nav>
+	</header>
+	<div class="d-flex align-items-stretch">
+		<div id="sidebar" class="sidebar py-3">
+			<div
+				class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">目
+				录</div>
+			<ul class="sidebar-menu list-unstyled">
 				<li class="sidebar-list-item"><a th:href="@{/dianpu/toIndex}"
 					class="sidebar-link text-muted"><i
 						class="o-home-1 mr-3 text-gray"></i><span>店铺</span></a></li>
-				<li class="sidebar-list-item"><a th:href="@{/shangpin/toTables}"
-					class="sidebar-link text-muted"><i
+				<li class="sidebar-list-item"><a
+					th:href="@{/shangpin/toTables}" class="sidebar-link text-muted"><i
 						class="o-table-content-1 mr-3 text-gray"></i><span>商品</span></a></li>
 				<li class="sidebar-list-item"><a th:href="@{/shouyin/toCharts}"
 					class="sidebar-link text-muted active"><i
@@ -118,61 +131,89 @@
 						class="o-exit-1 mr-3 text-gray"></i><span>登出</span></a></li>
 			</ul>
 
-			</div>
-			<div class="page-holder w-100 d-flex flex-wrap">
-				<div class="container-fluid px-xl-5">
-					<section class="py-5">
-						<div class="row mb-4">
-							
-							<div class="col-lg-5">
-								<div class="card mb-4">
-									<div class="card-header">
-										<div style="float: right;" class="icon text-white bg-blue"><i class="fa fa-dolly-flatbed"></i></div>
-										<h4 class="mb-0">购物清单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px;">总金额：<span style="color: red;font-size: 24px;font-weight:normal;" id="zongjine"></span></span></h4>
-										
-									</div>
-									<div class="card-body">
+		</div>
+
+		<div class="page-holder w-100 d-flex flex-wrap">
+			<div class="container-fluid px-xl-5">
+				<section class="py-5">
+					<div class="row mb-4">
+						<div class="col-lg-5">
+							<div class="card mb-4">
+								<div class="card-header">
+									<!-- 									<i class="fa fa-dolly-flatbed"></i> -->
+									<div id="guadanshuliang" style="float: right; cursor: pointer;"
+										href="http://example.com" data-toggle="dropdown"
+										aria-haspopup="true" aria-expanded="false"
+										class="icon text-white bg-warning nav-link dropdown-toggle"></div>
+									<div class="dropdown-menu">
 										<table class="table card-text">
-											<thead>
-												<tr>
-													<th style="color: #FF7256;">商品</th>
-													<th style="color: #FF7256;">数量</th>
-													<th style="color: #FF7256;">价格</th>
-													<th style="color: #FF7256;">折扣（%）</th>
-												</tr>
-											</thead>
-											<tbody id="chartsgouwuchetable">
-												
-											</tbody>
+											<tr>
+												<th>挂单时间</th>
+												<th>会员</th>
+												<th>金额</th>
+												<th>操作</th>
+											</tr>
+											<tbody id="guadantable"></tbody>
 										</table>
 									</div>
-								</div>
-								<div style="float: right;" id="chartscaozuo">
-									<button class="btn btn-outline-danger" id="chartsshanchu">删除</button>
-									<button class="btn btn-outline-warning" id="chartsguadan">挂单</button>
-									<button class="btn btn-outline-info" id="chartsshoukuan">收款</button>
-								</div>
+									<h4 class="mb-0">
+										购物清单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+											style="font-size: 16px;">总金额：<span
+											style="color: red; font-size: 24px; font-weight: normal;"
+											id="zongjine"></span></span>
+									</h4>
 
+								</div>
+								<div class="card-body">
+									<table class="table card-text">
+										<thead>
+											<tr>
+												<th style="color: #FF7256;">商品</th>
+												<th style="color: #FF7256;">数量</th>
+												<th style="color: #FF7256;">价格</th>
+												<th style="color: #FF7256;">折扣（%）</th>
+											</tr>
+										</thead>
+										<tbody id="chartsgouwuchetable">
+
+										</tbody>
+									</table>
+								</div>
 							</div>
-							
-							
-							
-							<div class="col-lg-7 mb-4 mb-lg-0">
-								<div class="card" id="chartsdiv1">
-									<div class="card-header" id="chartsbtn">
-										<button class="btn btn-primary">商品</button>&nbsp;<button class="btn btn-primary">会员</button>
-									</div>
-									<div class="card-body">
-										<div id="chartsshangpin">
-											<div class="btn-group" id="shangpinleibie">
-												<button type="button" class="btn btn-primary btn-xs" onclick="chartsinit()">全部</button>
-												<button type="button" class="btn btn-gray-500 btn-xs" onclick="queryShangPinByLeiBie(1)">羽绒服</button>
-												<button type="button" class="btn btn-gray-500 btn-xs" onclick="queryShangPinByLeiBie(2)">卫衣</button>
-												<button type="button" class="btn btn-gray-500 btn-xs" onclick="queryShangPinByLeiBie(3)">T恤</button>
-												<button type="button" class="btn btn-gray-500 btn-xs" onclick="queryShangPinByLeiBie(4)">上衣</button>
-												<button type="button" class="btn btn-gray-500 btn-xs" onclick="queryShangPinByLeiBie(5)">外套</button>
-											</div>
-											<section class="py-3">
+							<div style="float: right;" id="chartscaozuo">
+								<button class="btn btn-outline-danger" id="chartsshanchu">删除</button>
+								<button class="btn btn-outline-warning" id="chartsguadan">挂单</button>
+								<button class="btn btn-outline-info" id="chartsshoukuan">收款</button>
+							</div>
+
+						</div>
+
+
+
+						<div class="col-lg-7 mb-4 mb-lg-0">
+							<div class="card" id="chartsdiv1">
+								<div class="card-header" id="chartsbtn">
+									<button class="btn btn-primary">商品</button>
+									&nbsp;
+									<button class="btn btn-primary">会员</button>
+								</div>
+								<div class="card-body">
+									<div id="chartsshangpin">
+										<div class="btn-group" id="shangpinleibie">
+											<button type="button" class="btn btn-primary btn-xs"
+												onclick="chartsinit()">全部</button>
+											<button type="button" class="btn btn-gray-500 btn-xs"
+												onclick="queryShangPinByLeiBie(1)">羽绒服</button>
+											<button type="button" class="btn btn-gray-500 btn-xs"
+												onclick="queryShangPinByLeiBie(2)">卫衣</button>
+											<button type="button" class="btn btn-gray-500 btn-xs"
+												onclick="queryShangPinByLeiBie(3)">T恤</button>
+											<button type="button" class="btn btn-gray-500 btn-xs"
+												onclick="queryShangPinByLeiBie(4)">上衣</button>
+											<button type="button" class="btn btn-gray-500 btn-xs"
+												onclick="queryShangPinByLeiBie(5)">外套</button>
+										</div>
+										<section class="py-3">
 											<table class="table card-text">
 												<thead>
 													<tr>
@@ -183,117 +224,143 @@
 													</tr>
 												</thead>
 												<tbody id="chartsshangpintable">
-													
+
 												</tbody>
 											</table>
-											</section>
-										</div>
+										</section>
+									</div>
 
-										<div id="chartshuiyuan" style="display: none;">
-											<div class="btn-group" id="shangpinleibie2">
-											<button type="button" class="btn btn-primary btn-xs" onclick="chartsinit2()">全部</button>
-											<button type="button" class="btn btn-gray-500 btn-xs" onclick="queryHuiYuanByLeiBie(1)">会员</button>
-											<button type="button" class="btn btn-gray-500 btn-xs" onclick="queryHuiYuanByLeiBie(2)">vip</button>
+									<div id="chartshuiyuan" style="display: none;">
+										<div class="btn-group" id="shangpinleibie2">
+											<button type="button" class="btn btn-primary btn-xs"
+												onclick="chartsinit2()">全部</button>
+											<button type="button" class="btn btn-gray-500 btn-xs"
+												onclick="queryHuiYuanByLeiBie(1)">会员</button>
+											<button type="button" class="btn btn-gray-500 btn-xs"
+												onclick="queryHuiYuanByLeiBie(2)">vip</button>
 										</div>
 										<section class="py-3">
-										<table class="table card-text">
-											<thead>
-												<tr>
-													<th style="color: #FF7256;">会员名字</th>
-													<th style="color: #FF7256;">会员等级</th>
-													<th style="color: #FF7256;">会员余额</th>
-													<th style="color: #FF7256;">成交额</th>
-													<th style="color: #FF7256;">操作</th>
-												</tr>
-											</thead>
-											<tbody id="chartshuiyuantable">
-												
-											</tbody>
-										</table>
-										</section>
-										</div>
-				
-									</div>
-								</div>
-								
-								
-								<div class="card" id="chartsdiv2"  style="display: none;">
-									<div class="card-header" id="chartsbtn">
-										<h4 style="float: left;">结算中心</h4><button class="btn btn-outline-blue" style="float: right;" id="chartsfanhui">返回</button>
-									</div>
-									<div class="card-body">
-										<div id="chartsshangpin">
-											<section class="py-2">
-												<table class="table card-text">
-														<tr>
-															<td>总额:</td>
-															<td><span id="jiesuanzonge"></span></td>
-															
-														</tr>
-														<tr>
-															<td>折扣:</td>
-															<td><input type="text" class="small" placeholder="折扣" onblur="jiesuanzhekou()" id="jiesuanzhekou">&nbsp;<span>%</span></td>
-															<td>折扣后:</td>
-															<td><input type="text" class="small" id="jiesuanzhekouhou"></td>
-														</tr>
-														<tr>
-															<td>实收:</td>
-															<td><input style="color: red;" class="text-ms" id="jiesuanshishou"></td>
-														</tr>
-														</table>
-														<button style="float: right;background-color: #FF6347;" class="btn ">收款</button>
-											</section>
-										</div>
+											<table class="table card-text">
+												<thead>
+													<tr>
+														<th style="color: #FF7256;">会员名字</th>
+														<th style="color: #FF7256;">会员等级</th>
+														<th style="color: #FF7256;">会员余额</th>
+														<th style="color: #FF7256;">成交额</th>
+														<th style="color: #FF7256;">操作</th>
+													</tr>
+												</thead>
+												<tbody id="chartshuiyuantable">
 
+												</tbody>
+											</table>
+										</section>
 									</div>
+
 								</div>
 							</div>
-						</div>
-					</section>
-				</div>
-				<footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-md-6 text-center text-md-left text-primary">
-								<p class="mb-2 mb-md-0">Your company &copy; 2018-2020</p>
-							</div>
-							<div class="col-md-6 text-center text-md-right text-gray-400">
-								<p class="mb-0">Copyright &copy; 2019.Company name All rights reserved.More Templates
-									<a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from
-									<a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
-								</p>
-								<!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+
+
+							<div class="card" id="chartsdiv2" style="display: none;">
+								<div class="card-header" id="chartsbtn">
+									<h4 style="float: left;">结算中心</h4>
+									<button class="btn btn-outline-blue" style="float: right;"
+										id="chartsfanhui">返回</button>
+								</div>
+								<div class="card-body">
+									<div id="chartsshangpin">
+										<section class="py-2">
+											<table class="table card-text">
+												<tr>
+													<td>总额:</td>
+													<td><span id="jiesuanzonge"></span></td>
+
+												</tr>
+												<tr>
+													<td>折扣:</td>
+													<td colspan="1"><input type="text" class="small"
+														placeholder="折扣" onblur="jiesuanzhekou()"
+														id="jiesuanzhekou">&nbsp;<span>%</span></td>
+													<td>折扣后:</td>
+													<td><input type="text" class="small"
+														id="jiesuanzhekouhou"></td>
+												</tr>
+												<tr>
+													<td>实收:</td>
+													<td><input style="color: red;" class="text-ms"
+														id="jiesuanshishou"></td>
+												</tr>
+											</table>
+											<div style="margin-left: 10px;">
+												收款方式：
+												<table>
+													<tr>
+														<td><input style="width:20px;height:20px;vertical-align:middle;" checked="checked" type="radio" name="cjfangshi" value="现金"><span style="vertical-align:middle;margin-right:20px;">现金</span></td>
+														<td><input style="width:20px;height:20px;vertical-align:middle;" type="radio" name="cjfangshi" value="刷卡"><span style="vertical-align:middle;margin-right:20px;">刷卡</span></td>
+														<td><input style="width:20px;height:20px;vertical-align:middle;" type="radio" name="cjfangshi" value="支付宝"><span style="vertical-align:middle;margin-right:20px;">支付宝</span></td>
+														<td><input style="width:20px;height:20px;vertical-align:middle;" type="radio" name="cjfangshi" value="微信"><span style="vertical-align:middle;margin-right:20px;">微信</span></td>
+														<td><input style="width:20px;height:20px;vertical-align:middle;" type="radio" name="cjfangshi" value="余额"><span style="vertical-align:middle;">余额</span></td>
+													</tr>
+												
+												</table>
+											</div>
+											<button style="float: right; background-color: #FF6347;"
+												class="btn" id="jiesuanshoukua">收款</button>
+										</section>
+									</div>
+
+								</div>
 							</div>
 						</div>
 					</div>
-				</footer>
+				</section>
 			</div>
+			<footer
+				class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-6 text-center text-md-left text-primary">
+							<p class="mb-2 mb-md-0">Your company &copy; 2018-2020</p>
+						</div>
+						<div class="col-md-6 text-center text-md-right text-gray-400">
+							<p class="mb-0">
+								Copyright &copy; 2019.Company name All rights reserved.More
+								Templates <a href="http://www.cssmoban.com/" target="_blank"
+									title="模板之家">模板之家</a> - Collect from <a
+									href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+							</p>
+							<!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+						</div>
+					</div>
+				</div>
+			</footer>
 		</div>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		<!-- JavaScript files-->
-		<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-		<script type="text/javascript" th:src="@{/js/jquery-1.12.4.js}"></script>
-		<script th:src="@{/vendor/popper.js/umd/popper.min.js}">
-			
-		</script>
-		<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
-		<script th:src="@{/vendor/jquery.cookie/jquery.cookie.js}">
-			
-		</script>
-		<script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
-		<script th:src="@{/js/js.cookie.min.js}"></script>
-		<script th:src="@{/js/charts-home.js}"></script>
-		<script th:src="@{/js/front.js}"></script>
+	</div>
 
-		<script type="text/javascript">
+
+
+
+
+
+
+
+
+	<!-- JavaScript files-->
+	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/jquery-1.12.4.js}"></script>
+	<script th:src="@{/vendor/popper.js/umd/popper.min.js}">
+			
+		</script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/vendor/jquery.cookie/jquery.cookie.js}">
+			
+		</script>
+	<script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+	<script th:src="@{/js/js.cookie.min.js}"></script>
+	<script th:src="@{/js/charts-home.js}"></script>
+	<script th:src="@{/js/front.js}"></script>
+
+	<script type="text/javascript">
 			$(function() {
 				$("#shangpinleibie button").click(function() {
 					$("#shangpinleibie button").attr("class", "btn btn-gray-500 btn-xs");
@@ -316,14 +383,30 @@
 				});
 
 				$("#chartsshoukuan").click(function(){
+					let str={};
+					str.list=[];
+					let detail={};
+					let a=0;
+					$(".chartsspid,.spname,.spnum,.spdanjia").each(function(){
+						let name=$(this).attr("class");
+						detail[name]=$(this).text();
+						a++;
+						if(a==4){
+							str.list.push(detail);
+							a=0;
+							detail={};
+						}
+					});
+					if(str.list==null||str.list==""){
+						alert("请选择商品!");
+						return;
+					}
 					$("#chartscaozuo").hide();
 					$("#jiesuanzonge").text($("#zongjine").text());
 					$("#jiesuanzhekouhou").val($("#zongjine").text());
 					$("#jiesuanshishou").val($("#zongjine").text());
 					$("#chartsdiv1").hide();
 					$("#chartsdiv2").show();
-					
-					
 				});
 
 				$("#chartsfanhui").click(function(){
@@ -340,8 +423,197 @@
 					});
 					$("#zongjine").text(zongjine);
 				});
+				
+				$("#chartsguadan").click(function(){
+					let str={};
+					str.spprice=$("#zongjine").text();
+					str.hyid=vvid;
+					str.list=[];
+					let detail={};
+					let a=0;
+					$(".chartsspid,.spname,.spnum,.spdanjia").each(function(){
+						let name=$(this).attr("class");
+						if(name=="chartsspid"){
+							name="spid";
+						}
+						detail[name]=$(this).text();
+						a++;
+						if(a==4){
+							str.list.push(detail);
+							a=0;
+							detail={};
+						}
+					});
+					
+					$.ajax({
+						url:"[[@{/shouyin/guadan?qxidd=23}]]",
+						type:"post",
+						data:JSON.stringify(str),
+						contentType:"application/json;charset=utf-8",
+						success:function(res){
+							$("#chartsgouwuchetable").empty();
+							let zongjine=0;
+							$("[name='chartsxiaoshou']").each(function(){
+								zongjine+=parseFloat($(this).text());
+							});
+							$("#zongjine").text(zongjine);
+							queryGuaDanNum();
+							queryGuaDan();
+						}
+					});
+				});
+				//收款
+				//收款
+				//收款
+				//收款
+				$("#jiesuanshoukua").click(function(){
+					
+					let str={};
+					str.cjprice=$("#jiesuanshishou").val();
+					str.vid=vvid;
+					str.list=[];
+					let detail={};
+					let a=0;
+					$("[name='cjfangshi']").each(function(){
+						if($(this).prop("checked")){
+							str.cjfangshi=$(this).val();
+						}
+					});
+					$(".spname,.spnum,.spdanjia").each(function(){
+						let name=$(this).attr("class");
+						if(name=="spdanjia"){
+							name="cjxprice";
+						}
+						if(name=="spnum"){
+							name="cjxnum";
+						}
+						detail[name]=$(this).text();
+						a++;
+						if(a==3){
+							str.list.push(detail);
+							a=0;
+							detail={};
+						}
+					});
+					if(str.list==null||str.list==""){
+						alert("请选择商品!");
+						return;
+					}
+					$.ajax({
+						url:"[[@{/shouyin/shoukuan?qxidd=24}]]",
+						type:"post",
+						data:JSON.stringify(str),
+						contentType:"application/json;charset=utf-8",
+						success:function(res){
+							alert("收款成功！");
+							zhekou=0;
+							vvid=0;
+							
+							if(cjno2==""){
+								chartsinit();
+								chartsinit2();
+							}else{
+								deleteGuanDanByNo(cjno2);
+							}
+							cjno2="";
+							$("#chartsgouwuchetable").empty();
+							$("#zongjine").text("");
+							$("#chartscaozuo").show();
+							$("#chartsdiv1").show();
+							$("#chartsdiv2").hide();
+							$("#shangpinleibie button").attr("class", "btn btn-gray-500 btn-xs");
+							$("#shangpinleibie button:eq(0)").attr("class", "btn btn-primary btn-xs");
+							$("#shangpinleibie2 button").attr("class", "btn btn-gray-500 btn-xs");
+							$("#shangpinleibie2 button:eq(0)").attr("class", "btn btn-primary btn-xs");
+						}
+					});
+				});
+				
 			});
+			
+			function deleteGuanDanByNo(cjno){
+				$.ajax({
+					url:"[[@{/shouyin/deleteGuaDanByNo}]]",
+					data:{
+						cjno:cjno
+					},
+					success:function(res){
+						chartsinit();
+						chartsinit2();
+						queryGuaDanNum();
+						queryGuaDan();
+					}
+				});
+			}
+			
+			function queryGuaDanNum(){
+				$.ajax({
+					url:"[[@{/shouyin/queryGuaDanNum}]]",
+					type:"post",
+					success:function(res){
+						$("#guadanshuliang").text(res);
+					}
+				});
+			}
+			
+			function queryGuaDan(){
+				$.ajax({
+					url:"[[@{/shouyin/queryGuaDan}]]",
+					type:"post",
+					success:function(res){
+						$("#guadantable").empty();
+						$.each(res,function(index,obj){
+							let str=`<tr style="line-height:35px;">
+									<th>${obj.gddate}</th>
+									<th>${obj.hyname}</th>
+									<th>${obj.spprice}</th>
+									<th><button onclick="queryGuaDanByNo(${obj.cjno})" class="btn btn-xs btn-blue">收款</button></th>
+									</tr>`;
+							$("#guadantable").append(str);
+						});
+					}
+				});
+			}
+			
+			queryGuaDanNum();
+			queryGuaDan();
 		
+			
+			function queryGuaDanByNo(cjno){
+				$.ajax({
+					url:"[[@{/shouyin/queryGuaDanByNo?qxidd=23}]]",
+					data:{
+						cjno:cjno
+					},
+					success:function(res){
+						$("#chartsgouwuchetable").empty();
+						$.each(res.list,function(index,obj){
+							let str="";
+							if(res.hyid!=0){
+								str=`<tr>
+									<th><span class="chartsspid" style="display:none;">${obj.spid}</span><input type="hidden" class="chartsxiaoshou" value="${obj.spdanjia}"><span class="spname">${obj.spname}</span></th>
+									<th class="spnum">${obj.spnum}</th>
+									<th name="chartsxiaoshou" class="spdanjia">${obj.spdanjia}</th>
+									<th>${obj.djzhekou}</th>
+								</tr>`;
+							}else{
+								str=`<tr>
+									<th><span class="chartsspid" style="display:none;">${obj.spid}</span><input type="hidden" class="chartsxiaoshou" value="${obj.spdanjia}"><span class="spname">${obj.spname}</span></th>
+									<th class="spnum">${obj.spnum}</th>
+									<th name="chartsxiaoshou" class="spdanjia">${obj.spdanjia}</th>
+									<th></th>
+								</tr>`;
+							}
+							$("#chartsgouwuchetable").append(str);
+						});
+						zhekou=res.djzhekou;
+						$("#zongjine").text((res.spprice).toFixed(2));
+						vvid=res.hyid;
+						cjno2=cjno;
+					}
+				});
+			}
+						
 			function chartsinit(){
 				$.ajax({
 					url:"[[@{/shouyin/queryAllShangPin}]]",
@@ -389,7 +661,7 @@
 			function chartstianjiagouwuche(spid){
 				var i=true;
 				$(".chartsspid").each(function(){
-					if($(this).val()==spid){
+					if($(this).text()==spid){
 						$(this).parent().next().text(parseFloat($(this).parent().next().text())+1);
 						if($(this).parent().next().next().next().text()==""){
 							$(this).parent().next().next().text((parseFloat($(this).parent().next().text())*parseFloat($(this).next().val())).toFixed(2));
@@ -401,36 +673,37 @@
 				});
 				if(i){
 					$.ajax({
-						url:"[[@{/shouyin/queryShangPinById}]]",
+						url:"[[@{/shouyin/queryShangPinById?qxidd=22}]]",
 						data:{
 							spid:spid
 						},
 						success:function(res){
-							let str="";
-							if(zhekou==0){
-								str=`<tr>
-									<th><input type="hidden" class="chartsspid" value="${res.spid}"><input type="hidden" class="chartsxiaoshou" value="${res.spxiaoshou}">${res.spname}</th>
-									<th>1</th>
-									<th name="chartsxiaoshou">${res.spxiaoshou}</th>
-									<th></th>
-								</tr>`;
-							}else{
-								let a=(res.spxiaoshou*zhekou/100).toFixed(2);
-								str=`<tr>
-									<th><input type="hidden" class="chartsspid" value="${res.spid}"><input type="hidden" class="chartsxiaoshou" value="${res.spxiaoshou}">${res.spname}</th>
-									<th>1</th>
-									<th name="chartsxiaoshou">${a}</th>
-									<th>${zhekou}</th>
-								</tr>`;
+							if(res.spid!=null){
+								let str="";
+								if(zhekou==0){
+									str=`<tr>
+										<th><span class="chartsspid" style="display:none;">${res.spid}</span><input type="hidden" class="chartsxiaoshou" value="${res.spxiaoshou}"><span class="spname">${res.spname}</span></th>
+										<th class="spnum">1</th>
+										<th name="chartsxiaoshou" class="spdanjia">${res.spxiaoshou}</th>
+										<th></th>
+									</tr>`;
+								}else{
+									let a=(res.spxiaoshou*zhekou/100).toFixed(2);
+									str=`<tr>
+										<th><span class="chartsspid" style="display:none;">${res.spid}</span><input type="hidden" class="chartsxiaoshou" value="${res.spxiaoshou}"><span class="spname">${res.spname}</span></th>
+										<th class="spnum">1</th>
+										<th name="chartsxiaoshou" class="spdanjia">${a}</th>
+										<th>${zhekou}</th>
+									</tr>`;
+								}
+								$("#chartsgouwuchetable").append(str);
+								let zongjine=0;
+								$("[name='chartsxiaoshou']").each(function(){
+									zongjine+=parseFloat($(this).text());
+								});
+								$("#zongjine").text(zongjine.toFixed(2));
 							}
 							
-							
-							$("#chartsgouwuchetable").append(str);
-							let zongjine=0;
-							$("[name='chartsxiaoshou']").each(function(){
-								zongjine+=parseFloat($(this).text());
-							});
-							$("#zongjine").text(zongjine.toFixed(2));
 						}
 					});
 				}
@@ -442,17 +715,22 @@
 			}
 			
 			var zhekou=0;
+			var vvid=0;
+			var cjno2="";
 			function shiyong(vid){
 				$.ajax({
-					url:"[[@{/shouyin/shiyong}]]",
+					url:"[[@{/shouyin/shiyong?qxidd=22}]]",
 					data:{
 						vid:vid
 					},
 					success:function(res){
+						vvid=vid;
 						zhekou=res;
 						$(".chartsspid").each(function(){
 								$(this).parent().next().next().text((parseFloat($(this).parent().next().text())*parseFloat($(this).next().val())*parseFloat(res)/100).toFixed(2));
 								$(this).parent().next().next().next().text(res);
+// 								let aaa=`<span class="hyid" style="display:none;">${vid}</span>`;
+// 								$(this).parent().next().next().next().append(aaa);
 						});
 						let zongjine=0;
 						$("[name='chartsxiaoshou']").each(function(){
@@ -520,7 +798,8 @@
 			}
 			
 			
+			
 		</script>
-	</body>
+</body>
 
 </html>

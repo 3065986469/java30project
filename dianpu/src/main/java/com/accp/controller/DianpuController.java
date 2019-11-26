@@ -23,7 +23,7 @@ import com.accp.service.DianPuService;
 public class DianpuController {
 	
 	@Autowired
-	DianPuService service;
+	DianPuService dianpuservice;
 	
 	@RequestMapping("/toIndex")
 	public String toIndex() {
@@ -43,12 +43,12 @@ public class DianpuController {
 	@RequestMapping("/queryAllDianPu")
 	@ResponseBody
 	public List<Dianpu> queryAllDianPu() {
-		return service.queryAllDianPu();
+		return dianpuservice.queryAllDianPu();
 	}
 	
 	@RequestMapping("/denglu")
 	public String denglu(String name,String pwd,HttpSession sess) {
-		Yuangong yg= service.queryByNameAndPwd(name, pwd);
+		Yuangong yg= dianpuservice.queryByNameAndPwd(name, pwd);
 		if(yg==null) {
 			return "login";
 		}else {
@@ -60,153 +60,153 @@ public class DianpuController {
 	@RequestMapping("/insertDianPu")
 	@ResponseBody
 	public String insertDianPu(Dianpu dianpu) {
-		service.insertDianPu(dianpu);
+		dianpuservice.insertDianPu(dianpu);
 		return "";
 	}
 	
 	@RequestMapping("/queryAllZhiWei")
 	@ResponseBody
 	public List<Zhiwei> queryAllZhiWei() {
-		return service.queryAllZhiWei();
+		return dianpuservice.queryAllZhiWei();
 	}
 	
 	@RequestMapping("/queryAllZhiWei2")
 	@ResponseBody
 	public List<Zhiwei> queryAllZhiWei2() {
-		return service.queryAllZhiWei2();
+		return dianpuservice.queryAllZhiWei2();
 	}
 	
 	
 	@RequestMapping("/queryAllYuanGong")
 	@ResponseBody
 	public List<Yuangong> queryAllYuanGong() {
-		return service.queryAllYuanGong();
+		return dianpuservice.queryAllYuanGong();
 	}
 	
 	@RequestMapping("/yuangongguanliquery")
 	@ResponseBody
 	public List<Yuangong> yuangongguanliquery(String ygname) {
-		return service.yuangongguanliquery(ygname);
+		return dianpuservice.yuangongguanliquery(ygname);
 	}
 	
 	@RequestMapping("/yuangongguanliqueryByDianPu")
 	@ResponseBody
 	public List<Yuangong> yuangongguanliqueryByDianPu(Integer dpid) {
-		return service.yuangongguanliqueryByDianPu(dpid);
+		return dianpuservice.yuangongguanliqueryByDianPu(dpid);
 	}
 	
 	@RequestMapping("/yuangongguanliqueryByZhiWei")
 	@ResponseBody
 	public List<Yuangong> yuangongguanliqueryByZhiWei(Integer zwid) {
-		return service.yuangongguanliqueryByZhiWei(zwid);
+		return dianpuservice.yuangongguanliqueryByZhiWei(zwid);
 	}
 	
 	@RequestMapping("/insertYuanGong")
 	@ResponseBody
 	public String insertYuanGong(Yuangong yuangong) {
-		service.insertYuanGong(yuangong);
+		dianpuservice.insertYuanGong(yuangong);
 		return "";
 	}
 	
 	@RequestMapping("/queryQuanXian")
 	@ResponseBody
 	public List<Quanxian> queryQuanXian() {
-		return service.queryQuanXian();
+		return dianpuservice.queryQuanXian();
 	}
 	
 	@RequestMapping("/insertZhiWei")
 	@ResponseBody
 	public String insertZhiWei(Zhiwei zhiwei) {
-		service.insertZhiWei(zhiwei);
+		dianpuservice.insertZhiWei(zhiwei);
 		return "";
 	}
 	
 	@RequestMapping("/queryZhiWeiById")
 	@ResponseBody
 	public Zhiwei queryZhiWeiById(Integer zwid) {
-		return service.queryZhiWeiById(zwid);
+		return dianpuservice.queryZhiWeiById(zwid);
 	}
 	
 	@RequestMapping("/updateZhiWei")
 	@ResponseBody
 	public String updateZhiWei(Zhiwei zhiwei) {
-		service.updateZhiWei(zhiwei);
+		dianpuservice.updateZhiWei(zhiwei);
 		return "";
 	}
 	
 	@RequestMapping("/deleteZhiWei")
 	@ResponseBody
 	public String deleteZhiWei(Zhiwei zhiwei) {
-		service.deleteZhiWei(zhiwei);
+		dianpuservice.deleteZhiWei(zhiwei);
 		return "";
 	}
 	
 	@RequestMapping("/queryYuanGongById")
 	@ResponseBody
 	public Yuangong queryYuanGongById(Integer ygid) {
-		return service.queryYuanGongById(ygid);
+		return dianpuservice.queryYuanGongById(ygid);
 	}
 	
 	@RequestMapping("/updateYuanGong")
 	@ResponseBody
 	public String updateYuanGong(Yuangong yuangong) {
-		service.updateYuanGong(yuangong);
+		dianpuservice.updateYuanGong(yuangong);
 		return "";
 	}
 	
 	@RequestMapping("/deleteYuanGong")
 	@ResponseBody
 	public String deleteYuanGong(Yuangong yuangong) {
-		service.deleteYuanGong(yuangong);
+		dianpuservice.deleteYuanGong(yuangong);
 		return "";
 	}
 	@RequestMapping("/querysheng")
 	@ResponseBody
 	public List<Shengfen> querysheng() {
-		return service.querysheng();
+		return dianpuservice.querysheng();
 	}
 	@RequestMapping("/queryshi")
 	@ResponseBody
 	public List<Shi> queryshi() {
-		return service.queryshi();
+		return dianpuservice.queryshi();
 	}
 	
 	@RequestMapping("/queryShiById")
 	@ResponseBody
 	public List<Shi> queryShiById(Integer sfid) {
-		return service.queryShiById(sfid);
+		return dianpuservice.queryShiById(sfid);
 	}
 	
 	@RequestMapping("/queryqu")
 	@ResponseBody
 	public List<Qu> queryQu() {
-		return service.queryQu();
+		return dianpuservice.queryQu();
 	}
 	
 	@RequestMapping("/queryQuById")
 	@ResponseBody
 	public List<Qu> queryQuById(Integer sid) {
-		return service.queryQuById(sid);
+		return dianpuservice.queryQuById(sid);
 	}
 	
 	@RequestMapping("/queryDianPuById")
 	@ResponseBody
 	public Dianpu queryDianPuById(Integer dpid) {
-		Dianpu d= service.queryDianPuById(dpid);
+		Dianpu d= dianpuservice.queryDianPuById(dpid);
 		return d;
 	}
 	
 	@RequestMapping("/deleteDianPu")
 	@ResponseBody
 	public String deleteDianPu(Dianpu dianpu) {
-		service.deleteDianPu(dianpu);
+		dianpuservice.deleteDianPu(dianpu);
 		return "";
 	}
 	
 	@RequestMapping("/updateDianPu")
 	@ResponseBody
 	public String updateDianPu(Dianpu dianpu) {
-		service.updateDianPu(dianpu);
+		dianpuservice.updateDianPu(dianpu);
 		return "";
 	}
 }

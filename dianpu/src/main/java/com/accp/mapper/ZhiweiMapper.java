@@ -38,4 +38,10 @@ public interface ZhiweiMapper {
     		"FROM `zhiwei` a,`dianpu` b \r\n" + 
     		"WHERE a.dpid=b.dpid AND a.sid=1 and b.sid=1 group by a.zwname")
     List<Zhiwei> queryAllZhiWei2();
+    
+    @Select("SELECT zw.qxid\r\n" + 
+    		"FROM `yuangong` yg\r\n" + 
+    		"INNER JOIN `zhiwei` zw ON yg.zwid=zw.zwid\r\n" + 
+    		"WHERE yg.ygid=#{ygid}")
+    Zhiwei queryQuanXianByYuanGongId(Integer ygid);
 }
