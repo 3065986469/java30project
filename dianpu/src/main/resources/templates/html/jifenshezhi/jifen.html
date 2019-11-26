@@ -14,14 +14,14 @@
 						<label for="exampleInputEmail1 ">积分设置</label>
 					</div>
 				</form>
-				<div class="card-body"style="margin: 0px 0px 0px 1000px;">
-					<div class="btn-group " role="group " aria-label="..." style="border: 1px solid green;">
+				<div class="card-body">
+					<div class="btn-group " role="group " aria-label="..." style="border: 1px solid green; float: right;">
 					  <button type="button" style="border: none; width: 50px; height: 30px;" id="button1" @click="jfupd()">开启</button>
 					  <button type="button" style="border: none; width: 50px; height: 30px;" id="button2" @click="jfupds()">关闭</button>
 					    <input v-model="jifen.sid" style="display: none">
 					</div>
 				</div>
-					<div style="margin: 50px 20px 30px 250px; height: 150px; width: 500px; border: 1px solid pink; ">
+					<div style="height: 130px; width: 500px; border: 1px solid pink; margin:0 auto">
 						<div class="title " style="width: 70px; height: 50px;margin: 25px 20px 0px 40px; ">积分抵扣</div>
 							<div style="height: 50px;margin: 0px 0px 0px 40px; ">
 								<span>使用积分</span>
@@ -29,8 +29,10 @@
 								<span>可抵扣</span><span style="color: red; ">1.00</span><span>元</span>
 							</div>
 						</div>
-							<div style="width: 80px; height: 50px; margin: 0px 0px 50px 680px; ">
-								<button style="width: 70px; height: 40px;border:none;color: white;background-color: pink;border-radius:5px;" @click="upd()">确定</button>
+							<div style="margin: 20px auto;width: 500px">
+								<div style="width: 80px; height: 50px;float: right;">
+									<button style="width: 70px; height: 40px;border:none;color: white;background-color: pink;border-radius:5px;" @click="upd()">确定</button>
+								</div>
 							</div>
 					</div>
 			</div>			

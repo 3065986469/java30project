@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 public interface VipMapper {
     int countByExample(VipExample example);
@@ -88,4 +89,13 @@ public interface VipMapper {
     @Insert("INSERT INTO `dianpu`.`vip` (`vid`,`djid`,`vname`,`vphone`,`vyue`,`vjifen`,`vpwd`,`vaddress`,`sid`) \r\n" + 
     		"	VALUES(#{vip.vid},#{vip.djid},#{vip.vname},#{vip.vphone},#{vip.vyue},#{vip.vjifen},#{vip.vpwd},#{vip.vaddress},#{vip.sid}) ")
 	int hyadd(Vip vip);
+    
+    @Select("SELECT * FROM vip WHERE vname LIKE CONCAT(#{vname},'%')")
+    List<Vip> czQueryName(String vname);
+    
+    @Select("select * from vip where vname=#{vname}")
+    Vip czQueryByIdName(String vname);
+    
+    @Update("UPDATE vip SET vyue=#{yue} WHERE vid=#{vid}")
+    int updVipYe(int vid,float yue);
 }

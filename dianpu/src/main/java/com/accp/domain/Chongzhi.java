@@ -2,9 +2,13 @@ package com.accp.domain;
 
 import java.util.Date;
 
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Chongzhi {
     private Integer czid;
-
+    
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date czdate;
 
     private String czweixin;
@@ -18,8 +22,38 @@ public class Chongzhi {
     private Integer czzengsong;
 
     private String czbezhu;
+    
+    private int vid;
+    
+    private String vname;
+    
+    private String vphone;
 
-    public Integer getCzid() {
+    public String getVname() {
+		return vname;
+	}
+
+	public void setVname(String vname) {
+		this.vname = vname;
+	}
+
+	public String getVphone() {
+		return vphone;
+	}
+
+	public void setVphone(String vphone) {
+		this.vphone = vphone;
+	}
+
+	public int getVid() {
+		return vid;
+	}
+
+	public void setVid(int vid) {
+		this.vid = vid;
+	}
+
+	public Integer getCzid() {
         return czid;
     }
 

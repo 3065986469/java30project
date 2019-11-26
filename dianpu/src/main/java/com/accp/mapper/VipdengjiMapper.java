@@ -30,7 +30,7 @@ public interface VipdengjiMapper {
 
     int updateByPrimaryKey(Vipdengji record);
     
-    @Select("select * from vipdengji where sid='1'")
+    @Select("select * from vipdengji where sid='1' AND djid>0")
     List<Vipdengji> djquery();
     
     @Update("UPDATE vipdengji SET sid='0' WHERE djid=#{djid}")

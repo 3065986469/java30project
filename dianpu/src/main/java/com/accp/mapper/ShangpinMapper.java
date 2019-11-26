@@ -6,6 +6,7 @@ import com.accp.domain.Shangpinxiang;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface ShangpinMapper {
     int countByExample(ShangpinExample example);
@@ -37,5 +38,8 @@ public interface ShangpinMapper {
     Shangpin selectspno(String spno);
     
     List<Shangpinxiang> selectspxno(String spno);
+    
+    @Select("select * from shangpin")
+    List<Shangpin> yyquery();
     
 }

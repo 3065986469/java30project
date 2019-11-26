@@ -255,4 +255,9 @@
       czbezhu = #{czbezhu,jdbcType=VARCHAR}
     where czid = #{czid,jdbcType=INTEGER}
   </update>
+  
+    <insert id="czadd" parameterType="com.accp.domain.Chongzhi" >
+    insert into chongzhi (czid, czdate,czprice,czbezhu,vid)
+    values (#{czid,jdbcType=INTEGER}, #{czdate,jdbcType=DATE},#{czprice,jdbcType=REAL}, #{czbezhu,jdbcType=VARCHAR},#{vid,})
+  </insert>
 </mapper>

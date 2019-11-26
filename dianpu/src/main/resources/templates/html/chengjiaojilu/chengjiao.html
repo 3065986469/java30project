@@ -1,49 +1,214 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
 
-	<body>
-		<div class="col-lg-12 mb-4">
-			<div class="card">
-				<form>
-					<div class="card-header">
-						<label for="exampleInputEmail1">成交记录</label>
-						<label>
-					   		 <input type="radio" name="optionsRadios1" id="optionsRadios1" value="option1" checked="checked">按订单
-					   		 <input type="radio" name="optionsRadios1" id="optionsRadios2" value="option2">按用户
-					  	</label>
-						<input type="date">至<input type="date">
-						<input type="text" maxlength="30" value="" name="keywords" class="inputText keywords" placeholder="查找">
-						<input type="button" class="button button1" value="查找">
-					</div>
-				</form>
-				<div class="card-body" id="chengjiao">
-					
+<body>
+	<div class="col-lg-12 mb-4" id="sb">
+		<div class="card">
+			<form>
+				<div class="card-header">
+					<label for="exampleInputEmail1">成交记录</label> 
+					<label> 
+						<input type="radio" name="optionsRadios1" id="chengjiaoandingdan"value="option1" checked="checked" @click="a()">按订单 
+						<input type="radio" name="optionsRadios1" id="chengjiaoanyonghu"value="option2" @click="b()">按商品
+					</label> 
+					<input type="date" id="date1"><span id="span">至</span><input type="date" id="date2">
+					<input type="text" maxlength="30" value="" name="keywords" class="inputText keywords" placeholder="查找" id="vnames">
+					<input type="button" class="button button1" value="查找" @click="dingdanQuery(1)">
+				</div>
+			</form>
+			<div>
+				<div class="card-body" id="yc">
+					<table class="table card-text table table-hover">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>订单号</th>
+								<th>姓名</th>
+								<th>手机</th>
+								<th>数量</th>
+								<th>金额</th>
+								<th>支付方式</th>
+								<th>日期</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="dd,index in page.list">
+								<th scope="row">{{(index+1)}}</th>
+								<td>{{dd.cjno}}</td>
+								<td>{{dd.vname}}</td>
+								<td>{{dd.vphone}}</td>
+								<td>{{dd.cjnum}}</td>
+								<td>{{dd.cjprice}}</td>
+								<td>{{dd.cjfangshi}}</td>
+								<td>{{dd.cjdate}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+
+				<div class="card-body" id="ycs" style="display: none">
+					<table class="table card-text table table-hover">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>商品</th>
+								<th>数量</th>
+								<th>金额</th>
+								<th>日期</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="sp,index in page1.list">
+								<th scope="row">{{(index+1)}}</th>
+								<td>{{sp.spname}}</td>
+								<td>{{sp.cjxnum}}</td>
+								<td>{{sp.cjxprice}}</td>
+								<td>---</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div style="float: right;padding: 0px 40px 40px 0px">
+					<input type="button" style="float: right;color: white;background-color: pink;border-color: pink" value="" id="ys">
+		            <input type="button" style="float: right;"  class="" id="sptz" value="跳转" @click="queryVips"> <input type="text"  id="spshu"style="float: right;color:block;width: 30px">
+		            <input type="button" style="float: right;color:black;" value=">" @click="nextPage">
+		            <input type="button" style="float: right;color: white;background-color: pink;border-color: pink" value="" id="ysy">
+		            <input type="button" style="float: right;color:black;" value="<" @click="prePage">
 				</div>
 			</div>
 		</div>
-
-		<script>
-			$(function() {
-				var val = $('input:radio[name="optionsRadios1"]:checked').val();
-				if(val == "option1") {
-					$("#chengjiao").load("../html/huiyuan/andingdan.html")
+	</div>
+	<script type="text/javascript">
+		var vue=new Vue({
+			el:"#sb",
+			data(){
+				return{
+					page:{},
+					page1:{}
 				}
-
-				$("[name='optionsRadios1']").click(function() {
-					var val = $('input:radio[name="optionsRadios1"]:checked').val();
-					if(val == "option1") {
-						$("#chengjiao").load("../html/huiyuan/andingdan.html")
-					} else {
-						$("#chengjiao").load("../html/huiyuan/anshangpin.html")
+			},
+			methods:{
+				 a:function(){
+					$("#yc").show();
+					$("#ycs").hide();
+					this.dingdanQuery(1);
+				},
+				b:function(){
+					$("#yc").hide();
+					$("#ycs").show();
+					this.dingdanQuery(1);
+				},
+				//上一页
+ 				prePage:function(){
+ 					var val=$('input:radio[name="optionsRadios1"]:checked').val();
+ 					if(val=="option1"){
+ 						this.dingdanQuery(this.page.prePage);
+ 					}else{
+ 						this.dingdanQuery(this.page1.prePage);
+ 					}
+ 				},
+ 				//下一页
+ 				nextPage:function(){
+ 					var val=$('input:radio[name="optionsRadios1"]:checked').val();
+ 					if(val=="option1"){
+ 						this.dingdanQuery(this.page.nextPage);
+ 					}else{
+ 						this.dingdanQuery(this.page1.nextPage);
+ 					}
+ 					
+ 				},
+ 				//跳转页面
+ 				queryVips:function(){
+ 					var val=$('input:radio[name="optionsRadios1"]:checked').val();
+ 					var pageNum=$("#spshu").val();
+ 					 if(pageNum!=""){
+						if(val=="option1"){
+	 						if(pageNum>this.page.pages){
+	 							this.dingdanQuery(this.page.pages);
+	 						}else{
+	 							this.dingdanQuery(pageNum);
+	 						}
+						}else{
+	 						if(pageNum>this.page1.pages){
+	 							this.dingdanQuery(this.page1.pages);
+	 						}else{
+	 							this.dingdanQuery(pageNum);
+	 						}
+						}
+ 					}
+ 					$("#spshu").val("");
+ 				},
+				dingdanQuery:function(pageNum){
+					var val=$('input:radio[name="optionsRadios1"]:checked').val();
+					var date1=$("#date1").val();
+					var date2=$("#date2").val();
+					var vname=$("#vnames").val();
+					if(pageNum==0){
+						pageNum=1;
 					}
-				})
-			})
-		</script>
-	</body>
+					if(val=="option1"){
+						$("#date1").show();
+						$("#date2").show();
+						$("#span").show();
+						$.ajax({
+							url:"[[@{/huiyuan/dingdanQuery}]]",
+							type:"post",
+							data:{
+								pageNum:pageNum,
+								pageSize:2,
+								date1:date1,
+								date2:date2,
+								vname:vname
+							},
+							dataType:"json",
+							success:function(result){
+								vue.page=result;
+								$("#ys").val(vue.page.pages);
+								$("#ysy").val(vue.page.pageNum);
+							}
+						});
+					}else{
+						$("#date1").hide();
+						$("#date2").hide();
+						$("#span").hide();
+						$.ajax({
+							url:"[[@{/huiyuan/shangpin}]]",
+							type:"post",
+							data:{
+								pageNum:pageNum,
+								pageSize:2,
+								date1:date1,
+								date2:date2,
+								vname:vname
+							},
+							dataType:"json",
+							success:function(result){
+								if(val=="option1"){
+									vue.page=result;
+									$("#ys").val(vue.page.pages);
+									$("#ysy").val(vue.page.pageNum);
+								}else{
+									vue.page1=result;
+									$("#ys").val(vue.page1.pages);
+									$("#ysy").val(vue.page1.pageNum);
+								}
+							}
+						});
+					}
+				}
+			},
+			created:function(){
+				
+				this.dingdanQuery(1);
+			}
+		})
+	</script>
+</body>
 
 </html>

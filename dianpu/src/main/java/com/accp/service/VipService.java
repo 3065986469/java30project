@@ -60,5 +60,11 @@ public class VipService {
 		return vipMapper.hyupd(vip);
 	}
 	
+	
+	//充值后修改会员余额
+	public int updVipYe(int vid,float yue) {
+		return vipMapper.updVipYe(vid, yue);
+	}
+	
 
 }

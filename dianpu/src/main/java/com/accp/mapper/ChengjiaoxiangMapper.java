@@ -4,6 +4,7 @@ import com.accp.domain.Chengjiaoxiang;
 import com.accp.domain.ChengjiaoxiangExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface ChengjiaoxiangMapper {
     int countByExample(ChengjiaoxiangExample example);
@@ -27,4 +28,11 @@ public interface ChengjiaoxiangMapper {
     int updateByPrimaryKeySelective(Chengjiaoxiang record);
 
     int updateByPrimaryKey(Chengjiaoxiang record);
-}
+    
+    @Select("select * from chengjiaoxiang")
+    List<Chengjiaoxiang> query();
+    
+    
+    @Select("select * from chengjiaoxiang where spname LIKE CONCAT('%',#{vanem},'%')")
+    List<Chengjiaoxiang> queryByName(String vname);
+    }

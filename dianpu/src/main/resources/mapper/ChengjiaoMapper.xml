@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.mapper.ChengjiaoMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.domain.Chengjiao" >
+    <id column="cjid" property="cjid" jdbcType="INTEGER" />
+    <result column="cjno" property="cjno" jdbcType="VARCHAR" />
+    <result column="hyid" property="hyid" jdbcType="INTEGER" />
+    <result column="cjnum" property="cjnum" jdbcType="INTEGER" />
+    <result column="cjprice" property="cjprice" jdbcType="REAL" />
+    <result column="cjfangshi" property="cjfangshi" jdbcType="VARCHAR" />
+    <result column="cjdate" property="cjdate" jdbcType="DATE" />
+    <result column="vid" property="vid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cjid, cjno, hyid, cjnum, cjprice, cjfangshi, cjdate, vid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.ChengjiaoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from chenjiao
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from chenjiao
+    where cjid = #{cjid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from chenjiao
+    where cjid = #{cjid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.ChengjiaoExample" >
+    delete from chenjiao
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.Chengjiao" >
+    insert into chenjiao (cjid, cjno, hyid, 
+      cjnum, cjprice, cjfangshi, 
+      cjdate, vid)
+    values (#{cjid,jdbcType=INTEGER}, #{cjno,jdbcType=VARCHAR}, #{hyid,jdbcType=INTEGER}, 
+      #{cjnum,jdbcType=INTEGER}, #{cjprice,jdbcType=REAL}, #{cjfangshi,jdbcType=VARCHAR}, 
+      #{cjdate,jdbcType=DATE}, #{vid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.Chengjiao" >
+    insert into chenjiao
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cjid != null" >
+        cjid,
+      </if>
+      <if test="cjno != null" >
+        cjno,
+      </if>
+      <if test="hyid != null" >
+        hyid,
+      </if>
+      <if test="cjnum != null" >
+        cjnum,
+      </if>
+      <if test="cjprice != null" >
+        cjprice,
+      </if>
+      <if test="cjfangshi != null" >
+        cjfangshi,
+      </if>
+      <if test="cjdate != null" >
+        cjdate,
+      </if>
+      <if test="vid != null" >
+        vid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cjid != null" >
+        #{cjid,jdbcType=INTEGER},
+      </if>
+      <if test="cjno != null" >
+        #{cjno,jdbcType=VARCHAR},
+      </if>
+      <if test="hyid != null" >
+        #{hyid,jdbcType=INTEGER},
+      </if>
+      <if test="cjnum != null" >
+        #{cjnum,jdbcType=INTEGER},
+      </if>
+      <if test="cjprice != null" >
+        #{cjprice,jdbcType=REAL},
+      </if>
+      <if test="cjfangshi != null" >
+        #{cjfangshi,jdbcType=VARCHAR},
+      </if>
+      <if test="cjdate != null" >
+        #{cjdate,jdbcType=DATE},
+      </if>
+      <if test="vid != null" >
+        #{vid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.ChengjiaoExample" resultType="java.lang.Integer" >
+    select count(*) from chenjiao
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update chenjiao
+    <set >
+      <if test="record.cjid != null" >
+        cjid = #{record.cjid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cjno != null" >
+        cjno = #{record.cjno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hyid != null" >
+        hyid = #{record.hyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cjnum != null" >
+        cjnum = #{record.cjnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.cjprice != null" >
+        cjprice = #{record.cjprice,jdbcType=REAL},
+      </if>
+      <if test="record.cjfangshi != null" >
+        cjfangshi = #{record.cjfangshi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cjdate != null" >
+        cjdate = #{record.cjdate,jdbcType=DATE},
+      </if>
+      <if test="record.vid != null" >
+        vid = #{record.vid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update chenjiao
+    set cjid = #{record.cjid,jdbcType=INTEGER},
+      cjno = #{record.cjno,jdbcType=VARCHAR},
+      hyid = #{record.hyid,jdbcType=INTEGER},
+      cjnum = #{record.cjnum,jdbcType=INTEGER},
+      cjprice = #{record.cjprice,jdbcType=REAL},
+      cjfangshi = #{record.cjfangshi,jdbcType=VARCHAR},
+      cjdate = #{record.cjdate,jdbcType=DATE},
+      vid = #{record.vid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.Chengjiao" >
+    update chenjiao
+    <set >
+      <if test="cjno != null" >
+        cjno = #{cjno,jdbcType=VARCHAR},
+      </if>
+      <if test="hyid != null" >
+        hyid = #{hyid,jdbcType=INTEGER},
+      </if>
+      <if test="cjnum != null" >
+        cjnum = #{cjnum,jdbcType=INTEGER},
+      </if>
+      <if test="cjprice != null" >
+        cjprice = #{cjprice,jdbcType=REAL},
+      </if>
+      <if test="cjfangshi != null" >
+        cjfangshi = #{cjfangshi,jdbcType=VARCHAR},
+      </if>
+      <if test="cjdate != null" >
+        cjdate = #{cjdate,jdbcType=DATE},
+      </if>
+      <if test="vid != null" >
+        vid = #{vid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where cjid = #{cjid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.Chengjiao" >
+    update chenjiao
+    set cjno = #{cjno,jdbcType=VARCHAR},
+      hyid = #{hyid,jdbcType=INTEGER},
+      cjnum = #{cjnum,jdbcType=INTEGER},
+      cjprice = #{cjprice,jdbcType=REAL},
+      cjfangshi = #{cjfangshi,jdbcType=VARCHAR},
+      cjdate = #{cjdate,jdbcType=DATE},
+      vid = #{vid,jdbcType=INTEGER}
+    where cjid = #{cjid,jdbcType=INTEGER}
+  </update>
+</mapper>
